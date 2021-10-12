@@ -1,18 +1,64 @@
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchCategory {
+  final String title;
+  final CategoryMenu category;
+
+  SearchCategory({
+    required this.title,
+    required this.category,
+  });
+}
+
+final _categories = <SearchCategory>[
+  SearchCategory(
+    title: 'Movie',
+    category: CategoryMenu.Movie,
+  ),
+  SearchCategory(
+    title: 'TV Series',
+    category: CategoryMenu.TVSeries,
+  ),
+];
+
+class SearchPage extends StatefulWidget {
   static const ROUTE_NAME = '/search';
 
+  @override
+  State<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
+  SearchCategory? _selectedCategory;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Search'),
+        actions: [
+          Container(
+            child: DropdownButton<SearchCategory>(
+              value: _selectedCategory ?? _categories.first,
+              onChanged: (value) => setState(() => _selectedCategory = value),
+              items: _categories
+                  .map(
+                    (e) => DropdownMenuItem<SearchCategory>(
+                      child: Text('${e.title}'),
+                      value: e,
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -21,8 +67,7 @@ class SearchPage extends StatelessWidget {
           children: [
             TextField(
               onSubmitted: (query) {
-                Provider.of<MovieSearchNotifier>(context, listen: false)
-                    .fetchMovieSearch(query);
+                Provider.of<MovieSearchNotifier>(context, listen: false).fetchMovieSearch(query);
               },
               decoration: InputDecoration(
                 hintText: 'Search title',

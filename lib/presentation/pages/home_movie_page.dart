@@ -19,15 +19,16 @@ class HomeMoviePage extends StatefulWidget {
   _HomeMoviePageState createState() => _HomeMoviePageState();
 }
 
-class _HomeMoviePageState extends State<HomeMoviePage> {
+class _HomeMoviePageState extends State<HomeMoviePage> with SingleTickerProviderStateMixin {
+  late final TabController _controller;
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => Provider.of<MovieListNotifier>(context, listen: false)
-          ..fetchNowPlayingMovies()
-          ..fetchPopularMovies()
-          ..fetchTopRatedMovies());
+    _controller = TabController(length: 2, vsync: this);
+    Future.microtask(() => Provider.of<MovieListNotifier>(context, listen: false)
+      ..fetchNowPlayingMovies()
+      ..fetchPopularMovies()
+      ..fetchTopRatedMovies());
   }
 
   @override
@@ -78,65 +79,102 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           )
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Now Playing',
-                style: kHeading6,
+      body: SizedBox.expand(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: TabBar(
+                controller: _controller,
+                indicator: BoxDecoration(
+                  borderRadius: BorderRadius.circular(60.0),
+                  color: kMikadoYellow,
+                ),
+                // onTap: (value) => setState(() => _selectedIndex = value),
+                tabs: [
+                  Tab(child: Text('Movie')),
+                  Tab(child: Text('TV Series')),
+                ],
               ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
-                final state = data.nowPlayingState;
-                if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.nowPlayingMovies);
-                } else {
-                  return Text('Failed');
-                }
-              }),
-              _buildSubHeading(
-                title: 'Popular',
-                onTap: () =>
-                    Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TabBarView(
+                  controller: _controller,
+                  children: [
+                    MovieTabMenu(),
+                    SizedBox(),
+                  ],
+                ),
               ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
-                final state = data.popularMoviesState;
-                if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.popularMovies);
-                } else {
-                  return Text('Failed');
-                }
-              }),
-              _buildSubHeading(
-                title: 'Top Rated',
-                onTap: () =>
-                    Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
-              ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
-                final state = data.topRatedMoviesState;
-                if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.topRatedMovies);
-                } else {
-                  return Text('Failed');
-                }
-              }),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
+    );
+  }
+}
+
+class MovieTabMenu extends StatelessWidget {
+  const MovieTabMenu({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Now Playing',
+            style: kHeading6,
+          ),
+          Consumer<MovieListNotifier>(builder: (context, data, child) {
+            final state = data.nowPlayingState;
+            if (state == RequestState.Loading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state == RequestState.Loaded) {
+              return MovieList(data.nowPlayingMovies);
+            } else {
+              return Text('Failed');
+            }
+          }),
+          _buildSubHeading(
+            title: 'Popular',
+            onTap: () => Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
+          ),
+          Consumer<MovieListNotifier>(builder: (context, data, child) {
+            final state = data.popularMoviesState;
+            if (state == RequestState.Loading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state == RequestState.Loaded) {
+              return MovieList(data.popularMovies);
+            } else {
+              return Text('Failed');
+            }
+          }),
+          _buildSubHeading(
+            title: 'Top Rated',
+            onTap: () => Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
+          ),
+          Consumer<MovieListNotifier>(builder: (context, data, child) {
+            final state = data.topRatedMoviesState;
+            if (state == RequestState.Loading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state == RequestState.Loaded) {
+              return MovieList(data.topRatedMovies);
+            } else {
+              return Text('Failed');
+            }
+          }),
+        ],
       ),
     );
   }

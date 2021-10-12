@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_detail.dart';
@@ -57,6 +59,7 @@ class MovieDetailNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (movie) {
+        log('Movie ${movie.toString()}');
         _recommendationState = RequestState.Loading;
         _movie = movie;
         notifyListeners();
