@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ditonton/presentation/pages/tv_episode_season_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
@@ -143,12 +144,13 @@ class DetailContent extends StatelessWidget {
                                   );
                                 } else {
                                   showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          content: Text(message),
-                                        );
-                                      });
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        content: Text(message),
+                                      );
+                                    },
+                                  );
                                 }
                               },
                               child: Row(
@@ -189,6 +191,67 @@ class DetailContent extends StatelessWidget {
                             Text(
                               tv.overview ?? '',
                             ),
+                            if (tv.seasons.isNotEmpty) ...[
+                              SizedBox(height: 16),
+                              Text(
+                                'Season',
+                                style: kHeading6,
+                              ),
+                              SizedBox(
+                                height: 200,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: tv.seasons.length,
+                                  itemExtent: 120,
+                                  itemBuilder: (context, index) {
+                                    final season = tv.seasons[index];
+                                    return Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.of(context).pushNamed(
+                                            TVEpisodeSeasonPage.ROUTE_NAME,
+                                            arguments: {'tv': tv, 'season': season},
+                                          );
+                                        },
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(8.0),
+                                          child: CachedNetworkImage(
+                                            fit: BoxFit.cover,
+                                            imageUrl:
+                                                'https://image.tmdb.org/t/p/w500${season.posterPath}',
+                                            placeholder: (context, url) => Center(
+                                              child: CircularProgressIndicator(),
+                                            ),
+                                            errorWidget: (context, url, error) {
+                                              return Container(
+                                                height: double.infinity,
+                                                color: kMikadoYellow,
+                                                child: Center(
+                                                  child: FittedBox(
+                                                    child: Transform.rotate(
+                                                      angle: 45,
+                                                      child: Text(
+                                                        '${season.name}',
+                                                        style: TextStyle(
+                                                          fontSize: 16.0,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
                             SizedBox(height: 16),
                             Text(
                               'Recommendations',
@@ -223,20 +286,15 @@ class DetailContent extends StatelessWidget {
                                               borderRadius: BorderRadius.all(
                                                 Radius.circular(8),
                                               ),
-                                              child: Builder(builder: (_) {
-                                                if (recommendation.posterPath == null) {
-                                                  return Text('123');
-                                                }
-                                                return CachedNetworkImage(
-                                                  imageUrl:
-                                                      'https://image.tmdb.org/t/p/w500${recommendation.posterPath}',
-                                                  placeholder: (context, url) => Center(
-                                                    child: CircularProgressIndicator(),
-                                                  ),
-                                                  errorWidget: (context, url, error) =>
-                                                      Icon(Icons.error),
-                                                );
-                                              }),
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    'https://image.tmdb.org/t/p/w500${recommendation.posterPath}',
+                                                placeholder: (context, url) => Center(
+                                                  child: CircularProgressIndicator(),
+                                                ),
+                                                errorWidget: (context, url, error) =>
+                                                    Icon(Icons.error),
+                                              ),
                                             ),
                                           ),
                                         );

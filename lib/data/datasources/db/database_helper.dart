@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/data/models/movie_table.dart';

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv/tv.dart';
 import 'package:flutter/cupertino.dart';

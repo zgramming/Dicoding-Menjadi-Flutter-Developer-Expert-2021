@@ -1,6 +1,9 @@
+import 'package:ditonton/presentation/pages/tv_episode_season_page.dart';
+import 'package:ditonton/presentation/provider/tv/tv_series_episode_season_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/tv_series_watchlist_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 
 import 'package:ditonton/common/constants.dart';
@@ -28,8 +31,9 @@ import 'package:ditonton/presentation/provider/tv/tv_series_search_notifier.dart
 import 'package:ditonton/presentation/provider/tv/tv_series_top_rated_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 
-void main() {
+Future<void> main() async {
   di.init();
+  await initializeDateFormatting();
   runApp(MyApp());
 }
 
@@ -59,6 +63,7 @@ class MyApp extends StatelessWidget {
         ),
 
         ///! END MOVIE NOTIFIER
+
         ///! START TV NOTIFIER
         ChangeNotifierProvider(
           create: (_) => di.locator<TVSeriesAiringTodayNotifier>(),
@@ -80,6 +85,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TVSeriesWatchlistNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TVSeriesEpisodeSeasonNotifier>(),
         ),
 
         ///! END TV NOTIFIER
@@ -125,6 +133,11 @@ class MyApp extends StatelessWidget {
               final SeeMoreState state = settings.arguments as SeeMoreState;
               return MaterialPageRoute(
                 builder: (context) => TVSeeMorePage(seeMoreState: state),
+              );
+            case TVEpisodeSeasonPage.ROUTE_NAME:
+              final param = settings.arguments as Map<String, dynamic>;
+              return MaterialPageRoute(
+                builder: (context) => TVEpisodeSeasonPage(param: param),
               );
 
             ///! END TV SECTION
