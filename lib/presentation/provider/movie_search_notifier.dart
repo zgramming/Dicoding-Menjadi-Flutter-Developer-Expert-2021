@@ -11,11 +11,11 @@ class MovieSearchNotifier extends ChangeNotifier {
   RequestState _state = RequestState.Empty;
   RequestState get state => _state;
 
-  List<Movie> _searchResult = [];
-  List<Movie> get searchResult => _searchResult;
-
   String _message = '';
   String get message => _message;
+
+  List<Movie> _searchResult = [];
+  List<Movie> get searchResult => _searchResult;
 
   Future<void> fetchMovieSearch(String query) async {
     _state = RequestState.Loading;

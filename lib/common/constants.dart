@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+/// API KEY & URL
+const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
+const BASE_URL = 'https://api.themoviedb.org/3';
+
 const String BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
+
+/// Table Local Database
+const String tblWatchlist = 'watchlist';
+const String tblWatchlistTVSeries = 'watchlist_tv_series';
 
 // colors
 const Color kRichBlack = Color(0xFF000814);
@@ -12,14 +20,13 @@ const Color kDavysGrey = Color(0xFF4B5358);
 const Color kGrey = Color(0xFF303030);
 
 // text style
-final TextStyle kHeading5 =
-    GoogleFonts.poppins(fontSize: 23, fontWeight: FontWeight.w400);
-final TextStyle kHeading6 = GoogleFonts.poppins(
-    fontSize: 19, fontWeight: FontWeight.w500, letterSpacing: 0.15);
-final TextStyle kSubtitle = GoogleFonts.poppins(
-    fontSize: 15, fontWeight: FontWeight.w400, letterSpacing: 0.15);
-final TextStyle kBodyText = GoogleFonts.poppins(
-    fontSize: 13, fontWeight: FontWeight.w400, letterSpacing: 0.25);
+final TextStyle kHeading5 = GoogleFonts.poppins(fontSize: 23, fontWeight: FontWeight.w400);
+final TextStyle kHeading6 =
+    GoogleFonts.poppins(fontSize: 19, fontWeight: FontWeight.w500, letterSpacing: 0.15);
+final TextStyle kSubtitle =
+    GoogleFonts.poppins(fontSize: 15, fontWeight: FontWeight.w400, letterSpacing: 0.15);
+final TextStyle kBodyText =
+    GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w400, letterSpacing: 0.25);
 
 // text theme
 final kTextTheme = TextTheme(

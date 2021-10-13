@@ -1,21 +1,32 @@
+import 'package:ditonton/presentation/provider/tv/tv_series_watchlist_notifier.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:ditonton/common/constants.dart';
+import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/injection.dart' as di;
 import 'package:ditonton/presentation/pages/about_page.dart';
-import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
+import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
+import 'package:ditonton/presentation/pages/tv_detail_page.dart';
+import 'package:ditonton/presentation/pages/tv_see_more_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/tv_series_airing_today_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/tv_series_detail_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/tv_series_popular_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/tv_series_recommendations_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/tv_series_search_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/tv_series_top_rated_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:ditonton/injection.dart' as di;
 
 void main() {
   di.init();
@@ -27,6 +38,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ///! START MOVIE NOTIFIER
         ChangeNotifierProvider(
           create: (_) => di.locator<MovieListNotifier>(),
         ),
@@ -45,6 +57,32 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistMovieNotifier>(),
         ),
+
+        ///! END MOVIE NOTIFIER
+        ///! START TV NOTIFIER
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TVSeriesAiringTodayNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TVSeriesPopularNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TVSeriesTopRatedNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TVSeriesDetailNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TVSeriesRecommendationsNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TVSeriesSearchNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TVSeriesWatchlistNotifier>(),
+        ),
+
+        ///! END TV NOTIFIER
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -76,6 +114,20 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
             case AboutPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => AboutPage());
+
+            ///! START TV SECTION
+            case TVDetailPage.ROUTE_NAME:
+              final int id = settings.arguments as int;
+              return MaterialPageRoute(
+                builder: (context) => TVDetailPage(id: id),
+              );
+            case TVSeeMorePage.ROUTE_NAME:
+              final SeeMoreState state = settings.arguments as SeeMoreState;
+              return MaterialPageRoute(
+                builder: (context) => TVSeeMorePage(seeMoreState: state),
+              );
+
+            ///! END TV SECTION
             default:
               return MaterialPageRoute(builder: (_) {
                 return Scaffold(

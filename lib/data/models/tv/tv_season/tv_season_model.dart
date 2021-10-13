@@ -1,3 +1,4 @@
+import 'package:ditonton/domain/entities/tv/tv_season.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -6,8 +7,8 @@ part 'tv_season_model.g.dart';
 
 @immutable
 @JsonSerializable(fieldRename: FieldRename.snake)
-class Season extends Equatable {
-  Season({
+class SeasonModel extends Equatable {
+  SeasonModel({
     required this.airDate,
     required this.episodeCount,
     required this.id,
@@ -17,19 +18,28 @@ class Season extends Equatable {
     required this.seasonNumber,
   });
 
-  final DateTime airDate;
+  final DateTime? airDate;
   final int episodeCount;
   final int id;
-  final String name;
-  final String overview;
-  final String posterPath;
+  final String? name;
+  final String? overview;
+  final String? posterPath;
   final int seasonNumber;
 
-  factory Season.fromJson(Map<String, dynamic> json) => _$SeasonFromJson(json);
-  Map<String, dynamic> toJson() => _$SeasonToJson(this);
+  factory SeasonModel.fromJson(Map<String, dynamic> json) => _$SeasonModelFromJson(json);
+  Map<String, dynamic> toJson() => _$SeasonModelToJson(this);
+  Season toEntity() => Season(
+        airDate: airDate,
+        episodeCount: episodeCount,
+        id: id,
+        name: name,
+        overview: overview,
+        posterPath: posterPath,
+        seasonNumber: seasonNumber,
+      );
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       airDate,
       episodeCount,
@@ -43,24 +53,4 @@ class Season extends Equatable {
 
   @override
   bool get stringify => true;
-
-  Season copyWith({
-    DateTime? airDate,
-    int? episodeCount,
-    int? id,
-    String? name,
-    String? overview,
-    String? posterPath,
-    int? seasonNumber,
-  }) {
-    return Season(
-      airDate: airDate ?? this.airDate,
-      episodeCount: episodeCount ?? this.episodeCount,
-      id: id ?? this.id,
-      name: name ?? this.name,
-      overview: overview ?? this.overview,
-      posterPath: posterPath ?? this.posterPath,
-      seasonNumber: seasonNumber ?? this.seasonNumber,
-    );
-  }
 }

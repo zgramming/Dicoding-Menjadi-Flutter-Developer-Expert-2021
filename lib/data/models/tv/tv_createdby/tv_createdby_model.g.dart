@@ -6,15 +6,17 @@ part of 'tv_createdby_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-CreatedBy _$CreatedByFromJson(Map<String, dynamic> json) => CreatedBy(
-      id: json['id'] as int,
-      creditId: json['credit_id'] as String,
-      name: json['name'] as String,
-      gender: json['gender'] as int,
-      profilePath: json['profile_path'] as String,
+CreatedByModel _$CreatedByModelFromJson(Map<String, dynamic> json) =>
+    CreatedByModel(
+      id: json['id'] as int?,
+      creditId: json['credit_id'] as String?,
+      name: json['name'] as String?,
+      gender: json['gender'] as int?,
+      profilePath: json['profile_path'] as String?,
     );
 
-Map<String, dynamic> _$CreatedByToJson(CreatedBy instance) => <String, dynamic>{
+Map<String, dynamic> _$CreatedByModelToJson(CreatedByModel instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'credit_id': instance.creditId,
       'name': instance.name,

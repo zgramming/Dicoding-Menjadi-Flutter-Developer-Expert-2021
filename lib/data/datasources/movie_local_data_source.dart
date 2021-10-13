@@ -5,7 +5,7 @@ import 'package:ditonton/data/models/movie_table.dart';
 abstract class MovieLocalDataSource {
   Future<String> insertWatchlist(MovieTable movie);
   Future<String> removeWatchlist(MovieTable movie);
-  Future<MovieTable?> getMovieById(int id);
+  Future<MovieTable?> getDataById(int id);
   Future<List<MovieTable>> getWatchlistMovies();
 }
 
@@ -27,7 +27,7 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
   @override
   Future<String> removeWatchlist(MovieTable movie) async {
     try {
-      await databaseHelper.removeWatchlist(movie);
+      await databaseHelper.removeWatchlist(id: movie.id);
       return 'Removed from Watchlist';
     } catch (e) {
       throw DatabaseException(e.toString());
@@ -35,8 +35,8 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
   }
 
   @override
-  Future<MovieTable?> getMovieById(int id) async {
-    final result = await databaseHelper.getMovieById(id);
+  Future<MovieTable?> getDataById(int id) async {
+    final result = await databaseHelper.getDataById(id: id);
     if (result != null) {
       return MovieTable.fromMap(result);
     } else {
@@ -46,7 +46,7 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
 
   @override
   Future<List<MovieTable>> getWatchlistMovies() async {
-    final result = await databaseHelper.getWatchlistMovies();
+    final result = await databaseHelper.getWatchlist();
     return result.map((data) => MovieTable.fromMap(data)).toList();
   }
 }

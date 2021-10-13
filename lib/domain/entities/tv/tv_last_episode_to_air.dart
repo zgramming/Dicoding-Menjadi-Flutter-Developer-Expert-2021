@@ -1,12 +1,17 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
-import 'package:json_annotation/json_annotation.dart';
 
-part 'tv_last_episode_model.g.dart';
-
-@immutable
-@JsonSerializable(fieldRename: FieldRename.snake)
 class LastEpisodeToAir extends Equatable {
+  final DateTime? airDate;
+  final int episodeNumber;
+  final int id;
+  final String? name;
+  final String? overview;
+  final String? productionCode;
+  final int seasonNumber;
+  final String? stillPath;
+  final double voteAverage;
+  final int voteCount;
+
   LastEpisodeToAir({
     required this.airDate,
     required this.episodeNumber,
@@ -15,27 +20,13 @@ class LastEpisodeToAir extends Equatable {
     required this.overview,
     required this.productionCode,
     required this.seasonNumber,
-    required this.stillPath,
+    this.stillPath,
     required this.voteAverage,
     required this.voteCount,
   });
 
-  final DateTime airDate;
-  final int episodeNumber;
-  final int id;
-  final String name;
-  final String overview;
-  final String productionCode;
-  final int seasonNumber;
-  final String stillPath;
-  final double voteAverage;
-  final int voteCount;
-
-  factory LastEpisodeToAir.fromJson(Map<String, dynamic> json) => _$LastEpisodeToAirFromJson(json);
-  Map<String, dynamic> toJson() => _$LastEpisodeToAirToJson(this);
-
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       airDate,
       episodeNumber,

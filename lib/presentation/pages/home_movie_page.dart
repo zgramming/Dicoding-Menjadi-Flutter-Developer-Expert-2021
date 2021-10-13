@@ -1,6 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ditonton/presentation/pages/tv_detail_page.dart';
+import 'package:ditonton/presentation/pages/tv_see_more_page.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
+
 import 'package:ditonton/common/constants.dart';
+import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain/entities/tv/tv.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/popular_movies_page.dart';
@@ -8,11 +17,9 @@ import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
+import 'package:ditonton/presentation/provider/tv/tv_series_airing_today_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/tv_series_popular_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/tv_series_top_rated_notifier.dart';
 
 class HomeMoviePage extends StatefulWidget {
   @override
@@ -105,7 +112,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> with SingleTickerProvider
                   controller: _controller,
                   children: [
                     MovieTabMenu(),
-                    SizedBox(),
+                    TVSeriesTabMenu(),
                   ],
                 ),
               ),
@@ -115,6 +122,104 @@ class _HomeMoviePageState extends State<HomeMoviePage> with SingleTickerProvider
       ),
     );
   }
+}
+
+class TVSeriesTabMenu extends StatefulWidget {
+  const TVSeriesTabMenu({Key? key}) : super(key: key);
+
+  @override
+  State<TVSeriesTabMenu> createState() => _TVSeriesTabMenuState();
+}
+
+class _TVSeriesTabMenuState extends State<TVSeriesTabMenu> with AutomaticKeepAliveClientMixin {
+  @override
+  void initState() {
+    super.initState();
+
+    Future.microtask(() {
+      Provider.of<TVSeriesAiringTodayNotifier>(context, listen: false)..get();
+      Provider.of<TVSeriesPopularNotifier>(context, listen: false)..get();
+      Provider.of<TVSeriesTopRatedNotifier>(context, listen: false)..get();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            'Airing Today',
+            style: kHeading6,
+          ),
+          Consumer<TVSeriesAiringTodayNotifier>(
+            builder: (context, data, child) {
+              final state = data.state;
+              if (state == RequestState.Loading) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state == RequestState.Loaded) {
+                return TVList(data.items);
+              } else {
+                return Text('Failed');
+              }
+            },
+          ),
+          BuildSubHeading(
+            title: 'Popular',
+            onTap: () => Navigator.pushNamed(
+              context,
+              TVSeeMorePage.ROUTE_NAME,
+              arguments: SeeMoreState.Popular,
+            ),
+          ),
+          Consumer<TVSeriesPopularNotifier>(
+            builder: (context, data, child) {
+              final state = data.state;
+              if (state == RequestState.Loading) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state == RequestState.Loaded) {
+                return TVList(data.items);
+              } else {
+                return Text('Failed');
+              }
+            },
+          ),
+          BuildSubHeading(
+            title: 'Top Rated',
+            onTap: () => Navigator.pushNamed(
+              context,
+              TVSeeMorePage.ROUTE_NAME,
+              arguments: SeeMoreState.TopRated,
+            ),
+          ),
+          Consumer<TVSeriesTopRatedNotifier>(
+            builder: (context, data, child) {
+              final state = data.state;
+              if (state == RequestState.Loading) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state == RequestState.Loaded) {
+                return TVList(data.items);
+              } else {
+                return Text('Failed');
+              }
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class MovieTabMenu extends StatelessWidget {
@@ -142,7 +247,7 @@ class MovieTabMenu extends StatelessWidget {
               return Text('Failed');
             }
           }),
-          _buildSubHeading(
+          BuildSubHeading(
             title: 'Popular',
             onTap: () => Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
           ),
@@ -158,7 +263,7 @@ class MovieTabMenu extends StatelessWidget {
               return Text('Failed');
             }
           }),
-          _buildSubHeading(
+          BuildSubHeading(
             title: 'Top Rated',
             onTap: () => Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
           ),
@@ -176,27 +281,6 @@ class MovieTabMenu extends StatelessWidget {
           }),
         ],
       ),
-    );
-  }
-
-  Row _buildSubHeading({required String title, required Function() onTap}) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: kHeading6,
-        ),
-        InkWell(
-          onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [Text('See More'), Icon(Icons.arrow_forward_ios)],
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
@@ -239,6 +323,80 @@ class MovieList extends StatelessWidget {
         },
         itemCount: movies.length,
       ),
+    );
+  }
+}
+
+class TVList extends StatelessWidget {
+  final List<TV> items;
+
+  TVList(this.items);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 200,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          final tv = items[index];
+          return Container(
+            padding: const EdgeInsets.all(8),
+            child: InkWell(
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  TVDetailPage.ROUTE_NAME,
+                  arguments: tv.id,
+                );
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+                child: CachedNetworkImage(
+                  imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
+                  placeholder: (context, url) => Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
+              ),
+            ),
+          );
+        },
+        itemCount: items.length,
+      ),
+    );
+  }
+}
+
+class BuildSubHeading extends StatelessWidget {
+  final String title;
+  final VoidCallback onTap;
+  const BuildSubHeading({
+    Key? key,
+    required this.title,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: kHeading6,
+        ),
+        InkWell(
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [Text('See More'), Icon(Icons.arrow_forward_ios)],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
