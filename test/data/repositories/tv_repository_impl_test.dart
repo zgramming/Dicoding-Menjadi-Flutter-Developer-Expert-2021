@@ -29,11 +29,6 @@ void main() {
     );
   });
 
-  final jsonListSearchTV = (jsonDecode(readJson('dummy_data/tv_search.json'))['results']) as List;
-
-  final jsonListEpisodeSeasonTV =
-      (jsonDecode(readJson('dummy_data/tv_episode_season.json'))['episodes']) as List;
-
   const id = 61663;
   const seasonNumber = 1;
   const query = 'your lie in april';

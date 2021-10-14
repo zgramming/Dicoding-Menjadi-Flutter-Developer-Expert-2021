@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:ditonton/data/models/movie_table.dart';
 import 'package:ditonton/data/models/tv/tv_local_database/tv_local_database_model.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/domain/entities/tv/tv_detail.dart';
+
+import '../json_reader.dart';
 
 final testMovie = Movie(
   adult: false,
@@ -83,3 +87,16 @@ final testTVSeriesMap = {
 };
 
 ///! END TV SERIES DUMMY
+/// ! START DUMMY CONVERT FROM JSON
+
+final jsonListAiringTodayTV =
+    (jsonDecode(readJson('dummy_data/tv_airing_today.json'))['results']) as List;
+final jsonListPopularTV = (jsonDecode(readJson('dummy_data/tv_popular.json'))['results']) as List;
+final jsonListTopRatedTV =
+    (jsonDecode(readJson('dummy_data/tv_top_rated.json'))['results']) as List;
+final jsonListSearchTV = (jsonDecode(readJson('dummy_data/tv_search.json'))['results']) as List;
+final jsonListEpisodeSeasonTV =
+    (jsonDecode(readJson('dummy_data/tv_episode_season.json'))['episodes']) as List;
+final jsonDetailTV = jsonDecode(readJson('dummy_data/tv_detail.json')) as Map<String, dynamic>;
+
+/// ! END DUMMY CONVERT FROM JSON

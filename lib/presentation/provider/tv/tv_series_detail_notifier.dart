@@ -39,6 +39,9 @@ class TVSeriesDetailNotifier extends ChangeNotifier {
   bool get isAddedToWatchlist => _isAddedtoWatchlist;
 
   Future<void> get(int id) async {
+    _state = RequestState.Loading;
+    notifyListeners();
+
     final result = await getDetailTVSeries.execute(id);
     result.fold(
       (failure) {
