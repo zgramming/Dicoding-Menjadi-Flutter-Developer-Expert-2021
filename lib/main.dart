@@ -1,6 +1,3 @@
-import 'package:ditonton/presentation/pages/tv_episode_season_page.dart';
-import 'package:ditonton/presentation/provider/tv/tv_series_episode_season_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/tv_series_watchlist_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -16,6 +13,7 @@ import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/tv_detail_page.dart';
+import 'package:ditonton/presentation/pages/tv_episode_season_page.dart';
 import 'package:ditonton/presentation/pages/tv_see_more_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
@@ -25,10 +23,12 @@ import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/tv_series_airing_today_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/tv_series_detail_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/tv_series_episode_season_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/tv_series_popular_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/tv_series_recommendations_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/tv_series_search_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/tv_series_top_rated_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/tv_series_watchlist_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 
 Future<void> main() async {

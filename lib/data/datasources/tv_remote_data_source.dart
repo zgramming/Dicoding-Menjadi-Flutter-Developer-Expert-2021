@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:ditonton/data/models/tv/tv_episode/tv_episode_model.dart';
 import 'package:http/http.dart' as http;
@@ -110,7 +111,8 @@ class TVRemoteDataSourceImp implements TVRemoteDataSource {
 
     if (response.statusCode == 200) {
       final list = (jsonDecode(response.body)['episodes']) as List;
-      final result = list.map((e) => EpisodeModel.fromJson(Map<String, dynamic>.from(e))).toList();
+      log('result ${DateTime.parse(list[0]['air_date'])}');
+      final result = list.map((e) => EpisodeModel.fromJson(e)).toList();
       return result;
     } else {
       throw ServerException();

@@ -1,9 +1,9 @@
-import 'package:ditonton/domain/entities/tv/tv_episode.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:ditonton/data/models/tv/tv_crew/tv_crew_model.dart';
+import 'package:ditonton/domain/entities/tv/tv_episode.dart';
 
 part 'tv_episode_model.g.dart';
 
@@ -13,8 +13,8 @@ class EpisodeModel extends Equatable {
   const EpisodeModel({
     this.airDate,
     this.episodeNumber,
-    required this.crew,
-    required this.guestStars,
+    this.crew = const [],
+    this.guestStars = const [],
     this.id,
     this.name,
     this.overview,
@@ -25,7 +25,7 @@ class EpisodeModel extends Equatable {
     this.voteCount,
   });
 
-  final DateTime? airDate;
+  final String? airDate;
   final int? episodeNumber;
   final List<CrewModel> crew;
   final List<CrewModel> guestStars;
@@ -77,34 +77,4 @@ class EpisodeModel extends Equatable {
 
   @override
   bool get stringify => true;
-
-  EpisodeModel copyWith({
-    DateTime? airDate,
-    int? episodeNumber,
-    List<CrewModel>? crew,
-    List<CrewModel>? guestStars,
-    int? id,
-    String? name,
-    String? overview,
-    String? productionCode,
-    int? seasonNumber,
-    String? stillPath,
-    double? voteAverage,
-    int? voteCount,
-  }) {
-    return EpisodeModel(
-      airDate: airDate ?? this.airDate,
-      episodeNumber: episodeNumber ?? this.episodeNumber,
-      crew: crew ?? this.crew,
-      guestStars: guestStars ?? this.guestStars,
-      id: id ?? this.id,
-      name: name ?? this.name,
-      overview: overview ?? this.overview,
-      productionCode: productionCode ?? this.productionCode,
-      seasonNumber: seasonNumber ?? this.seasonNumber,
-      stillPath: stillPath ?? this.stillPath,
-      voteAverage: voteAverage ?? this.voteAverage,
-      voteCount: voteCount ?? this.voteCount,
-    );
-  }
 }

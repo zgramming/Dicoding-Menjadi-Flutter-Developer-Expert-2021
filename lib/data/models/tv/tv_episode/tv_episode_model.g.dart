@@ -7,16 +7,16 @@ part of 'tv_episode_model.dart';
 // **************************************************************************
 
 EpisodeModel _$EpisodeModelFromJson(Map<String, dynamic> json) => EpisodeModel(
-      airDate: json['air_date'] == null
-          ? null
-          : DateTime.parse(json['air_date'] as String),
+      airDate: json['air_date'] as String?,
       episodeNumber: json['episode_number'] as int?,
-      crew: (json['crew'] as List<dynamic>)
-          .map((e) => CrewModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      guestStars: (json['guest_stars'] as List<dynamic>)
-          .map((e) => CrewModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      crew: (json['crew'] as List<dynamic>?)
+              ?.map((e) => CrewModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      guestStars: (json['guest_stars'] as List<dynamic>?)
+              ?.map((e) => CrewModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
       id: json['id'] as int?,
       name: json['name'] as String?,
       overview: json['overview'] as String?,
@@ -29,7 +29,7 @@ EpisodeModel _$EpisodeModelFromJson(Map<String, dynamic> json) => EpisodeModel(
 
 Map<String, dynamic> _$EpisodeModelToJson(EpisodeModel instance) =>
     <String, dynamic>{
-      'air_date': instance.airDate?.toIso8601String(),
+      'air_date': instance.airDate,
       'episode_number': instance.episodeNumber,
       'crew': instance.crew,
       'guest_stars': instance.guestStars,

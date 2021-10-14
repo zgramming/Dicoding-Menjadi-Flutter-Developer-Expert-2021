@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -95,15 +93,23 @@ class _TVEpisodeSeasonPageState extends State<TVEpisodeSeasonPage> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         SizedBox(height: 10),
-                        Text(
-                          episode.airDate == null
-                              ? ''
-                              : '${GlobalFunction.formatYMD(episode.airDate ?? DateTime(1900), type: 3)}',
-                          style: TextStyle(
-                            color: Colors.grey.shade400,
-                            fontSize: 12.0,
-                          ),
-                        ),
+                        Builder(builder: (_) {
+                          DateTime? date;
+                          if (episode.airDate != null) {
+                            date = DateTime.tryParse(episode.airDate!);
+                          }
+                          if (date == null) {
+                            return SizedBox();
+                          }
+
+                          return Text(
+                            GlobalFunction.formatYMDS(date),
+                            style: TextStyle(
+                              color: Colors.grey.shade400,
+                              fontSize: 12.0,
+                            ),
+                          );
+                        }),
                         SizedBox(height: 10),
                         Row(
                           mainAxisSize: MainAxisSize.min,
@@ -191,6 +197,12 @@ class ShowCrew extends StatelessWidget {
   final List<Crew> crews;
   @override
   Widget build(BuildContext context) {
+    if (crews.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
+        child: Center(child: Text('People not found')),
+      );
+    }
     return SizedBox(
       height: 100,
       child: ListView.builder(

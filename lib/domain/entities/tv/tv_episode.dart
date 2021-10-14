@@ -17,7 +17,7 @@ class Episode extends Equatable {
     required this.voteCount,
   });
 
-  final DateTime? airDate;
+  final String? airDate;
   final int? episodeNumber;
   final List<Crew> crew;
   final List<Crew> guestStars;
