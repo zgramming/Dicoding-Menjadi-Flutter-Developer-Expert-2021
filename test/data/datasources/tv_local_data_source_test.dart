@@ -16,6 +16,22 @@ void main() {
     dataSource = TVLocalDataSourceImpl(databaseHelper: mockDatabaseHelper);
   });
 
+  group('get watchlist TV Series', () {
+    test(
+      'should return list of TVLocalDatabaseModel from databas ',
+      () async {
+        ///arrange
+        when(mockDatabaseHelper.getWatchlist(table: tblWatchlistTVSeries))
+            .thenAnswer((_) async => [testTVSeriesMap]);
+
+        ///act
+        final result = await dataSource.getWatchlist();
+
+        ///assert
+        expect(result, [testTVSeriesTable]);
+      },
+    );
+  });
   group('save watchlist TV Series', () {
     test(
       'should return success message when insert watchlist is success',

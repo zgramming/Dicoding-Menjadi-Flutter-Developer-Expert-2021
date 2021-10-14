@@ -85,37 +85,4 @@ class CrewModel extends Equatable {
   @override
   bool get stringify => true;
 
-  CrewModel copyWith({
-    String? job,
-    String? department,
-    String? personId,
-    String? creditId,
-    bool? adult,
-    int? gender,
-    int? id,
-    String? knownForDepartment,
-    String? name,
-    String? originalName,
-    double? popularity,
-    String? profilePath,
-    String? character,
-    int? order,
-  }) {
-    return CrewModel(
-      job: job ?? this.job,
-      department: department ?? this.department,
-      personId: personId ?? this.personId,
-      creditId: creditId ?? this.creditId,
-      adult: adult ?? this.adult,
-      gender: gender ?? this.gender,
-      id: id ?? this.id,
-      knownForDepartment: knownForDepartment ?? this.knownForDepartment,
-      name: name ?? this.name,
-      originalName: originalName ?? this.originalName,
-      popularity: popularity ?? this.popularity,
-      profilePath: profilePath ?? this.profilePath,
-      character: character ?? this.character,
-      order: order ?? this.order,
-    );
-  }
 }
