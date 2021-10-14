@@ -1,0 +1,212 @@
+{
+    "backdrop_path": "/oC9SgtJTDCEpWnTBtVGoAvjl5hb.jpg",
+    "created_by": [],
+    "episode_run_time": [
+        60,
+        42
+    ],
+    "first_air_date": "2006-09-18",
+    "genres": [
+        {
+            "id": 10767,
+            "name": "Talk"
+        }
+    ],
+    "homepage": "http://www.rachaelrayshow.com/",
+    "id": 1991,
+    "in_production": true,
+    "languages": [
+        "en"
+    ],
+    "last_air_date": "2021-10-13",
+    "last_episode_to_air": {
+        "air_date": "2021-10-13",
+        "episode_number": 23,
+        "id": 3273749,
+        "name": "It's Our Housewarming Party! Surprise Guests, José Andrés + Rach Makes Tacos",
+        "overview": "Welcome to our housewarming party! We're back in New York City and showing off our brand-new set with some surprise guests. Then, Rachael's hosting taco night and Chef José Andrés joins us from his kitchen.",
+        "production_code": "",
+        "season_number": 16,
+        "still_path": null,
+        "vote_average": 0,
+        "vote_count": 0
+    },
+    "name": "Rachael Ray",
+    "next_episode_to_air": {
+        "air_date": "2021-10-14",
+        "episode_number": 24,
+        "id": 3273750,
+        "name": "Anthony Anderson Talks Final Season of Black-ish + Rach's Shortcut Rotisserie Chicken Noodle Dish",
+        "overview": "\"Black-ish\" star Anthony Anderson is back and dishing on filming the show's final season. Plus, he brought his mom, Doris! The hilarious duo has teamed up to prank people on their new show. For dinner, Rachael's using a store-bought rotisserie chicken to make a simple noodle dish.",
+        "production_code": "",
+        "season_number": 16,
+        "still_path": null,
+        "vote_average": 0,
+        "vote_count": 0
+    },
+    "networks": [
+        {
+            "name": "Syndication",
+            "id": 184,
+            "logo_path": "/jjr5fB7Cboj0ZZl101iAeSiVuCA.png",
+            "origin_country": ""
+        }
+    ],
+    "number_of_episodes": 1046,
+    "number_of_seasons": 13,
+    "origin_country": [
+        "US"
+    ],
+    "original_language": "en",
+    "original_name": "Rachael Ray",
+    "overview": "Rachael Ray, also known as The Rachael Ray Show, is an American talk show starring Rachael Ray that debuted in syndication in the United States and Canada on September 18, 2006. It is filmed at Chelsea Television Studios in New York City. The show's 8th season premiered on September 9, 2013, and became the last Harpo show in syndication to switch to HD with a revamped studio. In January 2012, CBS Television Distribution announced a two-year renewal for the show, taking it through the 2013–14 season.",
+    "popularity": 2102.218,
+    "poster_path": "/dsAJhCLYX1fiNRoiiJqR6Up4aJ.jpg",
+    "production_companies": [],
+    "production_countries": [
+        {
+            "iso_3166_1": "US",
+            "name": "United States of America"
+        }
+    ],
+    "seasons": [
+        {
+            "air_date": null,
+            "episode_count": 0,
+            "id": 5906,
+            "name": "Specials",
+            "overview": "",
+            "poster_path": null,
+            "season_number": 0
+        },
+        {
+            "air_date": "2006-09-18",
+            "episode_count": 211,
+            "id": 5904,
+            "name": "Season 1",
+            "overview": "",
+            "poster_path": null,
+            "season_number": 1
+        },
+        {
+            "air_date": null,
+            "episode_count": 84,
+            "id": 5905,
+            "name": "Season 2",
+            "overview": "",
+            "poster_path": null,
+            "season_number": 2
+        },
+        {
+            "air_date": null,
+            "episode_count": 0,
+            "id": 5907,
+            "name": "Season 3",
+            "overview": "",
+            "poster_path": null,
+            "season_number": 3
+        },
+        {
+            "air_date": null,
+            "episode_count": 0,
+            "id": 5908,
+            "name": "Season 4",
+            "overview": "",
+            "poster_path": null,
+            "season_number": 4
+        },
+        {
+            "air_date": null,
+            "episode_count": 0,
+            "id": 5909,
+            "name": "Season 5",
+            "overview": "",
+            "poster_path": null,
+            "season_number": 5
+        },
+        {
+            "air_date": null,
+            "episode_count": 123,
+            "id": 5910,
+            "name": "Season 6",
+            "overview": "",
+            "poster_path": null,
+            "season_number": 6
+        },
+        {
+            "air_date": null,
+            "episode_count": 180,
+            "id": 5911,
+            "name": "Season 8",
+            "overview": "",
+            "poster_path": null,
+            "season_number": 8
+        },
+        {
+            "air_date": null,
+            "episode_count": 0,
+            "id": 77032,
+            "name": "Season 9",
+            "overview": "",
+            "poster_path": null,
+            "season_number": 9
+        },
+        {
+            "air_date": "2015-09-14",
+            "episode_count": 2,
+            "id": 77033,
+            "name": "Season 10",
+            "overview": "",
+            "poster_path": null,
+            "season_number": 10
+        },
+        {
+            "air_date": "2018-09-10",
+            "episode_count": 101,
+            "id": 117911,
+            "name": "Season 13",
+            "overview": "Season 13 new season begins Sept 10, 2018",
+            "poster_path": null,
+            "season_number": 13
+        },
+        {
+            "air_date": "2019-09-09",
+            "episode_count": 160,
+            "id": 132052,
+            "name": "Season 14",
+            "overview": "",
+            "poster_path": null,
+            "season_number": 14
+        },
+        {
+            "air_date": "2020-09-14",
+            "episode_count": 160,
+            "id": 162255,
+            "name": "Season 15",
+            "overview": "",
+            "poster_path": null,
+            "season_number": 15
+        },
+        {
+            "air_date": "2021-09-13",
+            "episode_count": 25,
+            "id": 210457,
+            "name": "Season 16",
+            "overview": "",
+            "poster_path": null,
+            "season_number": 16
+        }
+    ],
+    "spoken_languages": [
+        {
+            "english_name": "English",
+            "iso_639_1": "en",
+            "name": "English"
+        }
+    ],
+    "status": "Returning Series",
+    "tagline": "",
+    "type": "Talk Show",
+    "vote_average": 6.1,
+    "vote_count": 27
+}
