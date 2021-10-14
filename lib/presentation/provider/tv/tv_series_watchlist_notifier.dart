@@ -22,6 +22,9 @@ class TVSeriesWatchlistNotifier extends ChangeNotifier {
   List<TV> get items => _items;
 
   Future<void> get() async {
+    _state = RequestState.Loading;
+    notifyListeners();
+
     final result = await getWatchlistTVSeries.execute();
 
     result.fold(

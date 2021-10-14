@@ -108,7 +108,8 @@ void main() {
     });
     test('should execute save watchlist when function called', () async {
       ///arrange
-      when(saveWatchlistTVSeries.execute(mockTVDetail)).thenAnswer((_) async => Right('success'));
+      when(saveWatchlistTVSeries.execute(mockTVDetail))
+          .thenAnswer((_) async => Right('success insert'));
       when(getWatchListStatusTVSeries.execute(mockTVDetail.id)).thenAnswer((_) async => true);
 
       ///act
@@ -116,6 +117,7 @@ void main() {
 
       ///assert
       verify(saveWatchlistTVSeries.execute(mockTVDetail));
+      expect(notifier.watchlistMessage, 'success insert');
     });
 
     test('should execute remove watchlist when function called', () async {
@@ -129,6 +131,7 @@ void main() {
 
       /// assert
       verify(removeWatchlistTVSeries.execute(mockTVDetail));
+      expect(notifier.watchlistMessage, 'success remove');
     });
 
     test('should update watchlist status when add watchlist success', () async {

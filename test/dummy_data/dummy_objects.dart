@@ -97,6 +97,8 @@ final jsonListTopRatedTV =
 final jsonListSearchTV = (jsonDecode(readJson('dummy_data/tv_search.json'))['results']) as List;
 final jsonListEpisodeSeasonTV =
     (jsonDecode(readJson('dummy_data/tv_episode_season.json'))['episodes']) as List;
+final jsonListRecommendationTV =
+    (jsonDecode(readJson('dummy_data/tv_recommendation.json'))['results']) as List;
 final jsonDetailTV = jsonDecode(readJson('dummy_data/tv_detail.json')) as Map<String, dynamic>;
 
 /// ! END DUMMY CONVERT FROM JSON

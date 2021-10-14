@@ -25,6 +25,8 @@ class TVSeriesEpisodeSeasonNotifier extends ChangeNotifier {
     required int seasonNumber,
   }) async {
     _state = RequestState.Loading;
+    notifyListeners();
+
     final result = await getEpisodeSeasonTVSeries.execute(
       id: id,
       seasonNumber: seasonNumber,
