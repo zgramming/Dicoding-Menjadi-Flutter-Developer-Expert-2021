@@ -12,17 +12,17 @@ class LastEpisodeToAir extends Equatable {
   final double voteAverage;
   final int voteCount;
 
-  LastEpisodeToAir({
-    required this.airDate,
-    required this.episodeNumber,
-    required this.id,
-    required this.name,
-    required this.overview,
-    required this.productionCode,
-    required this.seasonNumber,
+  const LastEpisodeToAir({
+    this.airDate,
+    this.episodeNumber = 0,
+    this.id = 0,
+    this.name,
+    this.overview,
+    this.productionCode,
+    this.seasonNumber = 0,
     this.stillPath,
-    required this.voteAverage,
-    required this.voteCount,
+    this.voteAverage = 0,
+    this.voteCount = 0,
   });
 
   @override

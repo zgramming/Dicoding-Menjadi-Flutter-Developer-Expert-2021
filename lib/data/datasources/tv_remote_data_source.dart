@@ -53,6 +53,18 @@ class TVRemoteDataSourceImp implements TVRemoteDataSource {
   }
 
   @override
+  Future<List<TVModel>> getTopRatedTVSeries() async {
+    final response = await client.get(Uri.parse('$BASE_URL/tv/top_rated?$API_KEY'));
+
+    if (response.statusCode == 200) {
+      final result = (jsonDecode(response.body)['results']) as List;
+      return result.map((e) => TVModel.fromJson(Map<String, dynamic>.from(e))).toList();
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
   Future<TVDetailResponse> getDetailTVSeries(int id) async {
     final response = await client.get(Uri.parse('$BASE_URL/tv/$id?$API_KEY'));
 
@@ -60,18 +72,6 @@ class TVRemoteDataSourceImp implements TVRemoteDataSource {
       final body = Map<String, dynamic>.from(jsonDecode(response.body) as Map);
       final result = TVDetailResponse.fromJson(body);
       return result;
-    } else {
-      throw ServerException();
-    }
-  }
-
-  @override
-  Future<List<TVModel>> getTopRatedTVSeries() async {
-    final response = await client.get(Uri.parse('$BASE_URL/tv/top_rated?$API_KEY'));
-
-    if (response.statusCode == 200) {
-      final result = (jsonDecode(response.body)['results']) as List;
-      return result.map((e) => TVModel.fromJson(Map<String, dynamic>.from(e))).toList();
     } else {
       throw ServerException();
     }

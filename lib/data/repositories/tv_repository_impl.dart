@@ -146,6 +146,8 @@ class TVRepositoryImpl implements TVRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on DatabaseException catch (e) {
+      return Left(DatabaseFailure(e.message));
     } catch (e) {
       return Left(CommonFailure('${e.toString()}'));
     }
@@ -164,6 +166,8 @@ class TVRepositoryImpl implements TVRepository {
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
+    } catch (e) {
+      return Left(CommonFailure('${e.toString()}'));
     }
   }
 

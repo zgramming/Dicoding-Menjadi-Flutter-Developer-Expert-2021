@@ -1,212 +1,107 @@
 {
-    "backdrop_path": "/oC9SgtJTDCEpWnTBtVGoAvjl5hb.jpg",
+    "backdrop_path": "/x6jWDL4H9TaBLGEvyej0qKiirBU.jpg",
     "created_by": [],
     "episode_run_time": [
-        60,
-        42
+        23
     ],
-    "first_air_date": "2006-09-18",
+    "first_air_date": "2014-10-10",
     "genres": [
         {
-            "id": 10767,
-            "name": "Talk"
+            "id": 16,
+            "name": "Animation"
+        },
+        {
+            "id": 35,
+            "name": "Comedy"
+        },
+        {
+            "id": 18,
+            "name": "Drama"
         }
     ],
-    "homepage": "http://www.rachaelrayshow.com/",
-    "id": 1991,
-    "in_production": true,
+    "homepage": "http://www.kimiuso.jp/",
+    "id": 61663,
+    "in_production": false,
     "languages": [
-        "en"
+        "ja"
     ],
-    "last_air_date": "2021-10-13",
+    "last_air_date": "2015-03-20",
     "last_episode_to_air": {
-        "air_date": "2021-10-13",
-        "episode_number": 23,
-        "id": 3273749,
-        "name": "It's Our Housewarming Party! Surprise Guests, José Andrés + Rach Makes Tacos",
-        "overview": "Welcome to our housewarming party! We're back in New York City and showing off our brand-new set with some surprise guests. Then, Rachael's hosting taco night and Chef José Andrés joins us from his kitchen.",
+        "air_date": "2015-03-20",
+        "episode_number": 22,
+        "id": 1029354,
+        "name": "Spring Wind",
+        "overview": "Knowing her time is limited, Kaori undergoes a risky operation, hoping to have the chance to play with Kousei on stage one more time.",
         "production_code": "",
-        "season_number": 16,
-        "still_path": null,
+        "season_number": 1,
+        "still_path": "/vKyFjSSvWLDFybssKPGOZVjPYLq.jpg",
         "vote_average": 0,
         "vote_count": 0
     },
-    "name": "Rachael Ray",
-    "next_episode_to_air": {
-        "air_date": "2021-10-14",
-        "episode_number": 24,
-        "id": 3273750,
-        "name": "Anthony Anderson Talks Final Season of Black-ish + Rach's Shortcut Rotisserie Chicken Noodle Dish",
-        "overview": "\"Black-ish\" star Anthony Anderson is back and dishing on filming the show's final season. Plus, he brought his mom, Doris! The hilarious duo has teamed up to prank people on their new show. For dinner, Rachael's using a store-bought rotisserie chicken to make a simple noodle dish.",
-        "production_code": "",
-        "season_number": 16,
-        "still_path": null,
-        "vote_average": 0,
-        "vote_count": 0
-    },
+    "name": "Your Lie in April",
+    "next_episode_to_air": null,
     "networks": [
         {
-            "name": "Syndication",
-            "id": 184,
-            "logo_path": "/jjr5fB7Cboj0ZZl101iAeSiVuCA.png",
-            "origin_country": ""
+            "name": "Fuji TV",
+            "id": 1,
+            "logo_path": "/yS5UJjsSdZXML0YikWTYYHLPKhQ.png",
+            "origin_country": "JP"
         }
     ],
-    "number_of_episodes": 1046,
-    "number_of_seasons": 13,
+    "number_of_episodes": 22,
+    "number_of_seasons": 1,
     "origin_country": [
-        "US"
+        "JP"
     ],
-    "original_language": "en",
-    "original_name": "Rachael Ray",
-    "overview": "Rachael Ray, also known as The Rachael Ray Show, is an American talk show starring Rachael Ray that debuted in syndication in the United States and Canada on September 18, 2006. It is filmed at Chelsea Television Studios in New York City. The show's 8th season premiered on September 9, 2013, and became the last Harpo show in syndication to switch to HD with a revamped studio. In January 2012, CBS Television Distribution announced a two-year renewal for the show, taking it through the 2013–14 season.",
-    "popularity": 2102.218,
-    "poster_path": "/dsAJhCLYX1fiNRoiiJqR6Up4aJ.jpg",
-    "production_companies": [],
+    "original_language": "ja",
+    "original_name": "四月は君の嘘",
+    "overview": "Kousei Arima was a genius pianist until his mother's sudden death took away his ability to play. Each day was dull for Kousei. But, then he meets a violinist named Kaori Miyazono who has an eccentric playing style. Can the heartfelt sounds of the girl's violin lead the boy to play the piano again?",
+    "popularity": 45.429,
+    "poster_path": "/IGbeFv5Ji4W0x530JcSHiQpamY.jpg",
+    "production_companies": [
+        {
+            "id": 13113,
+            "logo_path": "/xV5tPYKZhP2Ko9dOh5A3FahuKsx.png",
+            "name": "A-1 Pictures",
+            "origin_country": "JP"
+        }
+    ],
     "production_countries": [
         {
-            "iso_3166_1": "US",
-            "name": "United States of America"
+            "iso_3166_1": "JP",
+            "name": "Japan"
         }
     ],
     "seasons": [
         {
-            "air_date": null,
-            "episode_count": 0,
-            "id": 5906,
+            "air_date": "2015-05-15",
+            "episode_count": 1,
+            "id": 76813,
             "name": "Specials",
             "overview": "",
-            "poster_path": null,
+            "poster_path": "/IGbeFv5Ji4W0x530JcSHiQpamY.jpg",
             "season_number": 0
         },
         {
-            "air_date": "2006-09-18",
-            "episode_count": 211,
-            "id": 5904,
+            "air_date": "2014-10-10",
+            "episode_count": 22,
+            "id": 63597,
             "name": "Season 1",
             "overview": "",
-            "poster_path": null,
+            "poster_path": "/IGbeFv5Ji4W0x530JcSHiQpamY.jpg",
             "season_number": 1
-        },
-        {
-            "air_date": null,
-            "episode_count": 84,
-            "id": 5905,
-            "name": "Season 2",
-            "overview": "",
-            "poster_path": null,
-            "season_number": 2
-        },
-        {
-            "air_date": null,
-            "episode_count": 0,
-            "id": 5907,
-            "name": "Season 3",
-            "overview": "",
-            "poster_path": null,
-            "season_number": 3
-        },
-        {
-            "air_date": null,
-            "episode_count": 0,
-            "id": 5908,
-            "name": "Season 4",
-            "overview": "",
-            "poster_path": null,
-            "season_number": 4
-        },
-        {
-            "air_date": null,
-            "episode_count": 0,
-            "id": 5909,
-            "name": "Season 5",
-            "overview": "",
-            "poster_path": null,
-            "season_number": 5
-        },
-        {
-            "air_date": null,
-            "episode_count": 123,
-            "id": 5910,
-            "name": "Season 6",
-            "overview": "",
-            "poster_path": null,
-            "season_number": 6
-        },
-        {
-            "air_date": null,
-            "episode_count": 180,
-            "id": 5911,
-            "name": "Season 8",
-            "overview": "",
-            "poster_path": null,
-            "season_number": 8
-        },
-        {
-            "air_date": null,
-            "episode_count": 0,
-            "id": 77032,
-            "name": "Season 9",
-            "overview": "",
-            "poster_path": null,
-            "season_number": 9
-        },
-        {
-            "air_date": "2015-09-14",
-            "episode_count": 2,
-            "id": 77033,
-            "name": "Season 10",
-            "overview": "",
-            "poster_path": null,
-            "season_number": 10
-        },
-        {
-            "air_date": "2018-09-10",
-            "episode_count": 101,
-            "id": 117911,
-            "name": "Season 13",
-            "overview": "Season 13 new season begins Sept 10, 2018",
-            "poster_path": null,
-            "season_number": 13
-        },
-        {
-            "air_date": "2019-09-09",
-            "episode_count": 160,
-            "id": 132052,
-            "name": "Season 14",
-            "overview": "",
-            "poster_path": null,
-            "season_number": 14
-        },
-        {
-            "air_date": "2020-09-14",
-            "episode_count": 160,
-            "id": 162255,
-            "name": "Season 15",
-            "overview": "",
-            "poster_path": null,
-            "season_number": 15
-        },
-        {
-            "air_date": "2021-09-13",
-            "episode_count": 25,
-            "id": 210457,
-            "name": "Season 16",
-            "overview": "",
-            "poster_path": null,
-            "season_number": 16
         }
     ],
     "spoken_languages": [
         {
-            "english_name": "English",
-            "iso_639_1": "en",
-            "name": "English"
+            "english_name": "Japanese",
+            "iso_639_1": "ja",
+            "name": "日本語"
         }
     ],
-    "status": "Returning Series",
+    "status": "Ended",
     "tagline": "",
-    "type": "Talk Show",
-    "vote_average": 6.1,
-    "vote_count": 27
+    "type": "Scripted",
+    "vote_average": 8.9,
+    "vote_count": 571
 }
