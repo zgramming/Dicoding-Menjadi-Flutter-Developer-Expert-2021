@@ -1,4 +1,5 @@
 import 'package:ditonton/data/models/movie_table.dart';
+import 'package:ditonton/data/models/tv/tv_local_database/tv_local_database_model.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
@@ -57,3 +58,19 @@ final testMovieMap = {
   'posterPath': 'posterPath',
   'title': 'title',
 };
+
+///! START TV SERIES DUMMY
+final testTVSeriesTable = TVLocalDatabaseModel(
+  id: 1,
+  title: 'title',
+  posterPath: 'posterPath',
+  overview: 'overview',
+);
+
+final testTVSeriesMap = {
+  'id': 1,
+  'overview': 'overview',
+  'posterPath': 'posterPath',
+  'title': 'title',
+};
+///! END TV SERIES DUMMY
