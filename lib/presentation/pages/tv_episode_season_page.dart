@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:global_template/functions/global_function.dart';
+import 'package:global_template/global_template.dart';
 import 'package:provider/provider.dart';
 
 import 'package:ditonton/common/constants.dart';
@@ -58,6 +58,14 @@ class _TVEpisodeSeasonPageState extends State<TVEpisodeSeasonPage> {
             if (state == RequestState.Loading) {
               return Center(child: CircularProgressIndicator());
             } else if (state == RequestState.Loaded) {
+              if (data.items.isEmpty) {
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Center(
+                    child: Text('Episode untuk ${tv.name} ${season.name} tidak ditemukan'),
+                  ),
+                );
+              }
               return ListView.builder(
                 itemCount: data.items.length,
                 shrinkWrap: true,
@@ -96,7 +104,7 @@ class _TVEpisodeSeasonPageState extends State<TVEpisodeSeasonPage> {
                         Builder(builder: (_) {
                           DateTime? date;
                           if (episode.airDate != null) {
-                            date = DateTime.tryParse(episode.airDate!);
+                            date = episode.airDate;
                           }
                           if (date == null) {
                             return SizedBox();
