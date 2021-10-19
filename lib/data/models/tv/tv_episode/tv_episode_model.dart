@@ -7,6 +7,14 @@ import 'package:ditonton/domain/entities/tv/tv_episode.dart';
 
 part 'tv_episode_model.g.dart';
 
+DateTime? _validDateTimeFromJson(String? value) {
+  if (value == null || value.isEmpty) {
+    return null;
+  }
+  final result = DateTime.tryParse(value);
+  return result;
+}
+
 @immutable
 @JsonSerializable(fieldRename: FieldRename.snake)
 class EpisodeModel extends Equatable {
@@ -25,7 +33,8 @@ class EpisodeModel extends Equatable {
     this.voteCount,
   });
 
-  final String? airDate;
+  @JsonKey(fromJson: _validDateTimeFromJson)
+  final DateTime? airDate;
   final int? episodeNumber;
   final List<CrewModel> crew;
   final List<CrewModel> guestStars;

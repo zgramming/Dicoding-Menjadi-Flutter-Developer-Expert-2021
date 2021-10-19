@@ -111,7 +111,6 @@ class TVRemoteDataSourceImp implements TVRemoteDataSource {
 
     if (response.statusCode == 200) {
       final list = (jsonDecode(response.body)['episodes']) as List;
-      log('result ${DateTime.parse(list[0]['air_date'])}');
       final result = list.map((e) => EpisodeModel.fromJson(e)).toList();
       return result;
     } else {

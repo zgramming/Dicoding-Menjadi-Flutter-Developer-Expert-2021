@@ -38,6 +38,7 @@ class TVRepositoryImpl implements TVRepository {
   Future<Either<Failure, TVDetail>> getDetailTVSeries(int id) async {
     try {
       final result = await tvRemoteDataSource.getDetailTVSeries(id);
+
       return Right(result.toEntity());
     } on ServerException {
       return Left(ServerFailure(''));
