@@ -5,13 +5,11 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/tv/tv_detail.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_detail_cubit.dart';
 import 'package:ditonton/presentation/pages/tv_episode_season_page.dart';
 import 'package:ditonton/presentation/provider/tv/tv_series_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/tv_series_recommendations_notifier.dart';
 import '../cubit/tv/tv_series_recommendations_cubit.dart';
 
 class TVDetailPage extends StatefulWidget {
@@ -35,7 +33,6 @@ class _TVDetailPageState extends State<TVDetailPage> {
     Future.microtask(() {
       context.read<TVSeriesDetailCubit>().get(widget.id);
       context.read<TVSeriesRecommendationsCubit>().get(widget.id);
-      // Provider.of<TVSeriesRecommendationsNotifier>(context, listen: false)..get(widget.id);
     });
   }
 

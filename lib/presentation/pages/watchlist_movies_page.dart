@@ -1,3 +1,4 @@
+import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/presentation/cubit/movie/movie_watchlist_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_watchlist_cubit.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
@@ -41,6 +42,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TabBar(
+                indicatorColor: kMikadoYellow,
                 tabs: [
                   Tab(child: Text('Movie')),
                   Tab(child: Text('TV Series')),

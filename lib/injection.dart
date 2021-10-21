@@ -1,5 +1,6 @@
 import 'package:ditonton/presentation/cubit/movie/movie_search_cubit.dart';
 import 'package:ditonton/presentation/cubit/movie/movie_watchlist_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_episode_season_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_popular_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_search_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_watchlist_cubit.dart';
@@ -112,9 +113,16 @@ void init() {
       searchMovies: locator(),
     ),
   );
+
   locator.registerFactory(
     () => MovieWatchlistCubit(
       getWatchlistMovies: locator(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => TVSeriesEpisodeSeasonCubit(
+      getEpisodeSeasonTVSeries: locator(),
     ),
   );
 

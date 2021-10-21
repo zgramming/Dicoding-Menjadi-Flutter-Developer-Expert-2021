@@ -1,4 +1,5 @@
 import 'package:ditonton/presentation/cubit/movie/movie_watchlist_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_episode_season_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_popular_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_watchlist_cubit.dart';
 import 'package:flutter/cupertino.dart';
@@ -96,6 +97,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<TVSeriesWatchlistCubit>(
           create: (context) => di.locator<TVSeriesWatchlistCubit>(),
+        ),
+        BlocProvider<TVSeriesEpisodeSeasonCubit>(
+          create: (context) => di.locator<TVSeriesEpisodeSeasonCubit>(),
         ),
 
         ///* END MIGRATION TV SERIES CUBIT

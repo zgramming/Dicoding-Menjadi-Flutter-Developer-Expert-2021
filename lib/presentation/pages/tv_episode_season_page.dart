@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_episode_season_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:global_template/global_template.dart';
 import 'package:provider/provider.dart';
@@ -36,11 +38,10 @@ class _TVEpisodeSeasonPageState extends State<TVEpisodeSeasonPage> {
     season = widget.param['season'];
 
     Future.microtask(() {
-      Provider.of<TVSeriesEpisodeSeasonNotifier>(context, listen: false)
-        ..get(
-          id: tv.id,
-          seasonNumber: season.seasonNumber,
-        );
+      context.read<TVSeriesEpisodeSeasonCubit>().get(
+            id: tv.id,
+            seasonNumber: season.seasonNumber,
+          );
     });
   }
 
@@ -52,13 +53,12 @@ class _TVEpisodeSeasonPageState extends State<TVEpisodeSeasonPage> {
         title: Text('${tv.name} | ${season.name}'),
       ),
       body: SizedBox.expand(
-        child: Consumer<TVSeriesEpisodeSeasonNotifier>(
-          builder: (context, data, child) {
-            final state = data.state;
-            if (state == RequestState.Loading) {
+        child: BlocBuilder<TVSeriesEpisodeSeasonCubit, TVSeriesEpisodeSeasonState>(
+          builder: (context, state) {
+            if (state is TVSeriesEpisodeSeasonLoadingState) {
               return Center(child: CircularProgressIndicator());
-            } else if (state == RequestState.Loaded) {
-              if (data.items.isEmpty) {
+            } else if (state is TVSeriesEpisodeSeasonLoadedState) {
+              if (state.items.isEmpty) {
                 return Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Center(
@@ -67,11 +67,11 @@ class _TVEpisodeSeasonPageState extends State<TVEpisodeSeasonPage> {
                 );
               }
               return ListView.builder(
-                itemCount: data.items.length,
+                itemCount: state.items.length,
                 shrinkWrap: true,
                 padding: const EdgeInsets.all(16.0),
                 itemBuilder: (context, index) {
-                  final episode = data.items[index];
+                  final episode = state.items[index];
                   return ListTile(
                     leading: Container(
                       width: 80,
@@ -186,8 +186,10 @@ class _TVEpisodeSeasonPageState extends State<TVEpisodeSeasonPage> {
                   );
                 },
               );
+            } else if (state is TVSeriesEpisodeSeasonErrorState) {
+              return Center(child: Text(state.message));
             } else {
-              return Center(child: Text(data.message));
+              return const SizedBox();
             }
           },
         ),
