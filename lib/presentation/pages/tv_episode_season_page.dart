@@ -7,11 +7,9 @@ import 'package:global_template/global_template.dart';
 import 'package:provider/provider.dart';
 
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv/tv_crew.dart';
 import 'package:ditonton/domain/entities/tv/tv_detail.dart';
 import 'package:ditonton/domain/entities/tv/tv_season.dart';
-import 'package:ditonton/presentation/provider/tv/tv_series_episode_season_notifier.dart';
 
 class TVEpisodeSeasonPage extends StatefulWidget {
   static const ROUTE_NAME = '/episode-season-tv';

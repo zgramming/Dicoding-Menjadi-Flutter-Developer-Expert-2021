@@ -32,7 +32,6 @@ import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/tv_series_airing_today_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/tv_series_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/tv_series_episode_season_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/tv_series_popular_notifier.dart';
