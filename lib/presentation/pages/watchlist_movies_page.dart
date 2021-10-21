@@ -1,9 +1,9 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/tv/tv_series_watchlist_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
+import 'package:ditonton/presentation/cubit/movie/movie_watchlist_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_watchlist_cubit.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:ditonton/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
@@ -19,8 +19,10 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
     super.initState();
     Future.microtask(
       () {
-        Provider.of<WatchlistMovieNotifier>(context, listen: false).fetchWatchlistMovies();
-        Provider.of<TVSeriesWatchlistNotifier>(context, listen: false).get();
+        // Provider.of<WatchlistMovieNotifier>(context, listen: false).fetchWatchlistMovies();
+        // Provider.of<TVSeriesWatchlistNotifier>(context, listen: false).get();
+        context.read<TVSeriesWatchlistCubit>().get();
+        context.read<MovieWatchlistCubit>().get();
       },
     );
   }
@@ -48,11 +50,11 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
               Expanded(
                 child: TabBarView(
                   children: [
-                    Consumer<WatchlistMovieNotifier>(
-                      builder: (context, data, child) => _buildWatchlistMovie(data),
+                    BlocBuilder<MovieWatchlistCubit, MovieWatchlistState>(
+                      builder: (context, state) => _buildWatchlistMovie(state),
                     ),
-                    Consumer<TVSeriesWatchlistNotifier>(
-                      builder: (context, data, child) => _buildWatchlistTVSeries(data),
+                    BlocBuilder<TVSeriesWatchlistCubit, TVSeriesWatchlistState>(
+                      builder: (context, state) => _buildWatchlistTVSeries(state),
                     ),
                   ],
                 ),
@@ -64,45 +66,49 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
     );
   }
 
-  _buildWatchlistMovie(WatchlistMovieNotifier data) {
-    if (data.watchlistState == RequestState.Loading) {
+  Widget _buildWatchlistMovie(MovieWatchlistState state) {
+    if (state is MovieWatchlistLoadingState) {
       return Center(
         child: CircularProgressIndicator(),
       );
-    } else if (data.watchlistState == RequestState.Loaded) {
+    } else if (state is MovieWatchlistLoadedState) {
       return ListView.builder(
         itemBuilder: (context, index) {
-          final movie = data.watchlistMovies[index];
+          final movie = state.items[index];
           return MovieCard(movie);
         },
-        itemCount: data.watchlistMovies.length,
+        itemCount: state.items.length,
       );
-    } else {
+    } else if (state is MovieWatchlistErrorState) {
       return Center(
         key: Key('error_message'),
-        child: Text(data.message),
+        child: Text(state.message),
       );
+    } else {
+      return SizedBox();
     }
   }
 
-  _buildWatchlistTVSeries(TVSeriesWatchlistNotifier data) {
-    if (data.state == RequestState.Loading) {
+  Widget _buildWatchlistTVSeries(TVSeriesWatchlistState state) {
+    if (state is TVSeriesWatchlistLoadingState) {
       return Center(
         child: CircularProgressIndicator(),
       );
-    } else if (data.state == RequestState.Loaded) {
+    } else if (state is TVSeriesWatchlistLoadedState) {
       return ListView.builder(
         itemBuilder: (context, index) {
-          final tv = data.items[index];
+          final tv = state.items[index];
           return TVCard(tv: tv);
         },
-        itemCount: data.items.length,
+        itemCount: state.items.length,
       );
-    } else {
+    } else if (state is TVSeriesWatchlistErrorState) {
       return Center(
         key: Key('error_message'),
-        child: Text(data.message),
+        child: Text(state.message),
       );
+    } else {
+      return SizedBox();
     }
   }
 }
