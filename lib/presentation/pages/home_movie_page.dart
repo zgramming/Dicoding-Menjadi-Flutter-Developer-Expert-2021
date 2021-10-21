@@ -1,7 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton/presentation/cubit/tv/tv_series_airing_today_cubit.dart';
-import 'package:ditonton/presentation/pages/tv_detail_page.dart';
-import 'package:ditonton/presentation/pages/tv_see_more_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -12,11 +9,15 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/tv/tv.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_airing_today_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_top_rated_cubit.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
+import 'package:ditonton/presentation/pages/tv_detail_page.dart';
+import 'package:ditonton/presentation/pages/tv_see_more_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/tv_series_airing_today_notifier.dart';
@@ -140,9 +141,10 @@ class _TVSeriesTabMenuState extends State<TVSeriesTabMenu> with AutomaticKeepAli
 
     Future.microtask(() {
       context.read<TVSeriesAiringTodayCubit>().get();
+      context.read<TVSeriesTopRatedCubit>().get();
       // Provider.of<TVSeriesAiringTodayNotifier>(context, listen: false)..get();
       Provider.of<TVSeriesPopularNotifier>(context, listen: false)..get();
-      Provider.of<TVSeriesTopRatedNotifier>(context, listen: false)..get();
+      // Provider.of<TVSeriesTopRatedNotifier>(context, listen: false)..get();
     });
   }
 
@@ -221,17 +223,18 @@ class _TVSeriesTabMenuState extends State<TVSeriesTabMenu> with AutomaticKeepAli
               arguments: SeeMoreState.TopRated,
             ),
           ),
-          Consumer<TVSeriesTopRatedNotifier>(
-            builder: (context, data, child) {
-              final state = data.state;
-              if (state == RequestState.Loading) {
+          BlocBuilder<TVSeriesTopRatedCubit, TVSeriesTopRatedState>(
+            builder: (context, state) {
+              if (state is TVSeriesTopRatedLoadingState) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state == RequestState.Loaded) {
-                return TVList(data.items);
+              } else if (state is TVSeriesTopRatedLoadedState) {
+                return TVList(state.items);
+              } else if (state is TVSeriesTopRatedErrorState) {
+                return Center(child: Text(state.message));
               } else {
-                return Text('Failed');
+                return SizedBox();
               }
             },
           ),

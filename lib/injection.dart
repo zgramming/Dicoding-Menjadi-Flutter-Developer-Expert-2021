@@ -50,6 +50,7 @@ import 'package:ditonton/presentation/provider/tv/tv_series_watchlist_notifier.d
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 
 import './presentation/cubit/tv/tv_series_recommendations_cubit.dart';
+import './presentation/cubit/tv/tv_series_top_rated_cubit.dart';
 
 final locator = GetIt.instance;
 
@@ -80,6 +81,11 @@ void init() {
   locator.registerFactory(
     () => TVSeriesSearchCubit(
       searchTVSeries: locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => TVSeriesTopRatedCubit(
+      getTopRatedTVSeries: locator(),
     ),
   );
 
