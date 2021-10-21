@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_airing_today_cubit.dart';
 import 'package:ditonton/presentation/pages/tv_detail_page.dart';
 import 'package:ditonton/presentation/pages/tv_see_more_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import 'package:ditonton/common/constants.dart';
@@ -137,7 +139,8 @@ class _TVSeriesTabMenuState extends State<TVSeriesTabMenu> with AutomaticKeepAli
     super.initState();
 
     Future.microtask(() {
-      Provider.of<TVSeriesAiringTodayNotifier>(context, listen: false)..get();
+      context.read<TVSeriesAiringTodayCubit>().get();
+      // Provider.of<TVSeriesAiringTodayNotifier>(context, listen: false)..get();
       Provider.of<TVSeriesPopularNotifier>(context, listen: false)..get();
       Provider.of<TVSeriesTopRatedNotifier>(context, listen: false)..get();
     });
@@ -155,20 +158,39 @@ class _TVSeriesTabMenuState extends State<TVSeriesTabMenu> with AutomaticKeepAli
             'Airing Today',
             style: kHeading6,
           ),
-          Consumer<TVSeriesAiringTodayNotifier>(
-            builder: (context, data, child) {
-              final state = data.state;
-              if (state == RequestState.Loading) {
+          BlocBuilder<TVSeriesAiringTodayCubit, TVSeriesAiringTodayState>(
+            builder: (context, state) {
+              if (state is TVSeriesAiringTodayLoading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state == RequestState.Loaded) {
-                return TVList(data.items);
-              } else {
-                return Text('Failed');
               }
+
+              if (state is TVSeriesAiringTodayLoaded) {
+                return TVList(state.items);
+              }
+
+              if (state is TVSeriesAiringTodayError) {
+                return Center(child: Text(state.message));
+              }
+
+              return SizedBox();
             },
           ),
+          // Consumer<TVSeriesAiringTodayNotifier>(
+          //   builder: (context, data, child) {
+          //     final state = data.state;
+          //     if (state == RequestState.Loading) {
+          // return Center(
+          //   child: CircularProgressIndicator(),
+          // );
+          //     } else if (state == RequestState.Loaded) {
+          // return TVList(data.items);
+          //     } else {
+          //       return Text('Failed');
+          //     }
+          //   },
+          // ),
           BuildSubHeading(
             title: 'Popular',
             onTap: () => Navigator.pushNamed(

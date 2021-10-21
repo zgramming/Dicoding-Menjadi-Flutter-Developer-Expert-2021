@@ -1,0 +1,57 @@
+part of 'tv_series_recommendations_cubit.dart';
+
+abstract class TVSeriesRecommendationsState {
+  const TVSeriesRecommendationsState();
+}
+
+class TVSeriesRecommendationsInitialState extends TVSeriesRecommendationsState {
+  const TVSeriesRecommendationsInitialState();
+}
+
+class TVSeriesRecommendationsLoadingState extends TVSeriesRecommendationsState {
+  const TVSeriesRecommendationsLoadingState();
+}
+
+class TVSeriesRecommendationsErrorState extends TVSeriesRecommendationsState with EquatableMixin {
+  const TVSeriesRecommendationsErrorState(
+    this.message,
+  );
+
+  final String message;
+
+  @override
+  List<Object> get props => [message];
+
+  @override
+  bool get stringify => true;
+
+  TVSeriesRecommendationsErrorState copyWith({
+    String? message,
+  }) {
+    return TVSeriesRecommendationsErrorState(
+      message ?? this.message,
+    );
+  }
+}
+
+class TVSeriesRecommendationsLoadedState extends TVSeriesRecommendationsState with EquatableMixin {
+  const TVSeriesRecommendationsLoadedState({
+    required this.items,
+  });
+
+  final List<TV> items;
+
+  @override
+  List<Object> get props => [items];
+
+  @override
+  bool get stringify => true;
+
+  TVSeriesRecommendationsLoadedState copyWith({
+    List<TV>? items,
+  }) {
+    return TVSeriesRecommendationsLoadedState(
+      items: items ?? this.items,
+    );
+  }
+}

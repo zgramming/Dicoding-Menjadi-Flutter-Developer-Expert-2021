@@ -1,11 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/injection.dart' as di;
+import 'package:ditonton/presentation/cubit/tv/tv_series_airing_today_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_detail_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_recommendations_cubit.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
@@ -65,9 +69,21 @@ class MyApp extends StatelessWidget {
         ///! END MOVIE NOTIFIER
 
         ///! START TV NOTIFIER
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TVSeriesAiringTodayNotifier>(),
+        ///* START MIGRATION CUBIT
+        BlocProvider<TVSeriesAiringTodayCubit>(
+          create: (context) => di.locator<TVSeriesAiringTodayCubit>(),
         ),
+        BlocProvider<TVSeriesDetailCubit>(
+          create: (context) => di.locator<TVSeriesDetailCubit>(),
+        ),
+        BlocProvider<TVSeriesRecommendationsCubit>(
+          create: (context) => di.locator<TVSeriesRecommendationsCubit>(),
+        ),
+
+        ///* END MIGRATION CUBIT
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<TVSeriesAiringTodayNotifier>(),
+        // ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TVSeriesPopularNotifier>(),
         ),
