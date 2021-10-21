@@ -1,4 +1,5 @@
 import 'package:ditonton/presentation/cubit/movie/movie_search_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_popular_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_search_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -83,9 +84,16 @@ void init() {
       searchTVSeries: locator(),
     ),
   );
+
   locator.registerFactory(
     () => TVSeriesTopRatedCubit(
       getTopRatedTVSeries: locator(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => TVSeriesPopularCubit(
+      getPopularTVSeries: locator(),
     ),
   );
 

@@ -10,6 +10,7 @@ import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/tv/tv.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_airing_today_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_popular_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_top_rated_cubit.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
@@ -20,9 +21,6 @@ import 'package:ditonton/presentation/pages/tv_detail_page.dart';
 import 'package:ditonton/presentation/pages/tv_see_more_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/tv_series_airing_today_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/tv_series_popular_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/tv_series_top_rated_notifier.dart';
 
 class HomeMoviePage extends StatefulWidget {
   @override
@@ -101,7 +99,6 @@ class _HomeMoviePageState extends State<HomeMoviePage> with SingleTickerProvider
                   borderRadius: BorderRadius.circular(60.0),
                   color: kMikadoYellow,
                 ),
-                // onTap: (value) => setState(() => _selectedIndex = value),
                 tabs: [
                   Tab(child: Text('Movie')),
                   Tab(child: Text('TV Series')),
@@ -142,9 +139,7 @@ class _TVSeriesTabMenuState extends State<TVSeriesTabMenu> with AutomaticKeepAli
     Future.microtask(() {
       context.read<TVSeriesAiringTodayCubit>().get();
       context.read<TVSeriesTopRatedCubit>().get();
-      // Provider.of<TVSeriesAiringTodayNotifier>(context, listen: false)..get();
-      Provider.of<TVSeriesPopularNotifier>(context, listen: false)..get();
-      // Provider.of<TVSeriesTopRatedNotifier>(context, listen: false)..get();
+      context.read<TVSeriesPopularCubit>().get();
     });
   }
 
@@ -179,20 +174,6 @@ class _TVSeriesTabMenuState extends State<TVSeriesTabMenu> with AutomaticKeepAli
               return SizedBox();
             },
           ),
-          // Consumer<TVSeriesAiringTodayNotifier>(
-          //   builder: (context, data, child) {
-          //     final state = data.state;
-          //     if (state == RequestState.Loading) {
-          // return Center(
-          //   child: CircularProgressIndicator(),
-          // );
-          //     } else if (state == RequestState.Loaded) {
-          // return TVList(data.items);
-          //     } else {
-          //       return Text('Failed');
-          //     }
-          //   },
-          // ),
           BuildSubHeading(
             title: 'Popular',
             onTap: () => Navigator.pushNamed(
@@ -201,17 +182,18 @@ class _TVSeriesTabMenuState extends State<TVSeriesTabMenu> with AutomaticKeepAli
               arguments: SeeMoreState.Popular,
             ),
           ),
-          Consumer<TVSeriesPopularNotifier>(
-            builder: (context, data, child) {
-              final state = data.state;
-              if (state == RequestState.Loading) {
+          BlocBuilder<TVSeriesPopularCubit, TVSeriesPopularState>(
+            builder: (context, state) {
+              if (state is TVSeriesPopularLoadingState) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state == RequestState.Loaded) {
-                return TVList(data.items);
+              } else if (state is TVSeriesPopularLoadedState) {
+                return TVList(state.items);
+              } else if (state is TVSeriesPopularErrorState) {
+                return Center(child: Text('${state.message}'));
               } else {
-                return Text('Failed');
+                return SizedBox();
               }
             },
           ),

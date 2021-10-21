@@ -1,3 +1,4 @@
+import 'package:ditonton/presentation/cubit/tv/tv_series_popular_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -87,6 +88,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<TVSeriesTopRatedCubit>(
           create: (context) => di.locator<TVSeriesTopRatedCubit>(),
+        ),
+        BlocProvider<TVSeriesPopularCubit>(
+          create: (context) => di.locator<TVSeriesPopularCubit>(),
         ),
 
         ///* END MIGRATION TV SERIES CUBIT
