@@ -1,3 +1,5 @@
+import 'package:ditonton/presentation/cubit/movie/movie_search_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_search_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 
@@ -53,6 +55,7 @@ final locator = GetIt.instance;
 
 void init() {
   ///? START CUBIT
+  ///! START TV SERIES
   locator.registerFactory(
     () => TVSeriesAiringTodayCubit(
       getAiringTodayTVSeries: locator(),
@@ -73,6 +76,22 @@ void init() {
       getRecommendationTVSeries: locator(),
     ),
   );
+
+  locator.registerFactory(
+    () => TVSeriesSearchCubit(
+      searchTVSeries: locator(),
+    ),
+  );
+
+  ///! END TV SERIES
+  ///! START MOVIES SERIES
+  locator.registerFactory(
+    () => MovieSearchCubit(
+      searchMovies: locator(),
+    ),
+  );
+
+  ///! END MOVIES SERIES
 
   ///? END CUBIT
   ///? START PROVIDER

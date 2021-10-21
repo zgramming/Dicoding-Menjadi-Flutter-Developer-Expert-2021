@@ -1,10 +1,11 @@
+import 'package:ditonton/presentation/cubit/movie/movie_search_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_search_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/tv_series_search_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:ditonton/presentation/widgets/tv_card_list.dart';
 
@@ -61,18 +62,15 @@ class _SearchPageState extends State<SearchPage> {
           Container(
             child: DropdownButton<SearchCategory>(
               value: _selectedCategory,
-              onChanged: (value) {
+              onChanged: (value) async {
                 if (_searchController.text.isNotEmpty) {
                   if (value!.category == CategoryMenu.Movie) {
                     /// Call Function Movie
-                    Provider.of<MovieSearchNotifier>(context, listen: false).fetchMovieSearch(
-                      _searchController.text,
-                    );
+
+                    await context.read<MovieSearchCubit>().get(_searchController.text);
                   } else {
                     /// Call Function TV Series
-                    Provider.of<TVSeriesSearchNotifier>(context, listen: false).fetchTVSeriesSearch(
-                      _searchController.text,
-                    );
+                    await context.read<TVSeriesSearchCubit>().get(_searchController.text);
                   }
                 }
                 setState(() => _selectedCategory = value!);
@@ -96,15 +94,11 @@ class _SearchPageState extends State<SearchPage> {
           children: [
             TextField(
               controller: _searchController,
-              onSubmitted: (query) {
+              onSubmitted: (query) async {
                 if (_selectedCategory.category == CategoryMenu.Movie) {
-                  Provider.of<MovieSearchNotifier>(context, listen: false).fetchMovieSearch(
-                    query,
-                  );
+                  await context.read<MovieSearchCubit>().get(_searchController.text);
                 } else {
-                  Provider.of<TVSeriesSearchNotifier>(context, listen: false).fetchTVSeriesSearch(
-                    query,
-                  );
+                  await context.read<TVSeriesSearchCubit>().get(_searchController.text);
                 }
               },
               decoration: InputDecoration(
@@ -120,15 +114,15 @@ class _SearchPageState extends State<SearchPage> {
               style: kHeading6,
             ),
             if (_selectedCategory.category == CategoryMenu.Movie) ...[
-              Consumer<MovieSearchNotifier>(
-                builder: (context, data, child) {
-                  return _buildMovieSearch(data);
+              BlocBuilder<MovieSearchCubit, MovieSearchState>(
+                builder: (context, state) {
+                  return _buildMovieSearch(state);
                 },
               ),
             ] else ...[
-              Consumer<TVSeriesSearchNotifier>(
-                builder: (context, data, child) {
-                  return _buildTVSeriesSearch(data);
+              BlocBuilder<TVSeriesSearchCubit, TVSeriesSearchState>(
+                builder: (context, state) {
+                  return _buildTVSeriesSearch(state);
                 },
               ),
             ],
@@ -138,21 +132,20 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  _buildMovieSearch(MovieSearchNotifier data) {
-    if (data.state == RequestState.Loading) {
+  _buildMovieSearch(MovieSearchState state) {
+    if (state is MovieSearchLoadingState) {
       return Center(
         child: CircularProgressIndicator(),
       );
-    } else if (data.state == RequestState.Loaded) {
-      final result = data.searchResult;
+    } else if (state is MovieSearchLoadedState) {
       return Expanded(
         child: ListView.builder(
           padding: const EdgeInsets.all(8),
           itemBuilder: (context, index) {
-            final movie = data.searchResult[index];
+            final movie = state.items[index];
             return MovieCard(movie);
           },
-          itemCount: result.length,
+          itemCount: state.items.length,
         ),
       );
     } else {
@@ -162,23 +155,25 @@ class _SearchPageState extends State<SearchPage> {
     }
   }
 
-  _buildTVSeriesSearch(TVSeriesSearchNotifier data) {
-    if (data.state == RequestState.Loading) {
+  _buildTVSeriesSearch(TVSeriesSearchState state) {
+    if (state is TVSeriesSearchLoadingState) {
       return Center(
         child: CircularProgressIndicator(),
       );
-    } else if (data.state == RequestState.Loaded) {
-      final result = data.items;
+    } else if (state is TVSeriesSearchLoadedState) {
+      final result = state.items;
       return Expanded(
         child: ListView.builder(
           padding: const EdgeInsets.all(8),
           itemBuilder: (context, index) {
-            final tv = data.items[index];
+            final tv = state.items[index];
             return TVCard(tv: tv);
           },
           itemCount: result.length,
         ),
       );
+    } else if (state is TVSeriesSearchErrorState) {
+      return Center(child: Text(state.message));
     } else {
       return Expanded(
         child: Container(),

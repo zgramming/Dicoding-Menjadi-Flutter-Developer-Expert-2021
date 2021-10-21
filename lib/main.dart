@@ -1,3 +1,5 @@
+import 'package:ditonton/presentation/cubit/movie/movie_search_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_search_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,6 +46,7 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    /// [https://github.com/felangel/bloc/issues/2526]
     return MultiProvider(
       providers: [
         ///! START MOVIE NOTIFIER
@@ -69,7 +72,8 @@ class MyApp extends StatelessWidget {
         ///! END MOVIE NOTIFIER
 
         ///! START TV NOTIFIER
-        ///* START MIGRATION CUBIT
+
+        ///* START MIGRATION TV SERIES CUBIT
         BlocProvider<TVSeriesAiringTodayCubit>(
           create: (context) => di.locator<TVSeriesAiringTodayCubit>(),
         ),
@@ -79,8 +83,17 @@ class MyApp extends StatelessWidget {
         BlocProvider<TVSeriesRecommendationsCubit>(
           create: (context) => di.locator<TVSeriesRecommendationsCubit>(),
         ),
+        BlocProvider<TVSeriesSearchCubit>(
+          create: (context) => di.locator<TVSeriesSearchCubit>(),
+        ),
 
-        ///* END MIGRATION CUBIT
+        ///* END MIGRATION TV SERIES CUBIT
+        ///* START MIGRATION MOVIES CUBIT
+        BlocProvider<MovieSearchCubit>(
+          create: (context) => di.locator<MovieSearchCubit>(),
+        ),
+
+        ///* END MIGRATION MOVIES CUBIT
         // ChangeNotifierProvider(
         //   create: (_) => di.locator<TVSeriesAiringTodayNotifier>(),
         // ),
