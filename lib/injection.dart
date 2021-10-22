@@ -1,9 +1,3 @@
-import 'package:ditonton/presentation/cubit/movie/movie_search_cubit.dart';
-import 'package:ditonton/presentation/cubit/movie/movie_watchlist_cubit.dart';
-import 'package:ditonton/presentation/cubit/tv/tv_series_episode_season_cubit.dart';
-import 'package:ditonton/presentation/cubit/tv/tv_series_popular_cubit.dart';
-import 'package:ditonton/presentation/cubit/tv/tv_series_search_cubit.dart';
-import 'package:ditonton/presentation/cubit/tv/tv_series_watchlist_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 
@@ -37,8 +31,17 @@ import 'package:ditonton/domain/usecases/tv/get_watchlist_tv_series.dart';
 import 'package:ditonton/domain/usecases/tv/remove_watchlist_tv_series.dart';
 import 'package:ditonton/domain/usecases/tv/save_watchlist_tv_series.dart';
 import 'package:ditonton/domain/usecases/tv/search_tv_series.dart';
+import 'package:ditonton/presentation/cubit/movie/movie_now_playing_cubit.dart';
+import 'package:ditonton/presentation/cubit/movie/movie_top_rated_cubit.dart';
+import 'package:ditonton/presentation/cubit/movie/movie_popular_cubit.dart';
+import 'package:ditonton/presentation/cubit/movie/movie_search_cubit.dart';
+import 'package:ditonton/presentation/cubit/movie/movie_watchlist_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_airing_today_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_detail_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_episode_season_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_popular_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_search_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_watchlist_cubit.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
@@ -60,7 +63,7 @@ final locator = GetIt.instance;
 
 void init() {
   ///? START CUBIT
-  ///! START TV SERIES
+  ///! START TV SERIES CUBIT
   locator.registerFactory(
     () => TVSeriesAiringTodayCubit(
       getAiringTodayTVSeries: locator(),
@@ -106,8 +109,14 @@ void init() {
     ),
   );
 
+  locator.registerFactory(
+    () => TVSeriesEpisodeSeasonCubit(
+      getEpisodeSeasonTVSeries: locator(),
+    ),
+  );
+
   ///! END TV SERIES
-  ///! START MOVIES SERIES
+  ///! START MOVIES SERIES CUBIT
   locator.registerFactory(
     () => MovieSearchCubit(
       searchMovies: locator(),
@@ -121,8 +130,20 @@ void init() {
   );
 
   locator.registerFactory(
-    () => TVSeriesEpisodeSeasonCubit(
-      getEpisodeSeasonTVSeries: locator(),
+    () => MovieNowPlayingCubit(
+      getNowPlayingMovies: locator(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => MoviePopularCubit(
+      getPopularMovies: locator(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => MovieTopRatedCubit(
+      getTopRatedMovies: locator(),
     ),
   );
 

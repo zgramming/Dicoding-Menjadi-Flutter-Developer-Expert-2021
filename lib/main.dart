@@ -1,7 +1,3 @@
-import 'package:ditonton/presentation/cubit/movie/movie_watchlist_cubit.dart';
-import 'package:ditonton/presentation/cubit/tv/tv_series_episode_season_cubit.dart';
-import 'package:ditonton/presentation/cubit/tv/tv_series_popular_cubit.dart';
-import 'package:ditonton/presentation/cubit/tv/tv_series_watchlist_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,12 +7,19 @@ import 'package:provider/provider.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/injection.dart' as di;
+import 'package:ditonton/presentation/cubit/movie/movie_top_rated_cubit.dart';
+import 'package:ditonton/presentation/cubit/movie/movie_now_playing_cubit.dart';
+import 'package:ditonton/presentation/cubit/movie/movie_popular_cubit.dart';
 import 'package:ditonton/presentation/cubit/movie/movie_search_cubit.dart';
+import 'package:ditonton/presentation/cubit/movie/movie_watchlist_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_airing_today_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_detail_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_episode_season_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_popular_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_recommendations_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_search_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_top_rated_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_watchlist_cubit.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
@@ -108,6 +111,15 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<MovieWatchlistCubit>(
           create: (context) => di.locator<MovieWatchlistCubit>(),
+        ),
+        BlocProvider<MovieNowPlayingCubit>(
+          create: (context) => di.locator<MovieNowPlayingCubit>(),
+        ),
+        BlocProvider<MoviePopularCubit>(
+          create: (context) => di.locator<MoviePopularCubit>(),
+        ),
+        BlocProvider<MovieTopRatedCubit>(
+          create: (context) => di.locator<MovieTopRatedCubit>(),
         ),
 
         ///* END MIGRATION MOVIES CUBIT
