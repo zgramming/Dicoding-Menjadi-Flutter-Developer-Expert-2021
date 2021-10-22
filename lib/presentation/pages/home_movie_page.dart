@@ -23,7 +23,6 @@ import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/tv_detail_page.dart';
 import 'package:ditonton/presentation/pages/tv_see_more_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
-import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 
 class HomeMoviePage extends StatefulWidget {
   @override
@@ -36,10 +35,6 @@ class _HomeMoviePageState extends State<HomeMoviePage> with SingleTickerProvider
   void initState() {
     super.initState();
     _controller = TabController(length: 2, vsync: this);
-    // Future.microtask(() => Provider.of<MovieListNotifier>(context, listen: false)
-    //   ..fetchNowPlayingMovies()
-    //   ..fetchPopularMovies()
-    //   ..fetchTopRatedMovies());
 
     Future.microtask(() {
       context.read<MovieNowPlayingCubit>().get();

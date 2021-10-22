@@ -1,9 +1,10 @@
+import 'package:ditonton/presentation/cubit/tv/tv_series_popular_cubit.dart';
+import 'package:ditonton/presentation/cubit/tv/tv_series_top_rated_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/tv/tv_series_popular_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/tv_series_top_rated_notifier.dart';
 import 'package:ditonton/presentation/widgets/tv_card_list.dart';
 
 class TVSeeMorePage extends StatefulWidget {
@@ -26,10 +27,12 @@ class _TVSeeMorePageState extends State<TVSeeMorePage> {
     super.initState();
 
     if (widget.seeMoreState == SeeMoreState.Popular) {
-      Provider.of<TVSeriesPopularNotifier>(context, listen: false)..get();
+      // Provider.of<TVSeriesPopularNotifier>(context, listen: false)..get();
+      context.read<TVSeriesPopularCubit>().get();
       titleAppbar = 'Popular TV Series';
     } else {
-      Provider.of<TVSeriesTopRatedNotifier>(context, listen: false)..get();
+      // Provider.of<TVSeriesTopRatedNotifier>(context, listen: false)..get();
+      context.read<TVSeriesTopRatedCubit>().get();
       titleAppbar = 'Top Rated TV Series';
     }
   }
@@ -45,12 +48,12 @@ class _TVSeeMorePageState extends State<TVSeeMorePage> {
         padding: const EdgeInsets.all(8.0),
         child: Builder(builder: (_) {
           if (widget.seeMoreState == SeeMoreState.Popular) {
-            return Consumer<TVSeriesPopularNotifier>(
-              builder: (context, data, child) => _buildPopular(data),
+            return BlocBuilder<TVSeriesPopularCubit, TVSeriesPopularState>(
+              builder: (context, state) => _buildPopular(state),
             );
           } else {
-            return Consumer<TVSeriesTopRatedNotifier>(
-              builder: (context, data, child) => _buildTopRated(data),
+            return BlocBuilder<TVSeriesTopRatedCubit, TVSeriesTopRatedState>(
+              builder: (context, state) => _buildTopRated(state),
             );
           }
         }),
@@ -58,45 +61,45 @@ class _TVSeeMorePageState extends State<TVSeeMorePage> {
     );
   }
 
-  _buildPopular(TVSeriesPopularNotifier data) {
-    if (data.state == RequestState.Loading) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    } else if (data.state == RequestState.Loaded) {
+  _buildPopular(TVSeriesPopularState state) {
+    if (state is TVSeriesPopularLoadingState) {
+      return Center(child: CircularProgressIndicator());
+    } else if (state is TVSeriesPopularLoadedState) {
       return ListView.builder(
         itemBuilder: (context, index) {
-          final tv = data.items[index];
+          final tv = state.items[index];
           return TVCard(tv: tv);
         },
-        itemCount: data.items.length,
+        itemCount: state.items.length,
       );
-    } else {
+    } else if (state is TVSeriesPopularErrorState) {
       return Center(
         key: Key('error_message'),
-        child: Text(data.message),
+        child: Text(state.message),
       );
+    } else {
+      return const SizedBox();
     }
   }
 
-  _buildTopRated(TVSeriesTopRatedNotifier data) {
-    if (data.state == RequestState.Loading) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    } else if (data.state == RequestState.Loaded) {
+  _buildTopRated(TVSeriesTopRatedState state) {
+    if (state is TVSeriesTopRatedLoadingState) {
+      return Center(child: CircularProgressIndicator());
+    } else if (state is TVSeriesTopRatedLoadedState) {
       return ListView.builder(
         itemBuilder: (context, index) {
-          final tv = data.items[index];
+          final tv = state.items[index];
           return TVCard(tv: tv);
         },
-        itemCount: data.items.length,
+        itemCount: state.items.length,
       );
-    } else {
+    } else if (state is TVSeriesTopRatedErrorState) {
       return Center(
         key: Key('error_message'),
-        child: Text(data.message),
+        child: Text(state.message),
       );
+    } else {
+      return SizedBox();
     }
   }
 }

@@ -1,8 +1,8 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import '../cubit/movie/movie_top_rated_cubit.dart';
 
 class TopRatedMoviesPage extends StatefulWidget {
   static const ROUTE_NAME = '/top-rated-movie';
@@ -15,9 +15,9 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<TopRatedMoviesNotifier>(context, listen: false)
-            .fetchTopRatedMovies());
+    Future.microtask(
+      () => context.read<MovieTopRatedCubit>().get(),
+    );
   }
 
   @override
@@ -28,25 +28,25 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<TopRatedMoviesNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (data.state == RequestState.Loaded) {
+        child: BlocBuilder<MovieTopRatedCubit, MovieTopRatedState>(
+          builder: (context, state) {
+            if (state is MovieTopRatedLoadingState) {
+              return Center(child: CircularProgressIndicator());
+            } else if (state is MovieTopRatedLoadedState) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final movie = data.movies[index];
+                  final movie = state.items[index];
                   return MovieCard(movie);
                 },
-                itemCount: data.movies.length,
+                itemCount: state.items.length,
               );
-            } else {
+            } else if (state is MovieTopRatedErrorState) {
               return Center(
                 key: Key('error_message'),
-                child: Text(data.message),
+                child: Text(state.message),
               );
+            } else {
+              return SizedBox();
             }
           },
         ),
