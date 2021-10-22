@@ -7,10 +7,12 @@ import 'package:provider/provider.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/injection.dart' as di;
-import 'package:ditonton/presentation/cubit/movie/movie_top_rated_cubit.dart';
+import 'package:ditonton/presentation/cubit/movie/movie_detail_cubit.dart';
 import 'package:ditonton/presentation/cubit/movie/movie_now_playing_cubit.dart';
 import 'package:ditonton/presentation/cubit/movie/movie_popular_cubit.dart';
+import 'package:ditonton/presentation/cubit/movie/movie_recommendations_cubit.dart';
 import 'package:ditonton/presentation/cubit/movie/movie_search_cubit.dart';
+import 'package:ditonton/presentation/cubit/movie/movie_top_rated_cubit.dart';
 import 'package:ditonton/presentation/cubit/movie/movie_watchlist_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_airing_today_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_detail_cubit.dart';
@@ -120,6 +122,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<MovieTopRatedCubit>(
           create: (context) => di.locator<MovieTopRatedCubit>(),
+        ),
+        BlocProvider<MovieRecommendationsCubit>(
+          create: (context) => di.locator<MovieRecommendationsCubit>(),
+        ),
+        BlocProvider<MovieDetailCubit>(
+          create: (context) => di.locator<MovieDetailCubit>(),
         ),
 
         ///* END MIGRATION MOVIES CUBIT

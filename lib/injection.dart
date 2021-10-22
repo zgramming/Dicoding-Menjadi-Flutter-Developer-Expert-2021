@@ -31,10 +31,12 @@ import 'package:ditonton/domain/usecases/tv/get_watchlist_tv_series.dart';
 import 'package:ditonton/domain/usecases/tv/remove_watchlist_tv_series.dart';
 import 'package:ditonton/domain/usecases/tv/save_watchlist_tv_series.dart';
 import 'package:ditonton/domain/usecases/tv/search_tv_series.dart';
+import 'package:ditonton/presentation/cubit/movie/movie_detail_cubit.dart';
 import 'package:ditonton/presentation/cubit/movie/movie_now_playing_cubit.dart';
-import 'package:ditonton/presentation/cubit/movie/movie_top_rated_cubit.dart';
 import 'package:ditonton/presentation/cubit/movie/movie_popular_cubit.dart';
+import 'package:ditonton/presentation/cubit/movie/movie_recommendations_cubit.dart';
 import 'package:ditonton/presentation/cubit/movie/movie_search_cubit.dart';
+import 'package:ditonton/presentation/cubit/movie/movie_top_rated_cubit.dart';
 import 'package:ditonton/presentation/cubit/movie/movie_watchlist_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_airing_today_cubit.dart';
 import 'package:ditonton/presentation/cubit/tv/tv_series_detail_cubit.dart';
@@ -144,6 +146,21 @@ void init() {
   locator.registerFactory(
     () => MovieTopRatedCubit(
       getTopRatedMovies: locator(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => MovieRecommendationsCubit(
+      getMovieRecommendations: locator(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => MovieDetailCubit(
+      getMovieDetail: locator(),
+      saveWatchlist: locator(),
+      removeWatchlist: locator(),
+      getWatchListStatus: locator(),
     ),
   );
 
