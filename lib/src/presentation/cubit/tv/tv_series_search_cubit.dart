@@ -13,6 +13,7 @@ class TVSeriesSearchCubit extends Cubit<TVSeriesSearchState> {
 
   final SearchTVSeries searchTVSeries;
   Future<void> get(String query) async {
+    emit(const TVSeriesSearchLoadingState());
     final result = await searchTVSeries.execute(query);
     result.fold(
       (failure) => emit(
