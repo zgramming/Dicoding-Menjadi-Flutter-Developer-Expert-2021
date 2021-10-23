@@ -5,10 +5,10 @@
 import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i3;
-import 'package:ditonton/common/failure.dart' as _i6;
-import 'package:ditonton/domain/entities/tv/tv.dart' as _i7;
-import 'package:ditonton/domain/repositories/tv_repository.dart' as _i2;
-import 'package:ditonton/domain/usecases/tv/get_airing_today_tv_series.dart'
+import 'package:ditonton/src/common/failure.dart' as _i6;
+import 'package:ditonton/src/domain/entities/tv/tv.dart' as _i7;
+import 'package:ditonton/src/domain/repositories/tv_repository.dart' as _i2;
+import 'package:ditonton/src/domain/usecases/tv/get_airing_today_tv_series.dart'
     as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 

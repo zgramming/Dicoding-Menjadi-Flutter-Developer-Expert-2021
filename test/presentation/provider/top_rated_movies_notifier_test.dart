@@ -1,12 +1,13 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
-import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+
+import 'package:ditonton/src/common/failure.dart';
+import 'package:ditonton/src/common/state_enum.dart';
+import 'package:ditonton/src/domain/entities/movie.dart';
+import 'package:ditonton/src/domain/usecases/get_top_rated_movies.dart';
+import 'package:ditonton/src/presentation/provider/top_rated_movies_notifier.dart';
 
 import 'top_rated_movies_notifier_test.mocks.dart';
 
@@ -45,8 +46,7 @@ void main() {
 
   test('should change state to loading when usecase is called', () async {
     // arrange
-    when(mockGetTopRatedMovies.execute())
-        .thenAnswer((_) async => Right(tMovieList));
+    when(mockGetTopRatedMovies.execute()).thenAnswer((_) async => Right(tMovieList));
     // act
     notifier.fetchTopRatedMovies();
     // assert
@@ -56,8 +56,7 @@ void main() {
 
   test('should change movies data when data is gotten successfully', () async {
     // arrange
-    when(mockGetTopRatedMovies.execute())
-        .thenAnswer((_) async => Right(tMovieList));
+    when(mockGetTopRatedMovies.execute()).thenAnswer((_) async => Right(tMovieList));
     // act
     await notifier.fetchTopRatedMovies();
     // assert

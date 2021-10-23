@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:ditonton/data/models/movie_table.dart';
-import 'package:ditonton/data/models/tv/tv_local_database/tv_local_database_model.dart';
-import 'package:ditonton/domain/entities/genre.dart';
-import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/entities/movie_detail.dart';
-import 'package:ditonton/domain/entities/tv/tv_detail.dart';
+import 'package:ditonton/src/data/models/movie_table.dart';
+import 'package:ditonton/src/data/models/tv/tv_local_database/tv_local_database_model.dart';
+import 'package:ditonton/src/domain/entities/genre.dart';
+import 'package:ditonton/src/domain/entities/movie.dart';
+import 'package:ditonton/src/domain/entities/movie_detail.dart';
+import 'package:ditonton/src/domain/entities/tv/tv_detail.dart';
 
 import '../json_reader.dart';
 

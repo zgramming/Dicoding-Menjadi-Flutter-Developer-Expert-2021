@@ -1,12 +1,13 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/usecases/search_movies.dart';
-import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+
+import 'package:ditonton/src/common/failure.dart';
+import 'package:ditonton/src/common/state_enum.dart';
+import 'package:ditonton/src/domain/entities/movie.dart';
+import 'package:ditonton/src/domain/usecases/search_movies.dart';
+import 'package:ditonton/src/presentation/provider/movie_search_notifier.dart';
 
 import 'movie_search_notifier_test.mocks.dart';
 
@@ -47,19 +48,16 @@ void main() {
   group('search movies', () {
     test('should change state to loading when usecase is called', () async {
       // arrange
-      when(mockSearchMovies.execute(tQuery))
-          .thenAnswer((_) async => Right(tMovieList));
+      when(mockSearchMovies.execute(tQuery)).thenAnswer((_) async => Right(tMovieList));
       // act
       provider.fetchMovieSearch(tQuery);
       // assert
       expect(provider.state, RequestState.Loading);
     });
 
-    test('should change search result data when data is gotten successfully',
-        () async {
+    test('should change search result data when data is gotten successfully', () async {
       // arrange
-      when(mockSearchMovies.execute(tQuery))
-          .thenAnswer((_) async => Right(tMovieList));
+      when(mockSearchMovies.execute(tQuery)).thenAnswer((_) async => Right(tMovieList));
       // act
       await provider.fetchMovieSearch(tQuery);
       // assert
