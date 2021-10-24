@@ -1,7 +1,10 @@
 part of 'movie_watchlist_cubit.dart';
 
-abstract class MovieWatchlistState {
+abstract class MovieWatchlistState extends Equatable {
   const MovieWatchlistState();
+
+  @override
+  List<Object> get props => [];
 }
 
 class MovieWatchlistInitialState extends MovieWatchlistState {
@@ -12,7 +15,7 @@ class MovieWatchlistLoadingState extends MovieWatchlistState {
   const MovieWatchlistLoadingState();
 }
 
-class MovieWatchlistErrorState extends MovieWatchlistState with EquatableMixin {
+class MovieWatchlistErrorState extends MovieWatchlistState {
   const MovieWatchlistErrorState(
     this.message,
   );
@@ -34,7 +37,7 @@ class MovieWatchlistErrorState extends MovieWatchlistState with EquatableMixin {
   }
 }
 
-class MovieWatchlistLoadedState extends MovieWatchlistState with EquatableMixin {
+class MovieWatchlistLoadedState extends MovieWatchlistState {
   const MovieWatchlistLoadedState({
     required this.items,
   });
