@@ -1,7 +1,10 @@
 part of 'movie_search_cubit.dart';
 
-abstract class MovieSearchState {
+abstract class MovieSearchState extends Equatable {
   const MovieSearchState();
+
+  @override
+  List<Object> get props => [];
 }
 
 class MovieSearchInitialState extends MovieSearchState {
@@ -12,7 +15,7 @@ class MovieSearchLoadingState extends MovieSearchState {
   const MovieSearchLoadingState();
 }
 
-class MovieSearchErrorState extends MovieSearchState with EquatableMixin {
+class MovieSearchErrorState extends MovieSearchState {
   const MovieSearchErrorState(
     this.message,
   );
@@ -34,7 +37,7 @@ class MovieSearchErrorState extends MovieSearchState with EquatableMixin {
   }
 }
 
-class MovieSearchLoadedState extends MovieSearchState with EquatableMixin {
+class MovieSearchLoadedState extends MovieSearchState {
   const MovieSearchLoadedState({
     required this.items,
   });

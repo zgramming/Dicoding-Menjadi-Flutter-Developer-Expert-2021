@@ -12,6 +12,7 @@ class MovieSearchCubit extends Cubit<MovieSearchState> {
   }) : super(const MovieSearchInitialState());
   final SearchMovies searchMovies;
   Future<void> get(String query) async {
+    emit(const MovieSearchLoadingState());
     final result = await searchMovies.execute(query);
     result.fold(
       (failure) => emit(
