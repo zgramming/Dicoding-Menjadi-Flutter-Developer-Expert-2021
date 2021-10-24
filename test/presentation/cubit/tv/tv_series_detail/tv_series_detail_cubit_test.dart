@@ -118,7 +118,7 @@ void main() {
 
         /// assert
         expect(cubit.state.messageWatchlist, 'success insert');
-        expect(cubit.state.isAddedToWatchlist, true);
+        verify(mockSaveWatchlistTVSeries.execute(mockTVDetail));
       },
     );
 
@@ -151,7 +151,7 @@ void main() {
 
         /// assert
         expect(cubit.state.messageWatchlist, 'success remove');
-        expect(cubit.state.isAddedToWatchlist, false);
+        verify(mockRemoveWatchlistTVSeries.execute(mockTVDetail));
       },
     );
 

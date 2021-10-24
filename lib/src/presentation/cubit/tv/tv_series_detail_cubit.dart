@@ -12,13 +12,13 @@ import '../../../domain/usecases/tv/save_watchlist_tv_series.dart';
 
 part 'tv_series_detail_state.dart';
 
-class TVSeriesDetailCubit extends Cubit<TVSeriesDetailState2> {
+class TVSeriesDetailCubit extends Cubit<TVSeriesDetailState> {
   TVSeriesDetailCubit({
     required this.getDetailTVSeries,
     required this.getWatchListStatusTVSeries,
     required this.saveWatchlistTVSeries,
     required this.removeWatchlistTVSeries,
-  }) : super(const TVSeriesDetailState2());
+  }) : super(const TVSeriesDetailState());
 
   final GetDetailTVSeries getDetailTVSeries;
   final GetWatchListStatusTVSeries getWatchListStatusTVSeries;

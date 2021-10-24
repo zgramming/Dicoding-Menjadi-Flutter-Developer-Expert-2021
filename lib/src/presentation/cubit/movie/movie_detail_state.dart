@@ -1,68 +1,54 @@
 part of 'movie_detail_cubit.dart';
 
-abstract class MovieDetailState {
-  const MovieDetailState();
-}
-
-class MovieDetailInitialState extends MovieDetailState {
-  const MovieDetailInitialState();
-}
-
-class MovieDetailLoadingState extends MovieDetailState {
-  const MovieDetailLoadingState();
-}
-
-class MovieDetailErrorState extends MovieDetailState with EquatableMixin {
-  const MovieDetailErrorState(
-    this.message,
-  );
-
-  final String message;
-
-  @override
-  List<Object> get props => [message];
-
-  @override
-  bool get stringify => true;
-
-  MovieDetailErrorState copyWith({
-    String? message,
-  }) {
-    return MovieDetailErrorState(
-      message ?? this.message,
-    );
-  }
-}
-
-class MovieDetailLoadedState extends MovieDetailState with EquatableMixin {
-  const MovieDetailLoadedState({
-    required this.movie,
-    this.isAddedToWatchlist = false,
-    this.messageWatchlist = '',
-  });
-
+class MovieDetailState extends Equatable {
   final MovieDetail movie;
   final bool isAddedToWatchlist;
+  final String message;
   final String messageWatchlist;
+  final RequestState requestState;
 
-  MovieDetailLoadedState setMessageWatchlist(String message) => copyWith(messageWatchlist: message);
-  MovieDetailLoadedState setIsAddedToWatchlist(bool value) => copyWith(isAddedToWatchlist: value);
+  const MovieDetailState({
+    this.movie = const MovieDetail(),
+    this.isAddedToWatchlist = false,
+    this.message = '',
+    this.messageWatchlist = '',
+    this.requestState = RequestState.Empty,
+  });
+
+  MovieDetailState setMovie(MovieDetail movie) => copyWith(movie: movie);
+  MovieDetailState setAddedToWatchlist(bool value) => copyWith(isAddedToWatchlist: value);
+  MovieDetailState setRequestState(RequestState requestState) =>
+      copyWith(requestState: requestState);
+  MovieDetailState setMessage(String message) => copyWith(message: message);
+  MovieDetailState setMessageWatchlist(String message) => copyWith(messageWatchlist: message);
 
   @override
-  List<Object> get props => [movie, isAddedToWatchlist, messageWatchlist];
+  List<Object> get props {
+    return [
+      movie,
+      isAddedToWatchlist,
+      message,
+      messageWatchlist,
+      requestState,
+    ];
+  }
 
   @override
   bool get stringify => true;
 
-  MovieDetailLoadedState copyWith({
+  MovieDetailState copyWith({
     MovieDetail? movie,
     bool? isAddedToWatchlist,
+    String? message,
     String? messageWatchlist,
+    RequestState? requestState,
   }) {
-    return MovieDetailLoadedState(
+    return MovieDetailState(
       movie: movie ?? this.movie,
       isAddedToWatchlist: isAddedToWatchlist ?? this.isAddedToWatchlist,
+      message: message ?? this.message,
       messageWatchlist: messageWatchlist ?? this.messageWatchlist,
+      requestState: requestState ?? this.requestState,
     );
   }
 }

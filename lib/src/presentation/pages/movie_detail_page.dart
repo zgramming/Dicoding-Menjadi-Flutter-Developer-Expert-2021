@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ditonton/src/common/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,8 +28,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      // Provider.of<MovieDetailNotifier>(context, listen: false).fetchMovieDetail(widget.id);
-      // Provider.of<MovieDetailNotifier>(context, listen: false).loadWatchlistStatus(widget.id);
       context.read<MovieDetailCubit>().get(widget.id);
     });
   }
@@ -38,13 +37,15 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
     return Scaffold(
       body: BlocBuilder<MovieDetailCubit, MovieDetailState>(
         builder: (context, state) {
-          if (state is MovieDetailLoadingState) {
+          final requestState = state.requestState;
+
+          if (requestState == RequestState.Loading) {
             return Center(child: CircularProgressIndicator());
-          } else if (state is MovieDetailLoadedState) {
+          } else if (requestState == RequestState.Loaded) {
             return SafeArea(
               child: DetailContent(state.movie),
             );
-          } else if (state is MovieDetailErrorState) {
+          } else if (requestState == RequestState.Error) {
             return Center(child: Text(state.message));
           } else {
             return SizedBox();
@@ -114,53 +115,47 @@ class _DetailContentState extends State<DetailContent> {
                             ),
                             BlocBuilder<MovieDetailCubit, MovieDetailState>(
                               builder: (context, state) {
-                                if (state is MovieDetailLoadedState) {
-                                  return ElevatedButton(
-                                    onPressed: () async {
-                                      if (!state.isAddedToWatchlist) {
-                                        await context
-                                            .read<MovieDetailCubit>()
-                                            .addWatchlist(widget.movie);
-                                      } else {
-                                        await context
-                                            .read<MovieDetailCubit>()
-                                            .deleteWatchlist(widget.movie);
-                                      }
+                                return ElevatedButton(
+                                  onPressed: () async {
+                                    if (!state.isAddedToWatchlist) {
+                                      await context
+                                          .read<MovieDetailCubit>()
+                                          .addWatchlist(widget.movie);
+                                    } else {
+                                      await context
+                                          .read<MovieDetailCubit>()
+                                          .deleteWatchlist(widget.movie);
+                                    }
 
-                                      final message = (context.read<MovieDetailCubit>().state
-                                              as MovieDetailLoadedState)
-                                          .messageWatchlist;
+                                    final message =
+                                        context.read<MovieDetailCubit>().state.messageWatchlist;
 
-                                      if (message ==
-                                              MovieDetailNotifier.watchlistAddSuccessMessage ||
-                                          message ==
-                                              MovieDetailNotifier.watchlistRemoveSuccessMessage) {
-                                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(SnackBar(content: Text(message)));
-                                      } else {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              content: Text(message),
-                                            );
-                                          },
-                                        );
-                                      }
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        state.isAddedToWatchlist
-                                            ? Icon(Icons.check)
-                                            : Icon(Icons.add),
-                                        Text('Watchlist'),
-                                      ],
-                                    ),
-                                  );
-                                }
-                                return const SizedBox();
+                                    if (message == MovieDetailCubit.watchlistAddSuccessMessage ||
+                                        message == MovieDetailCubit.watchlistRemoveSuccessMessage) {
+                                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(content: Text(message)));
+                                    } else {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            content: Text(message),
+                                          );
+                                        },
+                                      );
+                                    }
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      state.isAddedToWatchlist
+                                          ? Icon(Icons.check)
+                                          : Icon(Icons.add),
+                                      Text('Watchlist'),
+                                    ],
+                                  ),
+                                );
                               },
                             ),
                             Text(

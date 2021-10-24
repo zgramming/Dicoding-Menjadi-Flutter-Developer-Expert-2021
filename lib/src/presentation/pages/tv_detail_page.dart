@@ -40,7 +40,7 @@ class _TVDetailPageState extends State<TVDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SizedBox.expand(
-        child: BlocBuilder<TVSeriesDetailCubit, TVSeriesDetailState2>(
+        child: BlocBuilder<TVSeriesDetailCubit, TVSeriesDetailState>(
           builder: (_, state) {
             final requestState = state.requestState;
             if (requestState == RequestState.Loading) {
@@ -124,7 +124,7 @@ class _DetailContentState extends State<DetailContent> {
                               widget.tv.name,
                               style: kHeading5,
                             ),
-                            BlocBuilder<TVSeriesDetailCubit, TVSeriesDetailState2>(
+                            BlocBuilder<TVSeriesDetailCubit, TVSeriesDetailState>(
                               builder: (_, state) {
                                 return ElevatedButton(
                                   onPressed: () async {
