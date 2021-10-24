@@ -1,7 +1,10 @@
 part of 'movie_recommendations_cubit.dart';
 
-abstract class MovieRecommendationsState {
+abstract class MovieRecommendationsState extends Equatable {
   const MovieRecommendationsState();
+
+  @override
+  List<Object> get props => [];
 }
 
 class MovieRecommendationsInitialState extends MovieRecommendationsState {
@@ -12,7 +15,7 @@ class MovieRecommendationsLoadingState extends MovieRecommendationsState {
   const MovieRecommendationsLoadingState();
 }
 
-class MovieRecommendationsErrorState extends MovieRecommendationsState with EquatableMixin {
+class MovieRecommendationsErrorState extends MovieRecommendationsState {
   const MovieRecommendationsErrorState(
     this.message,
   );
@@ -34,7 +37,7 @@ class MovieRecommendationsErrorState extends MovieRecommendationsState with Equa
   }
 }
 
-class MovieRecommendationsLoadedState extends MovieRecommendationsState with EquatableMixin {
+class MovieRecommendationsLoadedState extends MovieRecommendationsState {
   const MovieRecommendationsLoadedState({
     required this.items,
   });
