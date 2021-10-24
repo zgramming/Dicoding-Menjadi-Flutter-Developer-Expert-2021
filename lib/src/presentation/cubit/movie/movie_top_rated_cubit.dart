@@ -13,7 +13,7 @@ class MovieTopRatedCubit extends Cubit<MovieTopRatedState> {
 
   final GetTopRatedMovies getTopRatedMovies;
   Future<void> get() async {
-    emit(const MovieTopRatedInitialState());
+    emit(const MovieTopRatedLoadingState());
 
     final result = await getTopRatedMovies.execute();
     result.fold(

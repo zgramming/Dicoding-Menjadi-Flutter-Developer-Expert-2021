@@ -1,7 +1,10 @@
 part of 'movie_top_rated_cubit.dart';
 
-abstract class MovieTopRatedState {
+abstract class MovieTopRatedState extends Equatable {
   const MovieTopRatedState();
+
+  @override
+  List<Object> get props => [];
 }
 
 class MovieTopRatedInitialState extends MovieTopRatedState {
@@ -12,7 +15,7 @@ class MovieTopRatedLoadingState extends MovieTopRatedState {
   const MovieTopRatedLoadingState();
 }
 
-class MovieTopRatedErrorState extends MovieTopRatedState with EquatableMixin {
+class MovieTopRatedErrorState extends MovieTopRatedState {
   const MovieTopRatedErrorState(
     this.message,
   );
@@ -34,7 +37,7 @@ class MovieTopRatedErrorState extends MovieTopRatedState with EquatableMixin {
   }
 }
 
-class MovieTopRatedLoadedState extends MovieTopRatedState with EquatableMixin {
+class MovieTopRatedLoadedState extends MovieTopRatedState {
   const MovieTopRatedLoadedState({
     required this.items,
   });
