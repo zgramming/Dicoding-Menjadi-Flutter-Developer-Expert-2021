@@ -1,15 +1,15 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+
 import 'package:ditonton/src/common/failure.dart';
 import 'package:ditonton/src/common/state_enum.dart';
-import 'package:ditonton/src/domain/entities/movie.dart';
 import 'package:ditonton/src/domain/usecases/get_movie_detail.dart';
 import 'package:ditonton/src/domain/usecases/get_watchlist_status.dart';
 import 'package:ditonton/src/domain/usecases/remove_watchlist.dart';
 import 'package:ditonton/src/domain/usecases/save_watchlist.dart';
 import 'package:ditonton/src/presentation/cubit/movie/movie_detail_cubit.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
 import '../../../../dummy_data/dummy_objects.dart';
 import 'movie_detail_cubit_test.mocks.dart';
@@ -44,23 +44,6 @@ void main() {
   });
 
   final id = 1;
-
-  final tMovie = Movie(
-    adult: false,
-    backdropPath: 'backdropPath',
-    genreIds: [1, 2, 3],
-    id: 1,
-    originalTitle: 'originalTitle',
-    overview: 'overview',
-    popularity: 1,
-    posterPath: 'posterPath',
-    releaseDate: 'releaseDate',
-    title: 'title',
-    video: false,
-    voteAverage: 1,
-    voteCount: 1,
-  );
-  final tMovies = <Movie>[tMovie];
 
   group(
     'Movie Detail',

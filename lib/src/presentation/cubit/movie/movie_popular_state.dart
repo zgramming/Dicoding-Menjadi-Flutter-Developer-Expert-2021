@@ -1,7 +1,10 @@
 part of 'movie_popular_cubit.dart';
 
-abstract class MoviePopularState {
+abstract class MoviePopularState extends Equatable {
   const MoviePopularState();
+
+  @override
+  List<Object> get props => [];
 }
 
 class MoviePopularInitialState extends MoviePopularState {
@@ -12,7 +15,7 @@ class MoviePopularLoadingState extends MoviePopularState {
   const MoviePopularLoadingState();
 }
 
-class MoviePopularErrorState extends MoviePopularState with EquatableMixin {
+class MoviePopularErrorState extends MoviePopularState {
   const MoviePopularErrorState(
     this.message,
   );
@@ -34,7 +37,7 @@ class MoviePopularErrorState extends MoviePopularState with EquatableMixin {
   }
 }
 
-class MoviePopularLoadedState extends MoviePopularState with EquatableMixin {
+class MoviePopularLoadedState extends MoviePopularState {
   const MoviePopularLoadedState({
     required this.items,
   });

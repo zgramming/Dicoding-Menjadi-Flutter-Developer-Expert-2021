@@ -1,7 +1,9 @@
 part of 'movie_now_playing_cubit.dart';
 
-abstract class MovieNowPlayingState {
+abstract class MovieNowPlayingState extends Equatable {
   const MovieNowPlayingState();
+  @override
+  List<Object> get props => [];
 }
 
 class MovieNowPlayingInitialState extends MovieNowPlayingState {
@@ -12,7 +14,7 @@ class MovieNowPlayingLoadingState extends MovieNowPlayingState {
   const MovieNowPlayingLoadingState();
 }
 
-class MovieNowPlayingErrorState extends MovieNowPlayingState with EquatableMixin {
+class MovieNowPlayingErrorState extends MovieNowPlayingState {
   const MovieNowPlayingErrorState(
     this.message,
   );
@@ -34,7 +36,7 @@ class MovieNowPlayingErrorState extends MovieNowPlayingState with EquatableMixin
   }
 }
 
-class MovieNowPlayingLoadedState extends MovieNowPlayingState with EquatableMixin {
+class MovieNowPlayingLoadedState extends MovieNowPlayingState {
   const MovieNowPlayingLoadedState({
     required this.items,
   });
