@@ -1,11 +1,12 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/src/common/failure.dart';
-import 'package:ditonton/src/domain/usecases/get_watchlist_movies.dart';
-import 'package:ditonton/src/presentation/cubit/movie/movie_watchlist_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+
+import 'package:ditonton/src/common/failure.dart';
+import 'package:ditonton/src/domain/usecases/get_watchlist_movies.dart';
+import 'package:ditonton/src/presentation/cubit/movie/movie_watchlist_cubit.dart';
 
 import '../../../../dummy_data/dummy_objects.dart';
 import 'movie_watchlist_cubit_test.mocks.dart';
@@ -19,11 +20,9 @@ void main() {
     cubit = MovieWatchlistCubit(getWatchlistMovies: mockGetWatchlistMovies);
   });
 
-  tearDown(
-    () async {
-      await cubit.close();
-    },
-  );
+  tearDown(() async {
+    await cubit.close();
+  });
 
   group(
     'Movie Watchlist',

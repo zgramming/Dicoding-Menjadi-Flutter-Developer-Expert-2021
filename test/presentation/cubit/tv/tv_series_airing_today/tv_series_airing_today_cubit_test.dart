@@ -1,11 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/src/common/failure.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import 'package:ditonton/src/common/failure.dart';
 import 'package:ditonton/src/data/models/tv/tv_model.dart';
 import 'package:ditonton/src/domain/usecases/tv/get_airing_today_tv_series.dart';
 import 'package:ditonton/src/presentation/cubit/tv/tv_series_airing_today_cubit.dart';
