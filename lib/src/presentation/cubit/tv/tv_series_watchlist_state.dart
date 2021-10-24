@@ -1,7 +1,10 @@
 part of 'tv_series_watchlist_cubit.dart';
 
-abstract class TVSeriesWatchlistState {
+abstract class TVSeriesWatchlistState extends Equatable {
   const TVSeriesWatchlistState();
+
+  @override
+  List<Object> get props => [];
 }
 
 class TVSeriesWatchlistInitialState extends TVSeriesWatchlistState {
@@ -12,7 +15,7 @@ class TVSeriesWatchlistLoadingState extends TVSeriesWatchlistState {
   const TVSeriesWatchlistLoadingState();
 }
 
-class TVSeriesWatchlistErrorState extends TVSeriesWatchlistState with EquatableMixin {
+class TVSeriesWatchlistErrorState extends TVSeriesWatchlistState {
   const TVSeriesWatchlistErrorState(
     this.message,
   );
@@ -34,7 +37,7 @@ class TVSeriesWatchlistErrorState extends TVSeriesWatchlistState with EquatableM
   }
 }
 
-class TVSeriesWatchlistLoadedState extends TVSeriesWatchlistState with EquatableMixin {
+class TVSeriesWatchlistLoadedState extends TVSeriesWatchlistState {
   const TVSeriesWatchlistLoadedState({
     required this.items,
   });

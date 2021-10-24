@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ditonton/src/common/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -9,7 +10,6 @@ import '../../domain/entities/genre.dart';
 import '../../domain/entities/tv/tv_detail.dart';
 import '../../presentation/cubit/tv/tv_series_detail_cubit.dart';
 import '../../presentation/pages/tv_episode_season_page.dart';
-import '../../presentation/provider/tv/tv_series_detail_notifier.dart';
 import '../cubit/tv/tv_series_recommendations_cubit.dart';
 
 class TVDetailPage extends StatefulWidget {
@@ -40,15 +40,16 @@ class _TVDetailPageState extends State<TVDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SizedBox.expand(
-        child: BlocBuilder<TVSeriesDetailCubit, TVSeriesDetailState>(
+        child: BlocBuilder<TVSeriesDetailCubit, TVSeriesDetailState2>(
           builder: (_, state) {
-            if (state is TVSeriesDetailLoadingState) {
+            final requestState = state.requestState;
+            if (requestState == RequestState.Loading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state is TVSeriesDetailLoadedState) {
+            } else if (requestState == RequestState.Loaded) {
               return DetailContent(tv: state.tv);
-            } else if (state is TVSeriesDetailErrorState) {
+            } else if (requestState == RequestState.Error) {
               return Center(child: Text(state.message));
             } else {
               return SizedBox();
@@ -123,58 +124,53 @@ class _DetailContentState extends State<DetailContent> {
                               widget.tv.name,
                               style: kHeading5,
                             ),
-                            BlocBuilder<TVSeriesDetailCubit, TVSeriesDetailState>(
+                            BlocBuilder<TVSeriesDetailCubit, TVSeriesDetailState2>(
                               builder: (_, state) {
-                                if (state is TVSeriesDetailLoadedState) {
-                                  return ElevatedButton(
-                                    onPressed: () async {
-                                      if (!state.isAddedToWatchlist) {
-                                        await context
-                                            .read<TVSeriesDetailCubit>()
-                                            .saveWatchlist(widget.tv);
-                                      } else {
-                                        await context
-                                            .read<TVSeriesDetailCubit>()
-                                            .removeWatchlist(widget.tv);
-                                      }
+                                return ElevatedButton(
+                                  onPressed: () async {
+                                    if (!state.isAddedToWatchlist) {
+                                      await context
+                                          .read<TVSeriesDetailCubit>()
+                                          .saveWatchlist(widget.tv);
+                                    } else {
+                                      await context
+                                          .read<TVSeriesDetailCubit>()
+                                          .removeWatchlist(widget.tv);
+                                    }
 
-                                      final watchlist = (context.read<TVSeriesDetailCubit>().state
-                                          as TVSeriesDetailLoadedState);
+                                    final message =
+                                        context.read<TVSeriesDetailCubit>().state.messageWatchlist;
 
-                                      if (watchlist.messageWatchlist ==
-                                              TVSeriesDetailNotifier.watchlistAddSuccessMessage ||
-                                          watchlist.messageWatchlist ==
-                                              TVSeriesDetailNotifier
-                                                  .watchlistRemoveSuccessMessage) {
-                                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(
-                                            content: Text(watchlist.messageWatchlist),
-                                          ),
-                                        );
-                                      } else {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              content: Text(watchlist.messageWatchlist),
-                                            );
-                                          },
-                                        );
-                                      }
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        state.isAddedToWatchlist
-                                            ? Icon(Icons.check)
-                                            : Icon(Icons.add),
-                                        Text('Watchlist'),
-                                      ],
-                                    ),
-                                  );
-                                }
-                                return SizedBox();
+                                    if (message == TVSeriesDetailCubit.watchlistAddSuccessMessage ||
+                                        message ==
+                                            TVSeriesDetailCubit.watchlistRemoveSuccessMessage) {
+                                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(message),
+                                        ),
+                                      );
+                                    } else {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            content: Text(message),
+                                          );
+                                        },
+                                      );
+                                    }
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      state.isAddedToWatchlist
+                                          ? Icon(Icons.check)
+                                          : Icon(Icons.add),
+                                      Text('Watchlist'),
+                                    ],
+                                  ),
+                                );
                               },
                             ),
                             Text(

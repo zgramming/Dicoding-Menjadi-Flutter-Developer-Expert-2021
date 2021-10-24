@@ -1,7 +1,9 @@
 part of 'tv_series_popular_cubit.dart';
 
-abstract class TVSeriesPopularState {
+abstract class TVSeriesPopularState extends Equatable {
   const TVSeriesPopularState();
+  @override
+  List<Object> get props => [];
 }
 
 class TVSeriesPopularInitialState extends TVSeriesPopularState {
@@ -12,7 +14,7 @@ class TVSeriesPopularLoadingState extends TVSeriesPopularState {
   const TVSeriesPopularLoadingState();
 }
 
-class TVSeriesPopularErrorState extends TVSeriesPopularState with EquatableMixin {
+class TVSeriesPopularErrorState extends TVSeriesPopularState {
   const TVSeriesPopularErrorState(
     this.message,
   );
@@ -34,7 +36,7 @@ class TVSeriesPopularErrorState extends TVSeriesPopularState with EquatableMixin
   }
 }
 
-class TVSeriesPopularLoadedState extends TVSeriesPopularState with EquatableMixin {
+class TVSeriesPopularLoadedState extends TVSeriesPopularState {
   const TVSeriesPopularLoadedState({
     required this.items,
   });

@@ -1,7 +1,9 @@
 part of 'tv_series_airing_today_cubit.dart';
 
-abstract class TVSeriesAiringTodayState {
+abstract class TVSeriesAiringTodayState extends Equatable {
   const TVSeriesAiringTodayState();
+  @override
+  List<Object> get props => [];
 }
 
 class TVSeriesAiringTodayInitial extends TVSeriesAiringTodayState {
@@ -12,7 +14,7 @@ class TVSeriesAiringTodayLoading extends TVSeriesAiringTodayState {
   const TVSeriesAiringTodayLoading();
 }
 
-class TVSeriesAiringTodayLoaded extends TVSeriesAiringTodayState with EquatableMixin {
+class TVSeriesAiringTodayLoaded extends TVSeriesAiringTodayState {
   const TVSeriesAiringTodayLoaded({
     required this.items,
   });
@@ -36,7 +38,7 @@ class TVSeriesAiringTodayLoaded extends TVSeriesAiringTodayState with EquatableM
   }
 }
 
-class TVSeriesAiringTodayError extends TVSeriesAiringTodayState with EquatableMixin {
+class TVSeriesAiringTodayError extends TVSeriesAiringTodayState {
   const TVSeriesAiringTodayError(
     this.message,
   );

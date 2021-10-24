@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:ditonton/src/common/state_enum.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,13 +12,13 @@ import '../../../domain/usecases/tv/save_watchlist_tv_series.dart';
 
 part 'tv_series_detail_state.dart';
 
-class TVSeriesDetailCubit extends Cubit<TVSeriesDetailState> {
+class TVSeriesDetailCubit extends Cubit<TVSeriesDetailState2> {
   TVSeriesDetailCubit({
     required this.getDetailTVSeries,
     required this.getWatchListStatusTVSeries,
     required this.saveWatchlistTVSeries,
     required this.removeWatchlistTVSeries,
-  }) : super(const TVSeriesDetailInitialState());
+  }) : super(const TVSeriesDetailState2());
 
   final GetDetailTVSeries getDetailTVSeries;
   final GetWatchListStatusTVSeries getWatchListStatusTVSeries;
@@ -26,19 +29,25 @@ class TVSeriesDetailCubit extends Cubit<TVSeriesDetailState> {
   static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
   Future<void> get(int id) async {
-    emit(TVSeriesDetailLoadingState());
+    emit(state.setRequestState(RequestState.Loading));
     final result = await getDetailTVSeries.execute(id);
     result.fold(
-      (failure) => emit(TVSeriesDetailErrorState(failure.message)),
-      (value) => emit(TVSeriesDetailLoadedState(tv: value)),
+      (failure) {
+        emit(state.setRequestState(RequestState.Error));
+        emit(state.setMessage(failure.message));
+      },
+      (value) {
+        emit(state.setRequestState(RequestState.Loaded));
+        emit(state.setTV(value));
+      },
     );
   }
 
   Future<void> saveWatchlist(TVDetail tv) async {
     final result = await saveWatchlistTVSeries.execute(tv);
     result.fold(
-      (failure) => emit((state as TVSeriesDetailLoadedState).setMessage(failure.message)),
-      (value) => emit((state as TVSeriesDetailLoadedState).setMessage(value)),
+      (failure) => emit(state.setMessageWatchlist(failure.message)),
+      (value) => emit(state.setMessageWatchlist(value)),
     );
 
     await getWatchlistStatus(tv.id);
@@ -47,18 +56,18 @@ class TVSeriesDetailCubit extends Cubit<TVSeriesDetailState> {
   Future<void> removeWatchlist(TVDetail tv) async {
     final result = await removeWatchlistTVSeries.execute(tv);
     result.fold(
-      (failure) => emit((state as TVSeriesDetailLoadedState).setMessage(failure.message)),
-      (value) => emit((state as TVSeriesDetailLoadedState).setMessage(value)),
+      (failure) => emit(state.setMessageWatchlist(failure.message)),
+      (value) {
+        log('message success remove watchlist $value');
+        emit(state.setMessageWatchlist(value));
+      },
     );
 
-    await getWatchlistStatus(tv.id);
+    // await getWatchlistStatus(tv.id);
   }
 
   Future<void> getWatchlistStatus(int id) async {
     final result = await getWatchListStatusTVSeries.execute(id);
-
-    if (state is TVSeriesDetailLoadedState) {
-      emit((state as TVSeriesDetailLoadedState).setAddedWatchlist(result));
-    }
+    emit(state.setAddedToWatchlist(result));
   }
 }

@@ -1,7 +1,10 @@
 part of 'tv_series_top_rated_cubit.dart';
 
-abstract class TVSeriesTopRatedState {
+abstract class TVSeriesTopRatedState extends Equatable {
   const TVSeriesTopRatedState();
+
+  @override
+  List<Object> get props => [];
 }
 
 class TVSeriesTopRatedInitialState extends TVSeriesTopRatedState {
@@ -12,7 +15,7 @@ class TVSeriesTopRatedLoadingState extends TVSeriesTopRatedState {
   const TVSeriesTopRatedLoadingState();
 }
 
-class TVSeriesTopRatedErrorState extends TVSeriesTopRatedState with EquatableMixin {
+class TVSeriesTopRatedErrorState extends TVSeriesTopRatedState {
   const TVSeriesTopRatedErrorState(
     this.message,
   );
@@ -34,7 +37,7 @@ class TVSeriesTopRatedErrorState extends TVSeriesTopRatedState with EquatableMix
   }
 }
 
-class TVSeriesTopRatedLoadedState extends TVSeriesTopRatedState with EquatableMixin {
+class TVSeriesTopRatedLoadedState extends TVSeriesTopRatedState {
   const TVSeriesTopRatedLoadedState({
     required this.items,
   });

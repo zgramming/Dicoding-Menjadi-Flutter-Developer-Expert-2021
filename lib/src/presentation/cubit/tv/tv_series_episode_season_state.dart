@@ -1,7 +1,9 @@
 part of 'tv_series_episode_season_cubit.dart';
 
-abstract class TVSeriesEpisodeSeasonState {
+abstract class TVSeriesEpisodeSeasonState extends Equatable {
   const TVSeriesEpisodeSeasonState();
+  @override
+  List<Object> get props => [];
 }
 
 class TVSeriesEpisodeSeasonInitialState extends TVSeriesEpisodeSeasonState {
@@ -12,7 +14,7 @@ class TVSeriesEpisodeSeasonLoadingState extends TVSeriesEpisodeSeasonState {
   const TVSeriesEpisodeSeasonLoadingState();
 }
 
-class TVSeriesEpisodeSeasonErrorState extends TVSeriesEpisodeSeasonState with EquatableMixin {
+class TVSeriesEpisodeSeasonErrorState extends TVSeriesEpisodeSeasonState {
   const TVSeriesEpisodeSeasonErrorState(
     this.message,
   );
@@ -34,7 +36,7 @@ class TVSeriesEpisodeSeasonErrorState extends TVSeriesEpisodeSeasonState with Eq
   }
 }
 
-class TVSeriesEpisodeSeasonLoadedState extends TVSeriesEpisodeSeasonState with EquatableMixin {
+class TVSeriesEpisodeSeasonLoadedState extends TVSeriesEpisodeSeasonState {
   const TVSeriesEpisodeSeasonLoadedState({
     required this.items,
   });

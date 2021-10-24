@@ -1,7 +1,9 @@
 part of 'tv_series_search_cubit.dart';
 
-abstract class TVSeriesSearchState {
+abstract class TVSeriesSearchState extends Equatable {
   const TVSeriesSearchState();
+  @override
+  List<Object> get props => [];
 }
 
 class TVSeriesSearchInitialState extends TVSeriesSearchState {
@@ -12,7 +14,7 @@ class TVSeriesSearchLoadingState extends TVSeriesSearchState {
   const TVSeriesSearchLoadingState();
 }
 
-class TVSeriesSearchErrorState extends TVSeriesSearchState with EquatableMixin {
+class TVSeriesSearchErrorState extends TVSeriesSearchState {
   const TVSeriesSearchErrorState(
     this.message,
   );
@@ -34,7 +36,7 @@ class TVSeriesSearchErrorState extends TVSeriesSearchState with EquatableMixin {
   }
 }
 
-class TVSeriesSearchLoadedState extends TVSeriesSearchState with EquatableMixin {
+class TVSeriesSearchLoadedState extends TVSeriesSearchState {
   const TVSeriesSearchLoadedState({
     required this.items,
   });

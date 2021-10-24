@@ -1,7 +1,9 @@
 part of 'tv_series_recommendations_cubit.dart';
 
-abstract class TVSeriesRecommendationsState {
+abstract class TVSeriesRecommendationsState extends Equatable {
   const TVSeriesRecommendationsState();
+  @override
+  List<Object> get props => [];
 }
 
 class TVSeriesRecommendationsInitialState extends TVSeriesRecommendationsState {
@@ -12,7 +14,7 @@ class TVSeriesRecommendationsLoadingState extends TVSeriesRecommendationsState {
   const TVSeriesRecommendationsLoadingState();
 }
 
-class TVSeriesRecommendationsErrorState extends TVSeriesRecommendationsState with EquatableMixin {
+class TVSeriesRecommendationsErrorState extends TVSeriesRecommendationsState {
   const TVSeriesRecommendationsErrorState(
     this.message,
   );
@@ -34,7 +36,7 @@ class TVSeriesRecommendationsErrorState extends TVSeriesRecommendationsState wit
   }
 }
 
-class TVSeriesRecommendationsLoadedState extends TVSeriesRecommendationsState with EquatableMixin {
+class TVSeriesRecommendationsLoadedState extends TVSeriesRecommendationsState {
   const TVSeriesRecommendationsLoadedState({
     required this.items,
   });
