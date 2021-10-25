@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:sqflite/sqflite.dart';
 
+import 'package:ditonton/src/common/exception.dart';
 import 'package:ditonton/src/data/datasources/movie_local_data_source.dart';
 
 import '../../dummy_data/dummy_objects.dart';
@@ -28,7 +28,8 @@ void main() {
 
     test('should throw DatabaseException when insert to database is failed', () async {
       // arrange
-      when(mockDatabaseHelper.insertWatchlist(testMovieTable)).thenThrow(Exception());
+      when(mockDatabaseHelper.insertWatchlist(testMovieTable))
+          .thenThrow(DatabaseException('message'));
       // act
       final call = dataSource.insertWatchlist(testMovieTable);
       // assert

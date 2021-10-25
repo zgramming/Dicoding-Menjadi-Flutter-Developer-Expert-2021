@@ -1,17 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton/src/common/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
+import 'package:ditonton/src/common/state_enum.dart';
+
 import '../../common/constants.dart';
 import '../../domain/entities/genre.dart';
 import '../../domain/entities/movie_detail.dart';
 import '../../presentation/cubit/movie/movie_detail_cubit.dart';
 import '../../presentation/cubit/movie/movie_recommendations_cubit.dart';
-import '../../presentation/provider/movie_detail_notifier.dart';
 
 class MovieDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/detail';
@@ -69,8 +69,10 @@ class _DetailContentState extends State<DetailContent> {
   @override
   void initState() {
     super.initState();
-    context.read<MovieRecommendationsCubit>().get(widget.movie.id);
-    context.read<MovieDetailCubit>().getWatchlistStatus(widget.movie.id);
+    Future.microtask(() {
+      context.read<MovieRecommendationsCubit>().get(widget.movie.id);
+      context.read<MovieDetailCubit>().getWatchlistStatus(widget.movie.id);
+    });
   }
 
   @override
