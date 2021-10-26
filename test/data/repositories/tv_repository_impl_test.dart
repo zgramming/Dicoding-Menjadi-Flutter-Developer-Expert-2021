@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import 'package:ditonton/src/common/exception.dart';
-import 'package:ditonton/src/common/failure.dart';
 import 'package:ditonton/src/data/models/tv/tv_detail/tv_detail_model.dart';
 import 'package:ditonton/src/data/models/tv/tv_episode/tv_episode_model.dart';
 import 'package:ditonton/src/data/models/tv/tv_model.dart';

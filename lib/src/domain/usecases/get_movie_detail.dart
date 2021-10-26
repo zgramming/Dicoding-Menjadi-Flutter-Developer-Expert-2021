@@ -1,7 +1,7 @@
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import '../../domain/entities/movie_detail.dart';
 import '../../domain/repositories/movie_repository.dart';
-import '../../common/failure.dart';
 
 class GetMovieDetail {
   final MovieRepository repository;

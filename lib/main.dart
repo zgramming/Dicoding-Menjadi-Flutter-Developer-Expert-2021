@@ -1,3 +1,5 @@
+import 'package:about/about.dart';
+import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,8 +7,6 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 
 import './injection.dart' as di;
-import './src/common/constants.dart';
-import './src/common/state_enum.dart';
 import './src/presentation/cubit/movie/movie_detail_cubit.dart';
 import './src/presentation/cubit/movie/movie_now_playing_cubit.dart';
 import './src/presentation/cubit/movie/movie_popular_cubit.dart';
@@ -22,7 +22,6 @@ import './src/presentation/cubit/tv/tv_series_recommendations_cubit.dart';
 import './src/presentation/cubit/tv/tv_series_search_cubit.dart';
 import './src/presentation/cubit/tv/tv_series_top_rated_cubit.dart';
 import './src/presentation/cubit/tv/tv_series_watchlist_cubit.dart';
-import './src/presentation/pages/about_page.dart';
 import './src/presentation/pages/home_movie_page.dart';
 import './src/presentation/pages/movie_detail_page.dart';
 import './src/presentation/pages/popular_movies_page.dart';

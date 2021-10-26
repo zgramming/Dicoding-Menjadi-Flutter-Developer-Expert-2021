@@ -5,7 +5,7 @@
 import 'dart:async' as _i6;
 import 'dart:ui' as _i7;
 
-import 'package:ditonton/src/common/state_enum.dart' as _i4;
+import 'package:core/core.dart' as _i4;
 import 'package:ditonton/src/domain/entities/movie.dart' as _i5;
 import 'package:ditonton/src/domain/usecases/get_popular_movies.dart' as _i2;
 import 'package:ditonton/src/presentation/provider/popular_movies_notifier.dart'

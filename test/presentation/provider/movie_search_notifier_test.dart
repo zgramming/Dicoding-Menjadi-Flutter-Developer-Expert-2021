@@ -1,10 +1,9 @@
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'package:ditonton/src/common/failure.dart';
-import 'package:ditonton/src/common/state_enum.dart';
 import 'package:ditonton/src/domain/entities/movie.dart';
 import 'package:ditonton/src/domain/usecases/search_movies.dart';
 import 'package:ditonton/src/presentation/provider/movie_search_notifier.dart';

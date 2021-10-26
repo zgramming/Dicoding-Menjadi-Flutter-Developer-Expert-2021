@@ -1,6 +1,6 @@
+import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../common/state_enum.dart';
 import '../../../domain/entities/tv/tv.dart';
 import '../../../domain/usecases/tv/get_recommendation_tv_series.dart';
 

@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -6,7 +7,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
-import 'package:ditonton/src/common/state_enum.dart';
 import 'package:ditonton/src/domain/entities/movie.dart';
 import 'package:ditonton/src/domain/usecases/get_watchlist_status.dart';
 import 'package:ditonton/src/presentation/cubit/movie/movie_detail_cubit.dart';
@@ -33,7 +33,6 @@ void main() {
   late MockMovieDetailNotifier mockNotifier;
   late MovieDetailCubitMock movieDetailCubitMock;
   late MovieRecommendationsCubitMock movieRecommendationsMock;
-  late GetWatchListStatusMock getWatchListStatusMock;
   setUpAll(() {
     registerFallbackValue(MovieDetailStateMock());
     registerFallbackValue(MovieRecommendationsStateMock());
@@ -42,7 +41,6 @@ void main() {
 
   setUp(() {
     mockNotifier = MockMovieDetailNotifier();
-    getWatchListStatusMock = GetWatchListStatusMock();
     movieDetailCubitMock = MovieDetailCubitMock();
     movieRecommendationsMock = MovieRecommendationsCubitMock();
   });

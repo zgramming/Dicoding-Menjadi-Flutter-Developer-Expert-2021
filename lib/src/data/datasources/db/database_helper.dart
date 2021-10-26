@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:core/core.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../../../common/constants.dart';
 import '../../models/movie_table.dart';
 import '../../models/tv/tv_local_database/tv_local_database_model.dart';
 

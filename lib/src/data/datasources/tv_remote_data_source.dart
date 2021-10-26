@@ -1,10 +1,9 @@
 import 'dart:convert';
 
+import 'package:core/core.dart';
 import 'package:http/http.dart' as http;
 
 import '../../data/models/tv/tv_episode/tv_episode_model.dart';
-import '../../common/constants.dart';
-import '../../common/exception.dart';
 import '../../data/models/tv/tv_detail/tv_detail_model.dart';
 import '../../data/models/tv/tv_model.dart';
 

@@ -1,9 +1,9 @@
 import 'dart:developer';
 
+import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../common/state_enum.dart';
 import '../../domain/entities/movie.dart';
 import '../../domain/entities/movie_detail.dart';
 import '../../domain/usecases/get_movie_detail.dart';

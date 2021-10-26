@@ -1,8 +1,8 @@
 import 'dart:developer';
 
+import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../common/state_enum.dart';
 import '../../../domain/entities/tv/tv_detail.dart';
 import '../../../domain/usecases/tv/get_detail_tv_series.dart';
 import '../../../domain/usecases/tv/get_watch_list_status_tv_series.dart';

@@ -1,8 +1,8 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
-import '../../common/state_enum.dart';
 import '../../presentation/cubit/tv/tv_series_popular_cubit.dart';
 import '../../presentation/cubit/tv/tv_series_top_rated_cubit.dart';
 import '../../presentation/widgets/tv_card_list.dart';

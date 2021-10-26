@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
-import '../../common/constants.dart';
 import '../../domain/entities/movie.dart';
 import '../../presentation/pages/movie_detail_page.dart';
 

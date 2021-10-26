@@ -1,8 +1,7 @@
+import 'package:core/core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import 'package:ditonton/src/common/constants.dart';
-import 'package:ditonton/src/common/exception.dart';
 import 'package:ditonton/src/data/datasources/tv_local_data_source.dart';
 
 import '../../dummy_data/dummy_objects.dart';

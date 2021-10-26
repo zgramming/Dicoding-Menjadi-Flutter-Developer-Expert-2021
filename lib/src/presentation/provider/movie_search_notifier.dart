@@ -1,6 +1,6 @@
+import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../common/state_enum.dart';
 import '../../domain/entities/movie.dart';
 import '../../domain/usecases/search_movies.dart';
 

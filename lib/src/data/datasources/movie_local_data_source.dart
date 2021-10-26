@@ -1,4 +1,5 @@
-import '../../common/exception.dart';
+import 'package:core/core.dart';
+
 import '../../data/datasources/db/database_helper.dart';
 import '../../data/models/movie_table.dart';
 

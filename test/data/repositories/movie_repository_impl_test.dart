@@ -1,11 +1,10 @@
 import 'dart:io';
 
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import 'package:ditonton/src/common/exception.dart';
-import 'package:ditonton/src/common/failure.dart';
 import 'package:ditonton/src/data/models/genre_model.dart';
 import 'package:ditonton/src/data/models/movie_detail_model.dart';
 import 'package:ditonton/src/data/models/movie_model.dart';

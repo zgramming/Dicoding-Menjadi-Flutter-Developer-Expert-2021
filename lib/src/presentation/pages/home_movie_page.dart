@@ -1,12 +1,12 @@
+import 'package:about/about.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
-import '../../common/constants.dart';
-import '../../common/state_enum.dart';
 import '../../domain/entities/movie.dart';
 import '../../domain/entities/tv/tv.dart';
 import '../../presentation/cubit/movie/movie_top_rated_cubit.dart';
@@ -15,7 +15,6 @@ import '../../presentation/cubit/movie/movie_popular_cubit.dart';
 import '../../presentation/cubit/tv/tv_series_airing_today_cubit.dart';
 import '../../presentation/cubit/tv/tv_series_popular_cubit.dart';
 import '../../presentation/cubit/tv/tv_series_top_rated_cubit.dart';
-import '../../presentation/pages/about_page.dart';
 import '../../presentation/pages/movie_detail_page.dart';
 import '../../presentation/pages/popular_movies_page.dart';
 import '../../presentation/pages/search_page.dart';

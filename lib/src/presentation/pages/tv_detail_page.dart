@@ -1,11 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton/src/common/state_enum.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
-import '../../common/constants.dart';
 import '../../domain/entities/genre.dart';
 import '../../domain/entities/tv/tv_detail.dart';
 import '../../presentation/cubit/tv/tv_series_detail_cubit.dart';

@@ -1,9 +1,8 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
-import '../../common/constants.dart';
-import '../../common/state_enum.dart';
 import '../../presentation/cubit/movie/movie_search_cubit.dart';
 import '../../presentation/cubit/tv/tv_series_search_cubit.dart';
 import '../../presentation/widgets/movie_card_list.dart';

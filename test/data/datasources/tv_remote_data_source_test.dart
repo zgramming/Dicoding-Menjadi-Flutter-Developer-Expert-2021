@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:core/core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 
-import 'package:ditonton/src/common/exception.dart';
 import 'package:ditonton/src/data/datasources/tv_remote_data_source.dart';
 import 'package:ditonton/src/data/models/tv/tv_detail/tv_detail_model.dart';
 import 'package:ditonton/src/data/models/tv/tv_episode/tv_episode_model.dart';
