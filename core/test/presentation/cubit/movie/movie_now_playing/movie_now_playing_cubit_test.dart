@@ -38,7 +38,7 @@ void main() {
         },
         act: (bloc) => bloc.get(),
         expect: () => [
-          MovieNowPlayingLoadingState(),
+          const MovieNowPlayingLoadingState(),
           MovieNowPlayingLoadedState(items: testMovieList),
         ],
       );
@@ -47,13 +47,13 @@ void main() {
         'should emitsInOrder [Loading, Error] when unsuccess',
         build: () {
           when(mockGetNowPlayingMovies.execute())
-              .thenAnswer((_) async => Left(ServerFailure('error')));
+              .thenAnswer((_) async => const Left(ServerFailure('error')));
           return cubit;
         },
         act: (bloc) => bloc.get(),
         expect: () => [
-          MovieNowPlayingLoadingState(),
-          MovieNowPlayingErrorState('error'),
+          const MovieNowPlayingLoadingState(),
+          const MovieNowPlayingErrorState('error'),
         ],
       );
     },

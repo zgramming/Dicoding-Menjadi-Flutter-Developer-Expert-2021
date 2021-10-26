@@ -54,7 +54,7 @@ void main() {
     test('state should be error when function success called', () async {
       /// arrange
       when(getRecommendationTVSeries.execute(mockTVDetail.id))
-          .thenAnswer((_) async => Left(ServerFailure('error')));
+          .thenAnswer((_) async => const Left(ServerFailure('error')));
 
       /// act
       await notifier.get(mockTVDetail.id);

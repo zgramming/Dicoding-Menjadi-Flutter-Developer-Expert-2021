@@ -24,6 +24,8 @@ import '../../presentation/pages/tv_see_more_page.dart';
 import '../../presentation/pages/watchlist_movies_page.dart';
 
 class HomeMoviePage extends StatefulWidget {
+  const HomeMoviePage({Key? key}) : super(key: key);
+
   @override
   _HomeMoviePageState createState() => _HomeMoviePageState();
 }
@@ -48,7 +50,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> with SingleTickerProvider
       drawer: Drawer(
         child: Column(
           children: [
-            UserAccountsDrawerHeader(
+            const UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage('assets/circle-g.png'),
               ),
@@ -56,15 +58,15 @@ class _HomeMoviePageState extends State<HomeMoviePage> with SingleTickerProvider
               accountEmail: Text('ditonton@dicoding.com'),
             ),
             ListTile(
-              leading: Icon(Icons.movie),
-              title: Text('Movies'),
+              leading: const Icon(Icons.movie),
+              title: const Text('Movies'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.save_alt),
-              title: Text('Watchlist'),
+              leading: const Icon(Icons.save_alt),
+              title: const Text('Watchlist'),
               onTap: () {
                 Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
               },
@@ -73,20 +75,20 @@ class _HomeMoviePageState extends State<HomeMoviePage> with SingleTickerProvider
               onTap: () {
                 Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
               },
-              leading: Icon(Icons.info_outline),
-              title: Text('About'),
+              leading: const Icon(Icons.info_outline),
+              title: const Text('About'),
             ),
           ],
         ),
       ),
       appBar: AppBar(
-        title: Text('Ditonton'),
+        title: const Text('Ditonton'),
         actions: [
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
             },
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
           )
         ],
       ),
@@ -102,7 +104,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> with SingleTickerProvider
                   borderRadius: BorderRadius.circular(60.0),
                   color: kMikadoYellow,
                 ),
-                tabs: [
+                tabs: const [
                   Tab(child: Text('Movie')),
                   Tab(child: Text('TV Series')),
                 ],
@@ -113,7 +115,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> with SingleTickerProvider
                 padding: const EdgeInsets.all(8.0),
                 child: TabBarView(
                   controller: _controller,
-                  children: [
+                  children: const [
                     MovieTabMenu(),
                     TVSeriesTabMenu(),
                   ],
@@ -161,20 +163,18 @@ class _TVSeriesTabMenuState extends State<TVSeriesTabMenu> with AutomaticKeepAli
           BlocBuilder<TVSeriesAiringTodayCubit, TVSeriesAiringTodayState>(
             builder: (context, state) {
               if (state is TVSeriesAiringTodayLoading) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
+                return const Center(child: CircularProgressIndicator());
               }
 
               if (state is TVSeriesAiringTodayLoaded) {
-                return TVList(state.items);
+                return TVList(items: state.items);
               }
 
               if (state is TVSeriesAiringTodayError) {
                 return Center(child: Text(state.message));
               }
 
-              return SizedBox();
+              return const SizedBox();
             },
           ),
           BuildSubHeading(
@@ -188,15 +188,13 @@ class _TVSeriesTabMenuState extends State<TVSeriesTabMenu> with AutomaticKeepAli
           BlocBuilder<TVSeriesPopularCubit, TVSeriesPopularState>(
             builder: (context, state) {
               if (state is TVSeriesPopularLoadingState) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
+                return const Center(child: CircularProgressIndicator());
               } else if (state is TVSeriesPopularLoadedState) {
-                return TVList(state.items);
+                return TVList(items: state.items);
               } else if (state is TVSeriesPopularErrorState) {
-                return Center(child: Text('${state.message}'));
+                return Center(child: Text(state.message));
               } else {
-                return SizedBox();
+                return const SizedBox();
               }
             },
           ),
@@ -211,15 +209,13 @@ class _TVSeriesTabMenuState extends State<TVSeriesTabMenu> with AutomaticKeepAli
           BlocBuilder<TVSeriesTopRatedCubit, TVSeriesTopRatedState>(
             builder: (context, state) {
               if (state is TVSeriesTopRatedLoadingState) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
+                return const Center(child: CircularProgressIndicator());
               } else if (state is TVSeriesTopRatedLoadedState) {
-                return TVList(state.items);
+                return TVList(items: state.items);
               } else if (state is TVSeriesTopRatedErrorState) {
                 return Center(child: Text(state.message));
               } else {
-                return SizedBox();
+                return const SizedBox();
               }
             },
           ),
@@ -248,9 +244,9 @@ class MovieTabMenu extends StatelessWidget {
           BlocBuilder<MovieNowPlayingCubit, MovieNowPlayingState>(
             builder: (context, state) {
               if (state is MovieNowPlayingLoadingState) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               } else if (state is MovieNowPlayingLoadedState) {
-                return MovieList(state.items);
+                return MovieList(movies: state.items);
               } else if (state is MovieNowPlayingErrorState) {
                 return Center(child: Text(state.message));
               } else {
@@ -264,9 +260,9 @@ class MovieTabMenu extends StatelessWidget {
           ),
           BlocBuilder<MoviePopularCubit, MoviePopularState>(builder: (context, state) {
             if (state is MoviePopularLoadingState) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is MoviePopularLoadedState) {
-              return MovieList(state.items);
+              return MovieList(movies: state.items);
             } else if (state is MoviePopularErrorState) {
               return Center(child: Text(state.message));
             } else {
@@ -279,9 +275,9 @@ class MovieTabMenu extends StatelessWidget {
           ),
           BlocBuilder<MovieTopRatedCubit, MovieTopRatedState>(builder: (context, state) {
             if (state is MovieTopRatedLoadingState) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is MovieTopRatedLoadedState) {
-              return MovieList(state.items);
+              return MovieList(movies: state.items);
             } else if (state is MovieTopRatedErrorState) {
               return Center(child: Text(state.message));
             } else {
@@ -297,11 +293,11 @@ class MovieTabMenu extends StatelessWidget {
 class MovieList extends StatelessWidget {
   final List<Movie> movies;
 
-  MovieList(this.movies);
+  const MovieList({Key? key, required this.movies}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 200,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -318,13 +314,13 @@ class MovieList extends StatelessWidget {
                 );
               },
               child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
                   imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
-                  placeholder: (context, url) => Center(
+                  placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
             ),
@@ -339,11 +335,11 @@ class MovieList extends StatelessWidget {
 class TVList extends StatelessWidget {
   final List<TV> items;
 
-  TVList(this.items);
+  const TVList({Key? key, required this.items}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 200,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -360,13 +356,13 @@ class TVList extends StatelessWidget {
                 );
               },
               child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
                   imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
-                  placeholder: (context, url) => Center(
+                  placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
             ),
@@ -401,7 +397,7 @@ class BuildSubHeading extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
-              children: [Text('See More'), Icon(Icons.arrow_forward_ios)],
+              children: const [Text('See More'), Icon(Icons.arrow_forward_ios)],
             ),
           ),
         ),

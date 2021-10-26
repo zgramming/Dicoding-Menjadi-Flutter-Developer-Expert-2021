@@ -51,7 +51,7 @@ void main() {
   }) {
     if (throwError) {
       when(getDetailTVSeries.execute(id))
-          .thenAnswer((_) async => Left(ServerFailure('server failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('server failure')));
     } else {
       when(getDetailTVSeries.execute(id)).thenAnswer((_) async => Right(mockTVDetail));
     }
@@ -108,7 +108,7 @@ void main() {
     test('should execute save watchlist when function called', () async {
       ///arrange
       when(saveWatchlistTVSeries.execute(mockTVDetail))
-          .thenAnswer((_) async => Right('success insert'));
+          .thenAnswer((_) async => const Right('success insert'));
       when(getWatchListStatusTVSeries.execute(mockTVDetail.id)).thenAnswer((_) async => true);
 
       ///act
@@ -122,7 +122,7 @@ void main() {
     test('should execute remove watchlist when function called', () async {
       /// arrange
       when(removeWatchlistTVSeries.execute(mockTVDetail))
-          .thenAnswer((_) async => Right('success remove'));
+          .thenAnswer((_) async => const Right('success remove'));
       when(getWatchListStatusTVSeries.execute(mockTVDetail.id)).thenAnswer((_) async => true);
 
       /// act
@@ -135,7 +135,8 @@ void main() {
 
     test('should update watchlist status when add watchlist success', () async {
       /// arrange
-      when(saveWatchlistTVSeries.execute(mockTVDetail)).thenAnswer((_) async => Right('success'));
+      when(saveWatchlistTVSeries.execute(mockTVDetail))
+          .thenAnswer((_) async => const Right('success'));
       when(getWatchListStatusTVSeries.execute(mockTVDetail.id)).thenAnswer((_) async => true);
 
       /// act
@@ -150,7 +151,7 @@ void main() {
     test('should update watchlist message when add watchlist failed', () async {
       /// arrange
       when(saveWatchlistTVSeries.execute(mockTVDetail))
-          .thenAnswer((_) async => Left(DatabaseFailure('error')));
+          .thenAnswer((_) async => const Left(DatabaseFailure('error')));
       when(getWatchListStatusTVSeries.execute(mockTVDetail.id)).thenAnswer((_) async => true);
 
       /// act

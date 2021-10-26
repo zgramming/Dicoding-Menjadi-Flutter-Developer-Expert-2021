@@ -9,7 +9,7 @@ part 'tv_production_country_model.g.dart';
 @immutable
 @JsonSerializable(fieldRename: FieldRename.snake)
 class ProductionCountryModel extends Equatable {
-  ProductionCountryModel({
+  const ProductionCountryModel({
     required this.iso31661,
     required this.name,
   });

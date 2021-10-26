@@ -13,7 +13,7 @@ class MovieNowPlayingCubit extends Cubit<MovieNowPlayingState> {
 
   final GetNowPlayingMovies getNowPlayingMovies;
   Future<void> get() async {
-    emit(MovieNowPlayingLoadingState());
+    emit(const MovieNowPlayingLoadingState());
 
     final result = await getNowPlayingMovies.execute();
     result.fold(

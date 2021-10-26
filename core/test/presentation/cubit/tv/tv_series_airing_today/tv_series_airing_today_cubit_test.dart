@@ -45,7 +45,7 @@ void main() {
       },
       act: (bloc) => bloc.get(),
       expect: () => [
-        TVSeriesAiringTodayLoading(),
+        const TVSeriesAiringTodayLoading(),
         TVSeriesAiringTodayLoaded(items: mockListTV),
       ],
     );
@@ -54,13 +54,13 @@ void main() {
       'Should be error when function called',
       build: () {
         when(mockGetAiringTodayTVSeries.execute())
-            .thenAnswer((_) async => Left(ServerFailure('error')));
+            .thenAnswer((_) async => const Left(ServerFailure('error')));
         return cubit;
       },
       act: (bloc) => bloc.get(),
       expect: () => [
-        TVSeriesAiringTodayLoading(),
-        TVSeriesAiringTodayError('error'),
+        const TVSeriesAiringTodayLoading(),
+        const TVSeriesAiringTodayError('error'),
       ],
     );
   });

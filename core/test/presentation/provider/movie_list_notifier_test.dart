@@ -37,7 +37,7 @@ void main() {
   final tMovie = Movie(
     adult: false,
     backdropPath: 'backdropPath',
-    genreIds: [1, 2, 3],
+    genreIds: const [1, 2, 3],
     id: 1,
     originalTitle: 'originalTitle',
     overview: 'overview',
@@ -88,7 +88,7 @@ void main() {
     test('should return error when data is unsuccessful', () async {
       // arrange
       when(mockGetNowPlayingMovies.execute())
-          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       // act
       await provider.fetchNowPlayingMovies();
       // assert
@@ -123,7 +123,7 @@ void main() {
     test('should return error when data is unsuccessful', () async {
       // arrange
       when(mockGetPopularMovies.execute())
-          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       // act
       await provider.fetchPopularMovies();
       // assert
@@ -157,7 +157,7 @@ void main() {
     test('should return error when data is unsuccessful', () async {
       // arrange
       when(mockGetTopRatedMovies.execute())
-          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       // act
       await provider.fetchTopRatedMovies();
       // assert

@@ -9,7 +9,7 @@ part 'tv_season_model.g.dart';
 @immutable
 @JsonSerializable(fieldRename: FieldRename.snake)
 class SeasonModel extends Equatable {
-  SeasonModel({
+  const SeasonModel({
     required this.airDate,
     required this.episodeCount,
     required this.id,

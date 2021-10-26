@@ -9,7 +9,7 @@ part 'tv_createdby_model.g.dart';
 @immutable
 @JsonSerializable(fieldRename: FieldRename.snake)
 class CreatedByModel extends Equatable {
-  CreatedByModel({
+  const CreatedByModel({
     this.id,
     this.creditId,
     this.name,

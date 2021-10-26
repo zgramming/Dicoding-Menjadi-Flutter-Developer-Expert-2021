@@ -42,14 +42,14 @@ void main() {
     await cubit.close();
   });
 
-  final id = 1;
+  const id = 1;
 
   group(
     'Movie Detail',
     () {
       test('state should be loading when first call', () async {
         /// arrange
-        when(mockGetMovieDetail.execute(id)).thenAnswer((_) async => Right(testMovieDetail));
+        when(mockGetMovieDetail.execute(id)).thenAnswer((_) async => const Right(testMovieDetail));
 
         /// act
         cubit.get(id);
@@ -62,7 +62,8 @@ void main() {
         'State should be loaded data when success',
         () async {
           /// arrange
-          when(mockGetMovieDetail.execute(id)).thenAnswer((_) async => Right(testMovieDetail));
+          when(mockGetMovieDetail.execute(id))
+              .thenAnswer((_) async => const Right(testMovieDetail));
 
           /// act
           await cubit.get(id);
@@ -77,7 +78,7 @@ void main() {
         () async {
           /// arrange
           when(mockGetMovieDetail.execute(id))
-              .thenAnswer((_) async => Left(ServerFailure('error')));
+              .thenAnswer((_) async => const Left(ServerFailure('error')));
 
           /// act
           await cubit.get(id);
@@ -108,7 +109,7 @@ void main() {
         () async {
           /// arrange
           when(mockSaveWatchlist.execute(testMovieDetail))
-              .thenAnswer((_) async => Right('success insert'));
+              .thenAnswer((_) async => const Right('success insert'));
           when(mockGetWatchListStatus.execute(testMovieDetail.id)).thenAnswer((_) async => true);
 
           /// act
@@ -125,7 +126,7 @@ void main() {
         () async {
           /// arrange
           when(mockSaveWatchlist.execute(testMovieDetail))
-              .thenAnswer((_) async => Left(DatabaseFailure('error')));
+              .thenAnswer((_) async => const Left(DatabaseFailure('error')));
           when(mockGetWatchListStatus.execute(testMovieDetail.id)).thenAnswer((_) async => true);
 
           /// act
@@ -141,7 +142,7 @@ void main() {
         () async {
           /// arrange
           when(mockRemoveWatchlist.execute(testMovieDetail))
-              .thenAnswer((_) async => Right('success remove'));
+              .thenAnswer((_) async => const Right('success remove'));
           when(mockGetWatchListStatus.execute(testMovieDetail.id)).thenAnswer((_) async => true);
 
           /// act
@@ -158,7 +159,7 @@ void main() {
         () async {
           /// arrange
           when(mockRemoveWatchlist.execute(testMovieDetail))
-              .thenAnswer((_) async => Left(DatabaseFailure('error')));
+              .thenAnswer((_) async => const Left(DatabaseFailure('error')));
           when(mockGetWatchListStatus.execute(testMovieDetail.id)).thenAnswer((_) async => true);
 
           /// act

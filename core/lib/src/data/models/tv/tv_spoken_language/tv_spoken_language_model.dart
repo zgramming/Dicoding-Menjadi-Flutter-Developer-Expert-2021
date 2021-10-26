@@ -9,7 +9,7 @@ part 'tv_spoken_language_model.g.dart';
 @immutable
 @JsonSerializable(fieldRename: FieldRename.snake)
 class SpokenLanguageModel extends Equatable {
-  SpokenLanguageModel({
+  const SpokenLanguageModel({
     required this.englishName,
     required this.iso6391,
     required this.name,

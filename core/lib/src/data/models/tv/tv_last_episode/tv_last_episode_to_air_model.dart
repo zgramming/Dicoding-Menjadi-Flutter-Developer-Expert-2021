@@ -9,7 +9,7 @@ part 'tv_last_episode_to_air_model.g.dart';
 @immutable
 @JsonSerializable(fieldRename: FieldRename.snake)
 class LastEpisodeToAirModel extends Equatable {
-  LastEpisodeToAirModel({
+  const LastEpisodeToAirModel({
     required this.airDate,
     required this.episodeNumber,
     required this.id,

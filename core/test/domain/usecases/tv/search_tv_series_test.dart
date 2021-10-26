@@ -20,12 +20,12 @@ void main() {
   const list = <TV>[];
   test('should get list of TV Series from repository', () async {
     /// arrange
-    when(repository.searchTVSeries(query)).thenAnswer((_) async => Right(list));
+    when(repository.searchTVSeries(query)).thenAnswer((_) async => const Right(list));
 
     /// act
     final result = await usecase.execute(query);
 
     /// assert
-    expect(result, Right(list));
+    expect(result, const Right(list));
   });
 }

@@ -12,10 +12,12 @@ import '../../presentation/cubit/movie/movie_detail_cubit.dart';
 import '../../presentation/cubit/movie/movie_recommendations_cubit.dart';
 
 class MovieDetailPage extends StatefulWidget {
+  // ignore: constant_identifier_names
   static const ROUTE_NAME = '/detail';
 
   final int id;
-  MovieDetailPage({required this.id});
+
+  const MovieDetailPage({Key? key, required this.id}) : super(key: key);
 
   @override
   _MovieDetailPageState createState() => _MovieDetailPageState();
@@ -38,15 +40,15 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
           final requestState = state.requestState;
 
           if (requestState == RequestState.Loading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (requestState == RequestState.Loaded) {
             return SafeArea(
-              child: DetailContent(state.movie),
+              child: DetailContent(movie: state.movie),
             );
           } else if (requestState == RequestState.Error) {
             return Center(child: Text(state.message));
           } else {
-            return SizedBox();
+            return const SizedBox();
           }
         },
       ),
@@ -57,7 +59,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 class DetailContent extends StatefulWidget {
   final MovieDetail movie;
 
-  DetailContent(this.movie);
+  const DetailContent({Key? key, required this.movie}) : super(key: key);
 
   @override
   State<DetailContent> createState() => _DetailContentState();
@@ -81,17 +83,15 @@ class _DetailContentState extends State<DetailContent> {
         CachedNetworkImage(
           imageUrl: 'https://image.tmdb.org/t/p/w500${widget.movie.posterPath}',
           width: screenWidth,
-          placeholder: (context, url) => Center(
-            child: CircularProgressIndicator(),
-          ),
-          errorWidget: (context, url, error) => Icon(Icons.error),
+          placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
         Container(
           margin: const EdgeInsets.only(top: 48 + 8),
           child: DraggableScrollableSheet(
             builder: (context, scrollController) {
               return Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: kRichBlack,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                 ),
@@ -150,9 +150,9 @@ class _DetailContentState extends State<DetailContent> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       state.isAddedToWatchlist
-                                          ? Icon(Icons.check)
-                                          : Icon(Icons.add),
-                                      Text('Watchlist'),
+                                          ? const Icon(Icons.check)
+                                          : const Icon(Icons.add),
+                                      const Text('Watchlist'),
                                     ],
                                   ),
                                 );
@@ -169,7 +169,7 @@ class _DetailContentState extends State<DetailContent> {
                                 RatingBarIndicator(
                                   rating: widget.movie.voteAverage / 2,
                                   itemCount: 5,
-                                  itemBuilder: (context, index) => Icon(
+                                  itemBuilder: (context, index) => const Icon(
                                     Icons.star,
                                     color: kMikadoYellow,
                                   ),
@@ -178,7 +178,7 @@ class _DetailContentState extends State<DetailContent> {
                                 Text('${widget.movie.voteAverage}')
                               ],
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             Text(
                               'Overview',
                               style: kHeading6,
@@ -186,7 +186,7 @@ class _DetailContentState extends State<DetailContent> {
                             Text(
                               widget.movie.overview,
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             Text(
                               'Recommendations',
                               style: kHeading6,
@@ -194,11 +194,11 @@ class _DetailContentState extends State<DetailContent> {
                             BlocBuilder<MovieRecommendationsCubit, MovieRecommendationsState>(
                               builder: (context, state) {
                                 if (state is MovieRecommendationsLoadingState) {
-                                  return Center(child: CircularProgressIndicator());
+                                  return const Center(child: CircularProgressIndicator());
                                 } else if (state is MovieRecommendationsErrorState) {
                                   return Text(state.message);
                                 } else if (state is MovieRecommendationsLoadedState) {
-                                  return Container(
+                                  return SizedBox(
                                     height: 150,
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
@@ -215,17 +215,17 @@ class _DetailContentState extends State<DetailContent> {
                                               );
                                             },
                                             child: ClipRRect(
-                                              borderRadius: BorderRadius.all(
+                                              borderRadius: const BorderRadius.all(
                                                 Radius.circular(8),
                                               ),
                                               child: CachedNetworkImage(
                                                 imageUrl:
                                                     'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-                                                placeholder: (context, url) => Center(
+                                                placeholder: (context, url) => const Center(
                                                   child: CircularProgressIndicator(),
                                                 ),
                                                 errorWidget: (context, url, error) =>
-                                                    Icon(Icons.error),
+                                                    const Icon(Icons.error),
                                               ),
                                             ),
                                           ),
@@ -266,7 +266,7 @@ class _DetailContentState extends State<DetailContent> {
             backgroundColor: kRichBlack,
             foregroundColor: Colors.white,
             child: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context);
               },

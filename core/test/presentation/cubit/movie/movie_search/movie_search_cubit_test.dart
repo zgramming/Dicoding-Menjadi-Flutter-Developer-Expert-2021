@@ -27,7 +27,7 @@ void main() {
   final tMovieModel = Movie(
     adult: false,
     backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
-    genreIds: [14, 28],
+    genreIds: const [14, 28],
     id: 557,
     originalTitle: 'Spider-Man',
     overview:
@@ -41,7 +41,7 @@ void main() {
     voteCount: 13507,
   );
   final tMovieList = <Movie>[tMovieModel];
-  final tQuery = 'spiderman';
+  const tQuery = 'spiderman';
   group(
     'Movie Search',
     () {
@@ -54,7 +54,7 @@ void main() {
         },
         act: (bloc) => bloc.get(tQuery),
         expect: () => [
-          MovieSearchLoadingState(),
+          const MovieSearchLoadingState(),
           MovieSearchLoadedState(items: tMovieList),
         ],
       );
@@ -63,14 +63,14 @@ void main() {
         'Should emitsInOrder [Loading, Error] when unsuccess ',
         build: () {
           when(mockSearchMovies.execute(tQuery))
-              .thenAnswer((_) async => Left(ServerFailure('error')));
+              .thenAnswer((_) async => const Left(ServerFailure('error')));
 
           return cubit;
         },
         act: (bloc) => bloc.get(tQuery),
         expect: () => [
-          MovieSearchLoadingState(),
-          MovieSearchErrorState('error'),
+          const MovieSearchLoadingState(),
+          const MovieSearchErrorState('error'),
         ],
       );
     },

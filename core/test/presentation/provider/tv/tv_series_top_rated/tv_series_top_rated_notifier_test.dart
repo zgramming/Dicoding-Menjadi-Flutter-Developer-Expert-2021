@@ -47,7 +47,8 @@ void main() {
 
     test('state shoulb be error when function success called', () async {
       /// arrange
-      when(getTopRatedTVSeries.execute()).thenAnswer((_) async => Left(ServerFailure('error')));
+      when(getTopRatedTVSeries.execute())
+          .thenAnswer((_) async => const Left(ServerFailure('error')));
 
       /// act
       await notifier.get();

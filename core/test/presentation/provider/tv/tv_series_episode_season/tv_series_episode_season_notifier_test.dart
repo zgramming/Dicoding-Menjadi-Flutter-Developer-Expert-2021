@@ -59,7 +59,7 @@ void main() {
       () async {
         /// arrange
         when(getEpisodeSeasonTVSeries.execute(id: mockTVDetail.id, seasonNumber: 1))
-            .thenAnswer((_) async => Left(ServerFailure('error')));
+            .thenAnswer((_) async => const Left(ServerFailure('error')));
 
         /// act
         await notifier.get(id: mockTVDetail.id, seasonNumber: 1);

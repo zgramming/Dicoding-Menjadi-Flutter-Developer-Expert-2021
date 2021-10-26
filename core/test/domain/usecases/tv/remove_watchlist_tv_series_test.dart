@@ -18,12 +18,12 @@ void main() {
   test('should remove tv series from repository', () async {
     /// arrange
     when(repository.removeWatchlistTVSeries(testTVDetail))
-        .thenAnswer((_) async => Right('Removed from watchlist'));
+        .thenAnswer((_) async => const Right('Removed from watchlist'));
 
     /// act
     final result = await usecase.execute(testTVDetail);
 
     /// assert
-    expect(result, Right('Removed from watchlist'));
+    expect(result, const Right('Removed from watchlist'));
   });
 }

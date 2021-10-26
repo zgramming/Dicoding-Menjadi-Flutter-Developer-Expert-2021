@@ -80,7 +80,7 @@ void main() {
         () async {
           /// arrange
           when(mockGetDetailTVSeries.execute(id))
-              .thenAnswer((_) async => Left(ServerFailure('error')));
+              .thenAnswer((_) async => const Left(ServerFailure('error')));
 
           /// act
           await cubit.get(id);
@@ -109,7 +109,7 @@ void main() {
       () async {
         /// arrange
         when(mockSaveWatchlistTVSeries.execute(mockTVDetail))
-            .thenAnswer((_) async => Right('success insert'));
+            .thenAnswer((_) async => const Right('success insert'));
         when(mockGetWatchListStatusTVSeries.execute(mockTVDetail.id)).thenAnswer((_) async => true);
 
         /// act
@@ -126,7 +126,7 @@ void main() {
       () async {
         /// arrange
         when(mockSaveWatchlistTVSeries.execute(mockTVDetail))
-            .thenAnswer((_) async => Left(DatabaseFailure('error')));
+            .thenAnswer((_) async => const Left(DatabaseFailure('error')));
         when(mockGetWatchListStatusTVSeries.execute(mockTVDetail.id)).thenAnswer((_) async => true);
 
         /// act
@@ -142,7 +142,7 @@ void main() {
       () async {
         /// arrange
         when(mockRemoveWatchlistTVSeries.execute(mockTVDetail))
-            .thenAnswer((_) async => Right('success remove'));
+            .thenAnswer((_) async => const Right('success remove'));
         when(mockGetWatchListStatusTVSeries.execute(mockTVDetail.id)).thenAnswer((_) async => true);
 
         /// act
@@ -159,7 +159,7 @@ void main() {
       () async {
         /// arrange
         when(mockRemoveWatchlistTVSeries.execute(mockTVDetail))
-            .thenAnswer((_) async => Left(DatabaseFailure('error')));
+            .thenAnswer((_) async => const Left(DatabaseFailure('error')));
         when(mockGetWatchListStatusTVSeries.execute(mockTVDetail.id)).thenAnswer((_) async => true);
 
         /// act

@@ -9,7 +9,10 @@ import '../../presentation/widgets/movie_card_list.dart';
 import '../../presentation/widgets/tv_card_list.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
+  // ignore: constant_identifier_names
   static const ROUTE_NAME = '/watchlist-movie';
+
+  const WatchlistMoviesPage({Key? key}) : super(key: key);
 
   @override
   _WatchlistMoviesPageState createState() => _WatchlistMoviesPageState();
@@ -35,14 +38,14 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Watchlist'),
+          title: const Text('Watchlist'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              TabBar(
+              const TabBar(
                 indicatorColor: kMikadoYellow,
                 tabs: [
                   Tab(child: Text('Movie')),
@@ -71,30 +74,30 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
 
   Widget _buildWatchlistMovie(MovieWatchlistState state) {
     if (state is MovieWatchlistLoadingState) {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(),
       );
     } else if (state is MovieWatchlistLoadedState) {
       return ListView.builder(
         itemBuilder: (context, index) {
           final movie = state.items[index];
-          return MovieCard(movie);
+          return MovieCard(movie: movie);
         },
         itemCount: state.items.length,
       );
     } else if (state is MovieWatchlistErrorState) {
       return Center(
-        key: Key('error_message'),
+        key: const Key('error_message'),
         child: Text(state.message),
       );
     } else {
-      return SizedBox();
+      return const SizedBox();
     }
   }
 
   Widget _buildWatchlistTVSeries(TVSeriesWatchlistState state) {
     if (state is TVSeriesWatchlistLoadingState) {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(),
       );
     } else if (state is TVSeriesWatchlistLoadedState) {
@@ -107,11 +110,11 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
       );
     } else if (state is TVSeriesWatchlistErrorState) {
       return Center(
-        key: Key('error_message'),
+        key: const Key('error_message'),
         child: Text(state.message),
       );
     } else {
-      return SizedBox();
+      return const SizedBox();
     }
   }
 }

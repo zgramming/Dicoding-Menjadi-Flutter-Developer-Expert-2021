@@ -12,7 +12,9 @@ import '../../json_reader.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
+  // ignore: constant_identifier_names
   const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
+  // ignore: constant_identifier_names
   const BASE_URL = 'https://api.themoviedb.org/3';
 
   late MovieRemoteDataSourceImpl dataSource;
@@ -99,7 +101,7 @@ void main() {
   });
 
   group('get movie detail', () {
-    final tId = 1;
+    const tId = 1;
     final tMovieDetail =
         MovieDetailResponse.fromJson(json.decode(readJson('dummy_data/movie_detail.json')));
 
@@ -128,7 +130,7 @@ void main() {
     final tMovieList =
         MovieResponse.fromJson(json.decode(readJson('dummy_data/movie_recommendations.json')))
             .movieList;
-    final tId = 1;
+    const tId = 1;
 
     test('should return list of Movie Model when the response code is 200', () async {
       // arrange
@@ -156,7 +158,7 @@ void main() {
     final tSearchResult =
         MovieResponse.fromJson(json.decode(readJson('dummy_data/search_spiderman_movie.json')))
             .movieList;
-    final tQuery = 'Spiderman';
+    const tQuery = 'Spiderman';
 
     test('should return list of movies when response code is 200', () async {
       // arrange

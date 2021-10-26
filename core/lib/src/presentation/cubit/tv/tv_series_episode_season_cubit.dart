@@ -16,7 +16,7 @@ class TVSeriesEpisodeSeasonCubit extends Cubit<TVSeriesEpisodeSeasonState> {
     required int id,
     required int seasonNumber,
   }) async {
-    emit(TVSeriesEpisodeSeasonLoadingState());
+    emit(const TVSeriesEpisodeSeasonLoadingState());
     final result = await getEpisodeSeasonTVSeries.execute(
       id: id,
       seasonNumber: seasonNumber,

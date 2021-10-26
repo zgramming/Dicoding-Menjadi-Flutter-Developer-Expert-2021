@@ -12,6 +12,7 @@ import '../../presentation/pages/tv_episode_season_page.dart';
 import '../cubit/tv/tv_series_recommendations_cubit.dart';
 
 class TVDetailPage extends StatefulWidget {
+  // ignore: constant_identifier_names
   static const ROUTE_NAME = '/detail-tv';
 
   final int id;
@@ -43,15 +44,13 @@ class _TVDetailPageState extends State<TVDetailPage> {
           builder: (_, state) {
             final requestState = state.requestState;
             if (requestState == RequestState.Loading) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
+              return const Center(child: CircularProgressIndicator());
             } else if (requestState == RequestState.Loaded) {
               return DetailContent(tv: state.tv);
             } else if (requestState == RequestState.Error) {
               return Center(child: Text(state.message));
             } else {
-              return SizedBox();
+              return const SizedBox();
             }
           },
         ),
@@ -89,10 +88,10 @@ class _DetailContentState extends State<DetailContent> {
         CachedNetworkImage(
           imageUrl: 'https://image.tmdb.org/t/p/w500${widget.tv.posterPath}',
           width: screenWidth,
-          placeholder: (context, url) => Center(
+          placeholder: (context, url) => const Center(
             child: CircularProgressIndicator(),
           ),
-          errorWidget: (context, url, error) => Icon(Icons.error),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
         Container(
           margin: const EdgeInsets.only(top: 48 + 8),
@@ -104,7 +103,7 @@ class _DetailContentState extends State<DetailContent> {
                   top: 16,
                   right: 16,
                 ),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: kRichBlack,
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(16.0),
@@ -164,9 +163,9 @@ class _DetailContentState extends State<DetailContent> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       state.isAddedToWatchlist
-                                          ? Icon(Icons.check)
-                                          : Icon(Icons.add),
-                                      Text('Watchlist'),
+                                          ? const Icon(Icons.check)
+                                          : const Icon(Icons.add),
+                                      const Text('Watchlist'),
                                     ],
                                   ),
                                 );
@@ -185,7 +184,7 @@ class _DetailContentState extends State<DetailContent> {
                                 RatingBarIndicator(
                                   rating: widget.tv.voteAverage / 2,
                                   itemCount: 5,
-                                  itemBuilder: (context, index) => Icon(
+                                  itemBuilder: (context, index) => const Icon(
                                     Icons.star,
                                     color: kMikadoYellow,
                                   ),
@@ -194,7 +193,7 @@ class _DetailContentState extends State<DetailContent> {
                                 Text('${widget.tv.voteAverage}')
                               ],
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             Text(
                               'Overview',
                               style: kHeading6,
@@ -203,7 +202,7 @@ class _DetailContentState extends State<DetailContent> {
                               widget.tv.overview ?? '',
                             ),
                             if (widget.tv.seasons.isNotEmpty) ...[
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               Text(
                                 'Season',
                                 style: kHeading6,
@@ -232,7 +231,7 @@ class _DetailContentState extends State<DetailContent> {
                                             fit: BoxFit.cover,
                                             imageUrl:
                                                 'https://image.tmdb.org/t/p/w500${season.posterPath}',
-                                            placeholder: (context, url) => Center(
+                                            placeholder: (context, url) => const Center(
                                               child: CircularProgressIndicator(),
                                             ),
                                             errorWidget: (context, url, error) {
@@ -245,7 +244,7 @@ class _DetailContentState extends State<DetailContent> {
                                                       angle: 45,
                                                       child: Text(
                                                         '${season.name}',
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                           fontSize: 16.0,
                                                           fontWeight: FontWeight.bold,
                                                         ),
@@ -263,7 +262,7 @@ class _DetailContentState extends State<DetailContent> {
                                 ),
                               ),
                             ],
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             Text(
                               'Recommendations',
                               style: kHeading6,
@@ -271,13 +270,13 @@ class _DetailContentState extends State<DetailContent> {
                             BlocBuilder<TVSeriesRecommendationsCubit, TVSeriesRecommendationsState>(
                               builder: (context, state) {
                                 if (state is TVSeriesRecommendationsLoadingState) {
-                                  return Center(
+                                  return const Center(
                                     child: CircularProgressIndicator(),
                                   );
                                 } else if (state is TVSeriesRecommendationsErrorState) {
                                   return Text(state.message);
                                 } else if (state is TVSeriesRecommendationsLoadedState) {
-                                  return Container(
+                                  return SizedBox(
                                     height: 150,
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
@@ -294,17 +293,17 @@ class _DetailContentState extends State<DetailContent> {
                                               );
                                             },
                                             child: ClipRRect(
-                                              borderRadius: BorderRadius.all(
+                                              borderRadius: const BorderRadius.all(
                                                 Radius.circular(8),
                                               ),
                                               child: CachedNetworkImage(
                                                 imageUrl:
                                                     'https://image.tmdb.org/t/p/w500${recommendation.posterPath}',
-                                                placeholder: (context, url) => Center(
+                                                placeholder: (context, url) => const Center(
                                                   child: CircularProgressIndicator(),
                                                 ),
                                                 errorWidget: (context, url, error) =>
-                                                    Icon(Icons.error),
+                                                    const Icon(Icons.error),
                                               ),
                                             ),
                                           ),
@@ -335,7 +334,7 @@ class _DetailContentState extends State<DetailContent> {
               backgroundColor: kRichBlack,
               foregroundColor: Colors.white,
               child: IconButton(
-                icon: Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back),
                 onPressed: () {
                   Navigator.pop(context);
                 },

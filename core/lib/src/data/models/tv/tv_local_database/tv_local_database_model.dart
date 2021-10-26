@@ -10,7 +10,7 @@ part 'tv_local_database_model.g.dart';
 @immutable
 @JsonSerializable()
 class TVLocalDatabaseModel extends Equatable {
-  TVLocalDatabaseModel({
+  const TVLocalDatabaseModel({
     required this.id,
     required this.title,
     required this.posterPath,

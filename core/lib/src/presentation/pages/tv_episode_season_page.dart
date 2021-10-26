@@ -12,6 +12,7 @@ import '../../domain/entities/tv/tv_season.dart';
 import '../../presentation/cubit/tv/tv_series_episode_season_cubit.dart';
 
 class TVEpisodeSeasonPage extends StatefulWidget {
+  // ignore: constant_identifier_names
   static const ROUTE_NAME = '/episode-season-tv';
 
   /// [tv, season]
@@ -54,7 +55,7 @@ class _TVEpisodeSeasonPageState extends State<TVEpisodeSeasonPage> {
         child: BlocBuilder<TVSeriesEpisodeSeasonCubit, TVSeriesEpisodeSeasonState>(
           builder: (context, state) {
             if (state is TVSeriesEpisodeSeasonLoadingState) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is TVSeriesEpisodeSeasonLoadedState) {
               if (state.items.isEmpty) {
                 return Padding(
@@ -71,23 +72,22 @@ class _TVEpisodeSeasonPageState extends State<TVEpisodeSeasonPage> {
                 itemBuilder: (context, index) {
                   final episode = state.items[index];
                   return ListTile(
-                    leading: Container(
+                    leading: SizedBox(
                       width: 80,
                       height: 80,
-                      decoration: BoxDecoration(),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: CachedNetworkImage(
                           imageUrl: '$BASE_IMAGE_URL/${episode.stillPath}',
                           fit: BoxFit.cover,
-                          placeholder: (context, url) => Center(
+                          placeholder: (context, url) => const Center(
                             child: CircularProgressIndicator(),
                           ),
                           errorWidget: (context, url, error) => Container(
                             width: 80.0,
                             height: 80.0,
-                            decoration: BoxDecoration(color: kMikadoYellow),
-                            child: FittedBox(
+                            decoration: const BoxDecoration(color: kMikadoYellow),
+                            child: const FittedBox(
                               child: Icon(Icons.error),
                             ),
                           ),
@@ -98,14 +98,14 @@ class _TVEpisodeSeasonPageState extends State<TVEpisodeSeasonPage> {
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Builder(builder: (_) {
                           DateTime? date;
                           if (episode.airDate != null) {
                             date = episode.airDate;
                           }
                           if (date == null) {
-                            return SizedBox();
+                            return const SizedBox();
                           }
 
                           return Text(
@@ -116,21 +116,21 @@ class _TVEpisodeSeasonPageState extends State<TVEpisodeSeasonPage> {
                             ),
                           );
                         }),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             RatingBarIndicator(
                               rating: (episode.voteAverage ?? 0) / 2,
                               itemCount: 5,
-                              itemBuilder: (context, index) => Icon(
+                              itemBuilder: (context, index) => const Icon(
                                 Icons.star,
                                 color: kMikadoYellow,
                               ),
                               itemSize: 24,
                             ),
-                            SizedBox(width: 5),
-                            Text('${(episode.voteAverage ?? 0).toStringAsFixed(1)}'),
+                            const SizedBox(width: 5),
+                            Text((episode.voteAverage ?? 0).toStringAsFixed(1)),
                           ],
                         )
                       ],
@@ -138,7 +138,7 @@ class _TVEpisodeSeasonPageState extends State<TVEpisodeSeasonPage> {
                     trailing: InkWell(
                       onTap: () async {
                         await showModalBottomSheet(
-                          shape: RoundedRectangleBorder(
+                          shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.vertical(
                               top: Radius.circular(15.0),
                             ),
@@ -150,32 +150,32 @@ class _TVEpisodeSeasonPageState extends State<TVEpisodeSeasonPage> {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text(
+                                const Text(
                                   'Crew',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16.0,
                                   ),
                                 ),
-                                SizedBox(height: 20),
+                                const SizedBox(height: 20),
                                 ShowCrew(crews: episode.crew),
-                                SizedBox(height: 20),
-                                Text(
+                                const SizedBox(height: 20),
+                                const Text(
                                   'Guest Start',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16.0,
                                   ),
                                 ),
-                                SizedBox(height: 20),
+                                const SizedBox(height: 20),
                                 ShowCrew(crews: episode.guestStars),
-                                SizedBox(height: 20),
+                                const SizedBox(height: 20),
                               ],
                             ),
                           ),
                         );
                       },
-                      child: CircleAvatar(
+                      child: const CircleAvatar(
                         backgroundColor: kMikadoYellow,
                         foregroundColor: Colors.white,
                         child: Icon(Icons.person),
@@ -206,8 +206,8 @@ class ShowCrew extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (crews.isEmpty) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
+      return const Padding(
+        padding: EdgeInsets.symmetric(vertical: 16.0),
         child: Center(child: Text('People not found')),
       );
     }
@@ -232,7 +232,7 @@ class ShowCrew extends StatelessWidget {
                       fit: BoxFit.cover,
                       width: 100,
                       height: 100,
-                      placeholder: (context, url) => Center(
+                      placeholder: (context, url) => const Center(
                         child: CircularProgressIndicator(),
                       ),
                       errorWidget: (context, url, error) => Container(

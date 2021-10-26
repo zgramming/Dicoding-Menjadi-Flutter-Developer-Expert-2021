@@ -68,13 +68,13 @@ void main() {
     when(() => movieDetailCubitMock.getWatchlistStatus(any())).thenAnswer((_) async => {});
 
     when(() => movieDetailCubitMock.state)
-        .thenAnswer((_) => MovieDetailState(requestState: RequestState.Loaded));
+        .thenAnswer((_) => const MovieDetailState(requestState: RequestState.Loaded));
 
     when(() => movieRecommendationsMock.get(any())).thenAnswer((_) async => {});
     when(() => movieRecommendationsMock.state)
         .thenAnswer((_) => MovieRecommendationsLoadedState(items: testMovieList));
 
-    await tester.pumpWidget(_makeTestableWidget(MovieDetailPage(id: 1)));
+    await tester.pumpWidget(_makeTestableWidget(const MovieDetailPage(id: 1)));
 
     expect(watchlistButtonIcon, findsOneWidget);
   });

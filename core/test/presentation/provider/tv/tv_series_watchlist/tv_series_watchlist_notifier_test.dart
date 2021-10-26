@@ -47,7 +47,8 @@ void main() {
 
     test('state should be error when function success called', () async {
       /// arrange
-      when(getWatchlistTVSeries.execute()).thenAnswer((_) async => Left(DatabaseFailure('error')));
+      when(getWatchlistTVSeries.execute())
+          .thenAnswer((_) async => const Left(DatabaseFailure('error')));
 
       /// act
       await notifier.get();

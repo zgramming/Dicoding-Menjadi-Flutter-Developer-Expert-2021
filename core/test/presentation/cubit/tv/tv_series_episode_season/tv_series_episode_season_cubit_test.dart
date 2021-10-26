@@ -43,7 +43,7 @@ void main() {
         },
         act: (bloc) => bloc.get(id: mockTVDetail.id, seasonNumber: 1),
         expect: () => [
-          TVSeriesEpisodeSeasonLoadingState(),
+          const TVSeriesEpisodeSeasonLoadingState(),
           TVSeriesEpisodeSeasonLoadedState(items: mockListEpisodeSeasonTV),
         ],
       );
@@ -52,13 +52,13 @@ void main() {
         'should EmitsInOrder [Loading, Error] when unsuccessful',
         build: () {
           when(mockGetEpisodeSeasonTVSeries.execute(id: mockTVDetail.id, seasonNumber: 1))
-              .thenAnswer((_) async => Left(ServerFailure('error')));
+              .thenAnswer((_) async => const Left(ServerFailure('error')));
           return cubit;
         },
         act: (bloc) => bloc.get(id: mockTVDetail.id, seasonNumber: 1),
         expect: () => [
-          TVSeriesEpisodeSeasonLoadingState(),
-          TVSeriesEpisodeSeasonErrorState('error'),
+          const TVSeriesEpisodeSeasonLoadingState(),
+          const TVSeriesEpisodeSeasonErrorState('error'),
         ],
       );
     },

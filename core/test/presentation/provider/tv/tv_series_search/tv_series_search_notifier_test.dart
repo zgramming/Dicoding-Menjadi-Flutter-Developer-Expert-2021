@@ -26,7 +26,7 @@ void main() {
   group('search TV Series', () {
     test('state should be loading when function success called', () {
       /// arrange
-      when(searchTVSeries.execute(query)).thenAnswer((_) async => Right([]));
+      when(searchTVSeries.execute(query)).thenAnswer((_) async => const Right([]));
 
       /// act
       notifier.fetchTVSeriesSearch(query);
@@ -49,7 +49,8 @@ void main() {
 
     test('state should be error when function success called', () async {
       /// arrange
-      when(searchTVSeries.execute(query)).thenAnswer((_) async => Left(ServerFailure('error')));
+      when(searchTVSeries.execute(query))
+          .thenAnswer((_) async => const Left(ServerFailure('error')));
 
       /// act
       await notifier.fetchTVSeriesSearch(query);

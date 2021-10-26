@@ -37,7 +37,7 @@ void main() {
         },
         act: (bloc) => bloc.get(),
         expect: () => [
-          MovieTopRatedLoadingState(),
+          const MovieTopRatedLoadingState(),
           MovieTopRatedLoadedState(items: testMovieList),
         ],
       );
@@ -46,13 +46,13 @@ void main() {
         'Should emitsInOrder [Loading, Error] when unsuccess',
         build: () {
           when(mockGetTopRatedMovies.execute())
-              .thenAnswer((_) async => Left(ServerFailure('error')));
+              .thenAnswer((_) async => const Left(ServerFailure('error')));
           return cubit;
         },
         act: (bloc) => bloc.get(),
         expect: () => [
-          MovieTopRatedLoadingState(),
-          MovieTopRatedErrorState('error'),
+          const MovieTopRatedLoadingState(),
+          const MovieTopRatedErrorState('error'),
         ],
       );
     },

@@ -22,13 +22,13 @@ void main() {
     'should get list of tv series from repository',
     () async {
       /// arrange
-      when(repository.getRecommendationTVSeries(id)).thenAnswer((_) async => Right(list));
+      when(repository.getRecommendationTVSeries(id)).thenAnswer((_) async => const Right(list));
 
       /// act
       final result = await usecase.execute(id);
 
       /// assert
-      expect(result, Right(list));
+      expect(result, const Right(list));
     },
   );
 }

@@ -33,7 +33,7 @@ void main() {
   final tMovie = Movie(
     adult: false,
     backdropPath: 'backdropPath',
-    genreIds: [1, 2, 3],
+    genreIds: const [1, 2, 3],
     id: 1,
     originalTitle: 'originalTitle',
     overview: 'overview',
@@ -57,7 +57,7 @@ void main() {
         },
         act: (bloc) => bloc.get(tId),
         expect: () => [
-          MovieRecommendationsLoadingState(),
+          const MovieRecommendationsLoadingState(),
           MovieRecommendationsLoadedState(items: tMovies),
         ],
       );
@@ -66,13 +66,13 @@ void main() {
         'Should emitsInOrder [Loading, Error] when unsuccess',
         build: () {
           when(mockGetMovieRecommendations.execute(tId))
-              .thenAnswer((_) async => Left(ServerFailure('error')));
+              .thenAnswer((_) async => const Left(ServerFailure('error')));
           return cubit;
         },
         act: (bloc) => bloc.get(tId),
         expect: () => [
-          MovieRecommendationsLoadingState(),
-          MovieRecommendationsErrorState('error'),
+          const MovieRecommendationsLoadingState(),
+          const MovieRecommendationsErrorState('error'),
         ],
       );
     },

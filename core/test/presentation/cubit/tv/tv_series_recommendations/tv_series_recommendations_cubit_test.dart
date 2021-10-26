@@ -42,7 +42,7 @@ void main() {
         },
         act: (bloc) => bloc.get(mockTVDetail.id),
         expect: () => [
-          TVSeriesRecommendationsLoadingState(),
+          const TVSeriesRecommendationsLoadingState(),
           TVSeriesRecommendationsLoadedState(items: mockListTV),
         ],
       );
@@ -51,13 +51,13 @@ void main() {
         'should emitsInOrder [Loading, Error] when unsuccess',
         build: () {
           when(mockGetRecommendationTVSeries.execute(mockTVDetail.id))
-              .thenAnswer((_) async => Left(ServerFailure('error')));
+              .thenAnswer((_) async => const Left(ServerFailure('error')));
           return cubit;
         },
         act: (bloc) => bloc.get(mockTVDetail.id),
         expect: () => [
-          TVSeriesRecommendationsLoadingState(),
-          TVSeriesRecommendationsErrorState('error'),
+          const TVSeriesRecommendationsLoadingState(),
+          const TVSeriesRecommendationsErrorState('error'),
         ],
       );
     },

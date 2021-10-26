@@ -13,7 +13,7 @@ class TVSeriesAiringTodayCubit extends Cubit<TVSeriesAiringTodayState> {
 
   final GetAiringTodayTVSeries getAiringTodayTVSeries;
   Future<void> get() async {
-    emit(TVSeriesAiringTodayLoading());
+    emit(const TVSeriesAiringTodayLoading());
     final result = await getAiringTodayTVSeries.execute();
     result.fold(
       (failure) => emit(TVSeriesAiringTodayError(failure.message)),

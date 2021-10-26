@@ -16,8 +16,8 @@ void main() {
     usecase = GetEpisodeSeasonTVSeries(repository: repository);
   });
 
-  final id = 1;
-  final seasonNumber = 1;
+  const id = 1;
+  const seasonNumber = 1;
 
   final list = <Episode>[];
   test(

@@ -74,7 +74,7 @@ void main() {
       final result = await repository.getAiringTodayTVSeries();
       // assert
       verify(mockTVRemoteDataSource.getAiringTodayTVSeries());
-      expect(result, equals(Left(ServerFailure(''))));
+      expect(result, equals(const Left(ServerFailure(''))));
     });
   });
 
@@ -104,7 +104,7 @@ void main() {
       final result = await repository.getPopularTVSeries();
       // assert
       verify(mockTVRemoteDataSource.getPopularTVSeries());
-      expect(result, equals(Left(ServerFailure(''))));
+      expect(result, equals(const Left(ServerFailure(''))));
     });
   });
 
@@ -134,7 +134,7 @@ void main() {
       final result = await repository.getTopRatedTVSeries();
       // assert
       verify(mockTVRemoteDataSource.getTopRatedTVSeries());
-      expect(result, equals(Left(ServerFailure(''))));
+      expect(result, equals(const Left(ServerFailure(''))));
     });
   });
 
@@ -162,7 +162,7 @@ void main() {
       final result = await repository.getDetailTVSeries(id);
       // assert
       verify(mockTVRemoteDataSource.getDetailTVSeries(id));
-      expect(result, equals(Left(ServerFailure(''))));
+      expect(result, equals(const Left(ServerFailure(''))));
     });
   });
 
@@ -193,7 +193,7 @@ void main() {
       final result = await repository.searchTVSeries(query);
       // assert
       verify(mockTVRemoteDataSource.searchTVSeries(query));
-      expect(result, equals(Left(ServerFailure(''))));
+      expect(result, equals(const Left(ServerFailure(''))));
     });
   });
 
@@ -225,7 +225,7 @@ void main() {
       final result = await repository.getRecommendationTVSeries(id);
       // assert
       verify(mockTVRemoteDataSource.getRecommendationTVSeries(id));
-      expect(result, equals(Left(ServerFailure(''))));
+      expect(result, equals(const Left(ServerFailure(''))));
     });
   });
 
@@ -261,7 +261,7 @@ void main() {
       final result = await repository.getEpisodeSeasonTVSeries(id: id, seasonNumber: seasonNumber);
       // assert
       verify(mockTVRemoteDataSource.getEpisodeSeasonTVSeries(id: id, seasonNumber: seasonNumber));
-      expect(result, equals(Left(ServerFailure(''))));
+      expect(result, equals(const Left(ServerFailure(''))));
     });
   });
 
@@ -292,7 +292,7 @@ void main() {
         log('result $result');
 
         ///assert
-        expect(result, Right('Added to Watchlist'));
+        expect(result, const Right('Added to Watchlist'));
       },
     );
 
@@ -303,7 +303,7 @@ void main() {
       // act
       final result = await repository.insertWatchlistTVSeries(testTVDetail);
       // assert
-      expect(result, Left(DatabaseFailure('Failed to add watchlist')));
+      expect(result, const Left(DatabaseFailure('Failed to add watchlist')));
     });
   });
 
@@ -315,7 +315,7 @@ void main() {
       // act
       final result = await repository.removeWatchlistTVSeries(testTVDetail);
       // assert
-      expect(result, Right('Removed from watchlist'));
+      expect(result, const Right('Removed from watchlist'));
     });
     test('should return DatabaseFailure when remove unsuccessful', () async {
       // arrange
@@ -324,14 +324,14 @@ void main() {
       // act
       final result = await repository.removeWatchlistTVSeries(testTVDetail);
       // assert
-      expect(result, Left(DatabaseFailure('Failed to remove watchlist')));
+      expect(result, const Left(DatabaseFailure('Failed to remove watchlist')));
     });
   });
 
   group('get watchlist status', () {
     test('should return watch status whether data is found', () async {
       // arrange
-      final tId = 1;
+      const tId = 1;
       when(mockTVLocalDataSource.getDataById(tId)).thenAnswer((_) async => null);
       // act
       final result = await repository.isAddedToWatchlistTVSeries(tId);

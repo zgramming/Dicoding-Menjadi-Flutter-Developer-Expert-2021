@@ -13,7 +13,7 @@ class TVSeriesTopRatedCubit extends Cubit<TVSeriesTopRatedState> {
 
   final GetTopRatedTVSeries getTopRatedTVSeries;
   Future<void> get() async {
-    emit(TVSeriesTopRatedLoadingState());
+    emit(const TVSeriesTopRatedLoadingState());
     final result = await getTopRatedTVSeries.execute();
     result.fold(
       (failure) => emit(TVSeriesTopRatedErrorState(failure.message)),

@@ -16,7 +16,7 @@ part 'tv_detail_model.g.dart';
 @immutable
 @JsonSerializable(fieldRename: FieldRename.snake)
 class TVDetailResponse extends Equatable {
-  TVDetailResponse({
+  const TVDetailResponse({
     required this.backdropPath,
     required this.episodeRunTime,
     required this.firstAirDate,

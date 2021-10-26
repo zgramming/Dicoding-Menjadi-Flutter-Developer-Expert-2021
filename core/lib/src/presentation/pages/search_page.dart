@@ -30,7 +30,10 @@ final _categories = <SearchCategory>[
 ];
 
 class SearchPage extends StatefulWidget {
+  // ignore: constant_identifier_names
   static const ROUTE_NAME = '/search';
+
+  const SearchPage({Key? key}) : super(key: key);
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -56,33 +59,31 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search'),
+        title: const Text('Search'),
         actions: [
-          Container(
-            child: DropdownButton<SearchCategory>(
-              value: _selectedCategory,
-              onChanged: (value) async {
-                if (_searchController.text.isNotEmpty) {
-                  if (value!.category == CategoryMenu.Movie) {
-                    /// Call Function Movie
+          DropdownButton<SearchCategory>(
+            value: _selectedCategory,
+            onChanged: (value) async {
+              if (_searchController.text.isNotEmpty) {
+                if (value!.category == CategoryMenu.Movie) {
+                  /// Call Function Movie
 
-                    await context.read<MovieSearchCubit>().get(_searchController.text);
-                  } else {
-                    /// Call Function TV Series
-                    await context.read<TVSeriesSearchCubit>().get(_searchController.text);
-                  }
+                  await context.read<MovieSearchCubit>().get(_searchController.text);
+                } else {
+                  /// Call Function TV Series
+                  await context.read<TVSeriesSearchCubit>().get(_searchController.text);
                 }
-                setState(() => _selectedCategory = value!);
-              },
-              items: _categories
-                  .map(
-                    (e) => DropdownMenuItem<SearchCategory>(
-                      child: Text('${e.title}'),
-                      value: e,
-                    ),
-                  )
-                  .toList(),
-            ),
+              }
+              setState(() => _selectedCategory = value!);
+            },
+            items: _categories
+                .map(
+                  (e) => DropdownMenuItem<SearchCategory>(
+                    child: Text(e.title),
+                    value: e,
+                  ),
+                )
+                .toList(),
           ),
         ],
       ),
@@ -100,14 +101,14 @@ class _SearchPageState extends State<SearchPage> {
                   await context.read<TVSeriesSearchCubit>().get(_searchController.text);
                 }
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Search title',
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(),
               ),
               textInputAction: TextInputAction.search,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               'Search Result',
               style: kHeading6,
@@ -133,7 +134,7 @@ class _SearchPageState extends State<SearchPage> {
 
   _buildMovieSearch(MovieSearchState state) {
     if (state is MovieSearchLoadingState) {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(),
       );
     } else if (state is MovieSearchLoadedState) {
@@ -142,7 +143,7 @@ class _SearchPageState extends State<SearchPage> {
           padding: const EdgeInsets.all(8),
           itemBuilder: (context, index) {
             final movie = state.items[index];
-            return MovieCard(movie);
+            return MovieCard(movie: movie);
           },
           itemCount: state.items.length,
         ),
@@ -156,7 +157,7 @@ class _SearchPageState extends State<SearchPage> {
 
   _buildTVSeriesSearch(TVSeriesSearchState state) {
     if (state is TVSeriesSearchLoadingState) {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(),
       );
     } else if (state is TVSeriesSearchLoadedState) {

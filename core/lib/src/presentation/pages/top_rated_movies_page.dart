@@ -6,7 +6,10 @@ import '../../presentation/widgets/movie_card_list.dart';
 import '../cubit/movie/movie_top_rated_cubit.dart';
 
 class TopRatedMoviesPage extends StatefulWidget {
+  // ignore: constant_identifier_names
   static const ROUTE_NAME = '/top-rated-movie';
+
+  const TopRatedMoviesPage({Key? key}) : super(key: key);
 
   @override
   _TopRatedMoviesPageState createState() => _TopRatedMoviesPageState();
@@ -25,29 +28,29 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Top Rated Movies'),
+        title: const Text('Top Rated Movies'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<MovieTopRatedCubit, MovieTopRatedState>(
           builder: (context, state) {
             if (state is MovieTopRatedLoadingState) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is MovieTopRatedLoadedState) {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = state.items[index];
-                  return MovieCard(movie);
+                  return MovieCard(movie: movie);
                 },
                 itemCount: state.items.length,
               );
             } else if (state is MovieTopRatedErrorState) {
               return Center(
-                key: Key('error_message'),
+                key: const Key('error_message'),
                 child: Text(state.message),
               );
             } else {
-              return SizedBox();
+              return const SizedBox();
             }
           },
         ),

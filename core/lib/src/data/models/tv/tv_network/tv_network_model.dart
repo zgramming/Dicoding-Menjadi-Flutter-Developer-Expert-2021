@@ -9,7 +9,7 @@ part 'tv_network_model.g.dart';
 @immutable
 @JsonSerializable(fieldRename: FieldRename.snake)
 class NetworkModel extends Equatable {
-  NetworkModel({
+  const NetworkModel({
     required this.name,
     required this.id,
     this.logoPath,

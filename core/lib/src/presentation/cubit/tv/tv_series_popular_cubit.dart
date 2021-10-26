@@ -13,7 +13,7 @@ class TVSeriesPopularCubit extends Cubit<TVSeriesPopularState> {
 
   final GetPopularTVSeries getPopularTVSeries;
   Future<void> get() async {
-    emit(TVSeriesPopularLoadingState());
+    emit(const TVSeriesPopularLoadingState());
     final result = await getPopularTVSeries.execute();
     result.fold(
       (failure) => emit(TVSeriesPopularErrorState(failure.message)),

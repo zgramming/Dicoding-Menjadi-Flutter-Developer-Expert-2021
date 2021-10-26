@@ -4,7 +4,7 @@ class SpokenLanguage extends Equatable {
   final String? englishName;
   final String? iso6391;
   final String? name;
-  SpokenLanguage({
+  const SpokenLanguage({
     required this.englishName,
     required this.iso6391,
     required this.name,

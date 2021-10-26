@@ -8,6 +8,7 @@ import '../../presentation/cubit/tv/tv_series_top_rated_cubit.dart';
 import '../../presentation/widgets/tv_card_list.dart';
 
 class TVSeeMorePage extends StatefulWidget {
+  // ignore: constant_identifier_names
   static const ROUTE_NAME = '/see-more-tv';
 
   final SeeMoreState seeMoreState;
@@ -63,7 +64,7 @@ class _TVSeeMorePageState extends State<TVSeeMorePage> {
 
   _buildPopular(TVSeriesPopularState state) {
     if (state is TVSeriesPopularLoadingState) {
-      return Center(child: CircularProgressIndicator());
+      return const Center(child: CircularProgressIndicator());
     } else if (state is TVSeriesPopularLoadedState) {
       return ListView.builder(
         itemBuilder: (context, index) {
@@ -74,7 +75,7 @@ class _TVSeeMorePageState extends State<TVSeeMorePage> {
       );
     } else if (state is TVSeriesPopularErrorState) {
       return Center(
-        key: Key('error_message'),
+        key: const Key('error_message'),
         child: Text(state.message),
       );
     } else {
@@ -84,7 +85,7 @@ class _TVSeeMorePageState extends State<TVSeeMorePage> {
 
   _buildTopRated(TVSeriesTopRatedState state) {
     if (state is TVSeriesTopRatedLoadingState) {
-      return Center(child: CircularProgressIndicator());
+      return const Center(child: CircularProgressIndicator());
     } else if (state is TVSeriesTopRatedLoadedState) {
       return ListView.builder(
         itemBuilder: (context, index) {
@@ -95,11 +96,11 @@ class _TVSeeMorePageState extends State<TVSeeMorePage> {
       );
     } else if (state is TVSeriesTopRatedErrorState) {
       return Center(
-        key: Key('error_message'),
+        key: const Key('error_message'),
         child: Text(state.message),
       );
     } else {
-      return SizedBox();
+      return const SizedBox();
     }
   }
 }

@@ -14,7 +14,7 @@ class TVSeriesRecommendationsCubit extends Cubit<TVSeriesRecommendationsState> {
   final GetRecommendationTVSeries getRecommendationTVSeries;
 
   Future<void> get(int id) async {
-    emit(TVSeriesRecommendationsLoadingState());
+    emit(const TVSeriesRecommendationsLoadingState());
 
     final result = await getRecommendationTVSeries.execute(id);
     result.fold(

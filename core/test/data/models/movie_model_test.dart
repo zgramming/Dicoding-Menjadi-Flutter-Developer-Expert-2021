@@ -4,10 +4,10 @@ import 'package:core/src/data/models/movie_model.dart';
 import 'package:core/src/domain/entities/movie.dart';
 
 void main() {
-  final tMovieModel = MovieModel(
+  const tMovieModel = MovieModel(
     adult: false,
     backdropPath: 'backdropPath',
-    genreIds: const [1, 2, 3],
+    genreIds: [1, 2, 3],
     id: 1,
     originalTitle: 'originalTitle',
     overview: 'overview',
