@@ -63,7 +63,7 @@ class TVSeriesDetailCubit extends Cubit<TVSeriesDetailState> {
       },
     );
 
-    // await getWatchlistStatus(tv.id);
+    await getWatchlistStatus(tv.id);
   }
 
   Future<void> getWatchlistStatus(int id) async {
