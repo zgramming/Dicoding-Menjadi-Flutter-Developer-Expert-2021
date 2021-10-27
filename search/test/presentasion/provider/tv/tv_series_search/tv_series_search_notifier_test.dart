@@ -5,8 +5,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'package:core/src/data/models/tv/tv_model.dart';
-import 'package:core/src/domain/usecases/tv/search_tv_series.dart';
-import 'package:core/src/presentation/provider/tv/tv_series_search_notifier.dart';
+import 'package:search/presentasion/provider/tv/tv_series_search_notifier.dart';
+import 'package:search/search.dart';
 
 import '../../../../dummy_data/dummy_objects.dart';
 import 'tv_series_search_notifier_test.mocks.dart';

@@ -1,8 +1,7 @@
 import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../domain/entities/tv/tv.dart';
-import '../../../domain/usecases/tv/search_tv_series.dart';
+import '../../../search.dart';
 
 class TVSeriesSearchNotifier extends ChangeNotifier {
   final SearchTVSeries searchTVSeries;

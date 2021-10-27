@@ -6,8 +6,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'package:core/src/data/models/tv/tv_model.dart';
-import 'package:core/src/domain/usecases/tv/search_tv_series.dart';
-import 'package:core/src/presentation/cubit/tv/tv_series_search_cubit.dart';
+import 'package:search/search.dart';
 
 import '../../../../dummy_data/dummy_objects.dart';
 import 'tv_series_search_cubit_test.mocks.dart';

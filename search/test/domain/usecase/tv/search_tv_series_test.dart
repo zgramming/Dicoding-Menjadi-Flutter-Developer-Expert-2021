@@ -1,12 +1,15 @@
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'package:core/src/domain/entities/tv/tv.dart';
-import 'package:core/src/domain/usecases/tv/search_tv_series.dart';
+import 'package:search/search.dart';
 
-import '../../../helpers/test_helper.mocks.dart';
+import 'search_tv_series_test.mocks.dart';
 
+@GenerateMocks([TVRepository])
 void main() {
   late MockTVRepository repository;
   late SearchTVSeries usecase;

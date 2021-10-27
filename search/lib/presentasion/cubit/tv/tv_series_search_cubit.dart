@@ -1,8 +1,8 @@
+import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../domain/entities/tv/tv.dart';
-import '../../../domain/usecases/tv/search_tv_series.dart';
+import '../../../search.dart';
 
 part './tv_series_search_state.dart';
 

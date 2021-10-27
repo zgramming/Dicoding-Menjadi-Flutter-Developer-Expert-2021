@@ -14,7 +14,6 @@ export './src/presentation/cubit/tv/tv_series_detail_cubit.dart';
 export './src/presentation/cubit/tv/tv_series_episode_season_cubit.dart';
 export './src/presentation/cubit/tv/tv_series_popular_cubit.dart';
 export './src/presentation/cubit/tv/tv_series_recommendations_cubit.dart';
-export './src/presentation/cubit/tv/tv_series_search_cubit.dart';
 export './src/presentation/cubit/tv/tv_series_top_rated_cubit.dart';
 export './src/presentation/cubit/tv/tv_series_watchlist_cubit.dart';
 
@@ -60,7 +59,6 @@ export './src/domain/usecases/tv/get_watch_list_status_tv_series.dart';
 export './src/domain/usecases/tv/get_watchlist_tv_series.dart';
 export './src/domain/usecases/tv/remove_watchlist_tv_series.dart';
 export './src/domain/usecases/tv/save_watchlist_tv_series.dart';
-export './src/domain/usecases/tv/search_tv_series.dart';
 
 ///! END Usecase
 
@@ -75,6 +73,7 @@ export './src/data/repositories/tv_repository_impl.dart';
 
 ///! Entitiy
 export './src/domain/entities/movie.dart';
+export './src/domain/entities/tv/tv.dart';
 
 ///! End Entity
 
