@@ -1,17 +1,16 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:core/core.dart';
+import 'package:core/src/domain/usecases/get_watchlist_status.dart';
+import 'package:core/src/presentation/cubit/movie/movie_detail_cubit.dart';
+import 'package:core/src/presentation/cubit/movie/movie_recommendations_cubit.dart';
+import 'package:core/src/presentation/pages/movie_detail_page.dart';
+import 'package:core/src/presentation/provider/movie_detail_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
-
-import 'package:core/src/domain/usecases/get_watchlist_status.dart';
-import 'package:core/src/presentation/cubit/movie/movie_detail_cubit.dart';
-import 'package:core/src/presentation/cubit/movie/movie_recommendations_cubit.dart';
-import 'package:core/src/presentation/pages/movie_detail_page.dart';
-import 'package:core/src/presentation/provider/movie_detail_notifier.dart';
 
 import '../../dummy_data/dummy_objects.dart';
 
@@ -123,13 +122,6 @@ void main() {
       const MovieRecommendationsLoadedState(items: []),
     );
 
-    // when(() => mockNotifier.movieState).thenReturn(RequestState.Loaded);
-    // when(() => mockNotifier.movie).thenReturn(testMovieDetail);
-    // when(() => mockNotifier.recommendationState).thenReturn(RequestState.Loaded);
-    // when(() => mockNotifier.movieRecommendations).thenReturn(<Movie>[]);
-    // when(() => mockNotifier.isAddedToWatchlist).thenReturn(false);
-    // when(() => mockNotifier.watchlistMessage).thenReturn('Added to Watchlist');
-
     final watchlistButton = find.byType(ElevatedButton);
 
     await tester.pumpWidget(_makeTestableWidget(const MovieDetailPage(id: 1)));
@@ -160,12 +152,6 @@ void main() {
     when(() => movieRecommendationsMock.state).thenReturn(
       const MovieRecommendationsLoadedState(items: []),
     );
-    // when(() => mockNotifier.movieState).thenReturn(RequestState.Loaded);
-    // when(() => mockNotifier.movie).thenReturn(testMovieDetail);
-    // when(() => mockNotifier.recommendationState).thenReturn(RequestState.Loaded);
-    // when(() => mockNotifier.movieRecommendations).thenReturn(<Movie>[]);
-    // when(() => mockNotifier.isAddedToWatchlist).thenReturn(false);
-    // when(() => mockNotifier.watchlistMessage).thenReturn('Failed');
 
     final watchlistButton = find.byType(ElevatedButton);
 
