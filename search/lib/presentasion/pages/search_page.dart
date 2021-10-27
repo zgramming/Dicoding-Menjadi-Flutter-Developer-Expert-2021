@@ -2,11 +2,7 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-
-import '../../presentation/cubit/movie/movie_search_cubit.dart';
-import '../../presentation/cubit/tv/tv_series_search_cubit.dart';
-import '../../presentation/widgets/movie_card_list.dart';
-import '../../presentation/widgets/tv_card_list.dart';
+import 'package:search/presentasion/cubit/movie_search_cubit.dart';
 
 class SearchCategory {
   final String title;

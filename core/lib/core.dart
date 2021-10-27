@@ -22,7 +22,6 @@ export './src/presentation/cubit/movie/movie_detail_cubit.dart';
 export './src/presentation/cubit/movie/movie_now_playing_cubit.dart';
 export './src/presentation/cubit/movie/movie_popular_cubit.dart';
 export './src/presentation/cubit/movie/movie_recommendations_cubit.dart';
-export './src/presentation/cubit/movie/movie_search_cubit.dart';
 export './src/presentation/cubit/movie/movie_top_rated_cubit.dart';
 export './src/presentation/cubit/movie/movie_watchlist_cubit.dart';
 
@@ -32,7 +31,6 @@ export './src/presentation/cubit/movie/movie_watchlist_cubit.dart';
 export './src/presentation/pages/home_movie_page.dart';
 export './src/presentation/pages/movie_detail_page.dart';
 export './src/presentation/pages/popular_movies_page.dart';
-export './src/presentation/pages/search_page.dart';
 export './src/presentation/pages/top_rated_movies_page.dart';
 export './src/presentation/pages/tv_detail_page.dart' hide DetailContent;
 export './src/presentation/pages/tv_episode_season_page.dart';
@@ -51,7 +49,6 @@ export './src/domain/usecases/get_watchlist_movies.dart';
 export './src/domain/usecases/get_watchlist_status.dart';
 export './src/domain/usecases/save_watchlist.dart';
 export './src/domain/usecases/remove_watchlist.dart';
-export './src/domain/usecases/search_movies.dart';
 
 export './src/domain/usecases/tv/get_airing_today_tv_series.dart';
 export './src/domain/usecases/tv/get_detail_tv_series.dart';
@@ -76,6 +73,11 @@ export './src/data/repositories/tv_repository_impl.dart';
 
 ///! End Repository
 
+///! Entitiy
+export './src/domain/entities/movie.dart';
+
+///! End Entity
+
 ///! Datasource
 
 export './src/data/datasources/db/database_helper.dart';
@@ -85,4 +87,10 @@ export './src/data/datasources/movie_remote_data_source.dart';
 
 export './src/data/datasources/tv_local_data_source.dart';
 export './src/data/datasources/tv_remote_data_source.dart';
+
 ///! END Datasource
+
+///! Reusable Widget
+export './src/presentation/widgets/movie_card_list.dart';
+export './src/presentation/widgets/tv_card_list.dart';
+///! End Reusable Widget

@@ -43,10 +43,11 @@ dependencies:
   json_annotation: ^4.3.0
   path_provider: ^2.0.5
   provider: ^6.0.1
+  search:
+    path: search
   sqflite: ^2.0.0+4
 
 dev_dependencies:
-  bloc_test: ^9.0.0-dev.3
   build_runner: ^2.0.4
   flutter_test:
     sdk: flutter

@@ -5,8 +5,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'package:core/src/domain/entities/movie.dart';
-import 'package:core/src/domain/usecases/search_movies.dart';
-import 'package:core/src/presentation/provider/movie_search_notifier.dart';
+import 'package:search/presentasion/provider/movie_search_notifier.dart';
+import 'package:search/search.dart';
 
 import 'movie_search_notifier_test.mocks.dart';
 
