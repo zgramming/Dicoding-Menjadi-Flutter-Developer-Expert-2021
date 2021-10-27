@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:search/search.dart';
+import 'package:watchlist/watchlist.dart';
 
 import '../../domain/entities/movie.dart';
 import '../../domain/entities/tv/tv.dart';
@@ -21,7 +22,6 @@ import '../../presentation/pages/popular_movies_page.dart';
 import '../../presentation/pages/top_rated_movies_page.dart';
 import '../../presentation/pages/tv_detail_page.dart';
 import '../../presentation/pages/tv_see_more_page.dart';
-import '../../presentation/pages/watchlist_movies_page.dart';
 
 class HomeMoviePage extends StatefulWidget {
   const HomeMoviePage({Key? key}) : super(key: key);

@@ -15,14 +15,12 @@ export './src/presentation/cubit/tv/tv_series_episode_season_cubit.dart';
 export './src/presentation/cubit/tv/tv_series_popular_cubit.dart';
 export './src/presentation/cubit/tv/tv_series_recommendations_cubit.dart';
 export './src/presentation/cubit/tv/tv_series_top_rated_cubit.dart';
-export './src/presentation/cubit/tv/tv_series_watchlist_cubit.dart';
 
 export './src/presentation/cubit/movie/movie_detail_cubit.dart';
 export './src/presentation/cubit/movie/movie_now_playing_cubit.dart';
 export './src/presentation/cubit/movie/movie_popular_cubit.dart';
 export './src/presentation/cubit/movie/movie_recommendations_cubit.dart';
 export './src/presentation/cubit/movie/movie_top_rated_cubit.dart';
-export './src/presentation/cubit/movie/movie_watchlist_cubit.dart';
 
 ///! END Cubit
 
@@ -34,7 +32,6 @@ export './src/presentation/pages/top_rated_movies_page.dart';
 export './src/presentation/pages/tv_detail_page.dart' hide DetailContent;
 export './src/presentation/pages/tv_episode_season_page.dart';
 export './src/presentation/pages/tv_see_more_page.dart';
-export './src/presentation/pages/watchlist_movies_page.dart';
 
 ///! END Pages
 
@@ -44,7 +41,6 @@ export './src/domain/usecases/get_movie_recommendations.dart';
 export './src/domain/usecases/get_now_playing_movies.dart';
 export './src/domain/usecases/get_popular_movies.dart';
 export './src/domain/usecases/get_top_rated_movies.dart';
-export './src/domain/usecases/get_watchlist_movies.dart';
 export './src/domain/usecases/get_watchlist_status.dart';
 export './src/domain/usecases/save_watchlist.dart';
 export './src/domain/usecases/remove_watchlist.dart';
@@ -56,7 +52,6 @@ export './src/domain/usecases/tv/get_popular_tv_series.dart';
 export './src/domain/usecases/tv/get_recommendation_tv_series.dart';
 export './src/domain/usecases/tv/get_top_rated_tv_series.dart';
 export './src/domain/usecases/tv/get_watch_list_status_tv_series.dart';
-export './src/domain/usecases/tv/get_watchlist_tv_series.dart';
 export './src/domain/usecases/tv/remove_watchlist_tv_series.dart';
 export './src/domain/usecases/tv/save_watchlist_tv_series.dart';
 

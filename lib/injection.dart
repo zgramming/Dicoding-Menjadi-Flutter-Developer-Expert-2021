@@ -2,6 +2,7 @@ import 'package:core/core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:search/search.dart';
+import 'package:watchlist/watchlist.dart';
 
 final locator = GetIt.instance;
 

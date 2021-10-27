@@ -1,6 +1,6 @@
 library search;
 
-export './domain/usecase/search_movies.dart';
+export 'domain/usecase/movie/search_movies.dart';
 export './domain/usecase/tv/search_tv_series.dart';
 
 export './presentasion/pages/search_page.dart';

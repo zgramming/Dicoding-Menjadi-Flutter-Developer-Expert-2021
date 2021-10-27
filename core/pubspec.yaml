@@ -30,6 +30,8 @@ dependencies:
   search:
     path: ../search
   sqflite: ^2.0.0+4
+  watchlist:
+    path: ../watchlist
 
 dev_dependencies:
   bloc_test: ^9.0.0-dev.3

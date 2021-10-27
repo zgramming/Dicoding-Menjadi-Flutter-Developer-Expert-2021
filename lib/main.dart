@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:search/search.dart';
+import 'package:watchlist/watchlist.dart';
 
 import './injection.dart' as di;
 

@@ -7,7 +7,7 @@ import 'dart:async' as _i5;
 import 'package:core/core.dart' as _i2;
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:search/domain/usecase/search_movies.dart' as _i4;
+import 'package:search/domain/usecase/movie/search_movies.dart' as _i4;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
