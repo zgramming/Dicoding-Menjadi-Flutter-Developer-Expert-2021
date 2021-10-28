@@ -7,6 +7,7 @@ export './src/utils/constants.dart';
 export './src/utils/exception.dart';
 export './src/utils/failure.dart';
 export './src/utils/state_enum.dart';
+export './src/utils/shared.dart';
 
 ///! Cubit
 export './src/presentation/cubit/tv/tv_series_airing_today_cubit.dart';

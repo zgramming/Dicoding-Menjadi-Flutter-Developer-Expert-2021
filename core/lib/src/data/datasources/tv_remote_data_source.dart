@@ -30,7 +30,6 @@ class TVRemoteDataSourceImp implements TVRemoteDataSource {
   @override
   Future<List<TVModel>> getAiringTodayTVSeries() async {
     final response = await client.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY'));
-
     if (response.statusCode == 200) {
       final result = (jsonDecode(response.body)['results']) as List;
       return result.map((e) => TVModel.fromJson(Map<String, dynamic>.from(e))).toList();
