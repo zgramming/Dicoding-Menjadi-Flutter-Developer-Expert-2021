@@ -1,6 +1,5 @@
 import 'package:core/core.dart';
 import 'package:get_it/get_it.dart';
-import 'package:http/http.dart' as http;
 import 'package:search/search.dart';
 import 'package:watchlist/watchlist.dart';
 
@@ -111,102 +110,6 @@ void init() {
 
   ///? END CUBIT
 
-  // ///? START PROVIDER
-
-  // //! START [MOVIE_NOTIFIER]
-  // locator.registerFactory(
-  //   () => MovieListNotifier(
-  //     getNowPlayingMovies: locator(),
-  //     getPopularMovies: locator(),
-  //     getTopRatedMovies: locator(),
-  //   ),
-  // );
-  // locator.registerFactory(
-  //   () => MovieDetailNotifier(
-  //     getMovieDetail: locator(),
-  //     getMovieRecommendations: locator(),
-  //     getWatchListStatus: locator(),
-  //     saveWatchlist: locator(),
-  //     removeWatchlist: locator(),
-  //   ),
-  // );
-  // locator.registerFactory(
-  //   () => MovieSearchNotifier(
-  //     searchMovies: locator(),
-  //   ),
-  // );
-  // locator.registerFactory(
-  //   () => PopularMoviesNotifier(
-  //     locator(),
-  //   ),
-  // );
-  // locator.registerFactory(
-  //   () => TopRatedMoviesNotifier(
-  //     getTopRatedMovies: locator(),
-  //   ),
-  // );
-  // locator.registerFactory(
-  //   () => WatchlistMovieNotifier(
-  //     getWatchlistMovies: locator(),
-  //   ),
-  // );
-  // //! END [MOVIE_NOTIFIER]
-
-  // //! START [TV_NOTIFIER]
-  // // locator.registerFactory(
-  // //   () => TVSeriesAiringTodayNotifier(
-  // //     getAiringTodayTVSeries: locator(),
-  // //   ),
-  // // );
-
-  // locator.registerFactory(
-  //   () => TVSeriesPopularNotifier(
-  //     getPopularTVSeries: locator(),
-  //   ),
-  // );
-
-  // locator.registerFactory(
-  //   () => TVSeriesTopRatedNotifier(
-  //     getTopRatedTVSeries: locator(),
-  //   ),
-  // );
-
-  // locator.registerFactory(
-  //   () => TVSeriesDetailNotifier(
-  //     getDetailTVSeries: locator(),
-  //     getWatchListStatusTVSeries: locator(),
-  //     removeWatchlistTVSeries: locator(),
-  //     saveWatchlistTVSeries: locator(),
-  //   ),
-  // );
-
-  // locator.registerFactory(
-  //   () => TVSeriesRecommendationsNotifier(
-  //     getRecommendationTVSeries: locator(),
-  //   ),
-  // );
-
-  // locator.registerFactory(
-  //   () => TVSeriesSearchNotifier(
-  //     searchTVSeries: locator(),
-  //   ),
-  // );
-
-  // locator.registerFactory(
-  //   () => TVSeriesWatchlistNotifier(
-  //     getWatchlistTVSeries: locator(),
-  //   ),
-  // );
-
-  // locator.registerFactory(
-  //   () => TVSeriesEpisodeSeasonNotifier(
-  //     getEpisodeSeasonTVSeries: locator(),
-  //   ),
-  // );
-  // //! END [TV_NOTIFIER]
-
-  // ///? END [PROVIDER]
-
   ///? START [USECASE]
 
   //! START[USECASE_MOVIE]
@@ -299,5 +202,5 @@ void init() {
   ///! END [HELPER]
 
   // external
-  locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton(() => HttpSSLPinning.client);
 }

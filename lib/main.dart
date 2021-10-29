@@ -1,5 +1,6 @@
 import 'package:about/about.dart';
 import 'package:core/core.dart';
+import 'package:ditonton/injection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,8 +12,10 @@ import 'package:watchlist/watchlist.dart';
 import './injection.dart' as di;
 
 Future<void> main() async {
-  di.init();
+  WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting();
+  await HttpSSLPinning.init();
+  di.init();
   runApp(MyApp());
 }
 
@@ -23,24 +26,6 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ///! START MOVIE NOTIFIER
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<MovieListNotifier>(),
-        // ),
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<MovieDetailNotifier>(),
-        // ),
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<MovieSearchNotifier>(),
-        // ),
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<TopRatedMoviesNotifier>(),
-        // ),
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<PopularMoviesNotifier>(),
-        // ),
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<WatchlistMovieNotifier>(),
-        // ),
 
         ///! END MOVIE NOTIFIER
 
@@ -95,28 +80,6 @@ class MyApp extends StatelessWidget {
         ),
 
         ///* END MIGRATION MOVIES CUBIT
-
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<TVSeriesPopularNotifier>(),
-        // ),
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<TVSeriesTopRatedNotifier>(),
-        // ),
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<TVSeriesDetailNotifier>(),
-        // ),
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<TVSeriesRecommendationsNotifier>(),
-        // ),
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<TVSeriesSearchNotifier>(),
-        // ),
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<TVSeriesWatchlistNotifier>(),
-        // ),
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<TVSeriesEpisodeSeasonNotifier>(),
-        // ),
       ],
       child: MaterialApp(
         title: 'Ditonton',
@@ -182,3 +145,28 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// class SplashPage extends StatefulWidget {
+//   const SplashPage({Key? key}) : super(key: key);
+
+//   @override
+//   _SplashPageState createState() => _SplashPageState();
+// }
+
+// class _SplashPageState extends State<SplashPage> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//         body: FutureBuilder(
+//       initialData: [],
+//       future: di.locator.allReady(),
+//       builder: (context, snapshot) {
+//         if (snapshot.hasData) {
+//           return HomeMoviePage();
+//         } else {
+//           return Center(child: CircularProgressIndicator());
+//         }
+//       },
+//     ));
+//   }
+// }

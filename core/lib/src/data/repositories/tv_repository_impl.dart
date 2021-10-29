@@ -28,6 +28,8 @@ class TVRepositoryImpl implements TVRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(CommonFailure('SSL Certificated not valid\n ${e.message}'));
     } catch (e) {
       return Left(CommonFailure(e.toString()));
     }
@@ -43,6 +45,8 @@ class TVRepositoryImpl implements TVRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(CommonFailure('SSL Certificated not valid\n ${e.message}'));
     } catch (e) {
       return Left(CommonFailure(e.toString()));
     }
@@ -57,6 +61,8 @@ class TVRepositoryImpl implements TVRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(CommonFailure('SSL Certificated not valid\n ${e.message}'));
     } catch (e) {
       return Left(CommonFailure(e.toString()));
     }
@@ -71,6 +77,8 @@ class TVRepositoryImpl implements TVRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(CommonFailure('SSL Certificated not valid\n ${e.message}'));
     } catch (e) {
       return Left(CommonFailure(e.toString()));
     }
@@ -85,6 +93,8 @@ class TVRepositoryImpl implements TVRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(CommonFailure('SSL Certificated not valid\n ${e.message}'));
     } catch (e) {
       return Left(CommonFailure(e.toString()));
     }
@@ -99,6 +109,8 @@ class TVRepositoryImpl implements TVRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(CommonFailure('SSL Certificated not valid\n ${e.message}'));
     } catch (e) {
       return Left(CommonFailure(e.toString()));
     }
@@ -117,6 +129,8 @@ class TVRepositoryImpl implements TVRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(CommonFailure('SSL Certificated not valid\n ${e.message}'));
     } catch (e) {
       return Left(CommonFailure(e.toString()));
     }
@@ -132,6 +146,8 @@ class TVRepositoryImpl implements TVRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(CommonFailure('SSL Certificated not valid\n ${e.message}'));
     } catch (e) {
       return Left(CommonFailure(e.toString()));
     }

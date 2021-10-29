@@ -12,7 +12,7 @@ void main() {
         // ByteData bytes = await rootBundle.load('assets/api_ssl_pinning.pem');
         // log('bytse ${bytes}');
         final _client = await Shared.createLEClient(isTestMode: true);
-        final response = await _client.get(Uri.parse(URL_SSL_PINNING));
+        final response = await _client.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY'));
         expect(response.statusCode, 200);
         _client.close();
       },

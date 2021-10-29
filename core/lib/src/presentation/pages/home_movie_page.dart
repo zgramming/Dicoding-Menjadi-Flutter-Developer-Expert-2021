@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:about/about.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
@@ -5,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:global_template/global_template.dart';
 import 'package:provider/provider.dart';
 import 'package:search/search.dart';
 import 'package:watchlist/watchlist.dart';
