@@ -145,28 +145,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// class SplashPage extends StatefulWidget {
-//   const SplashPage({Key? key}) : super(key: key);
-
-//   @override
-//   _SplashPageState createState() => _SplashPageState();
-// }
-
-// class _SplashPageState extends State<SplashPage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         body: FutureBuilder(
-//       initialData: [],
-//       future: di.locator.allReady(),
-//       builder: (context, snapshot) {
-//         if (snapshot.hasData) {
-//           return HomeMoviePage();
-//         } else {
-//           return Center(child: CircularProgressIndicator());
-//         }
-//       },
-//     ));
-//   }
-// }
