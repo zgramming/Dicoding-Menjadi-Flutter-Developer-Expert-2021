@@ -29,10 +29,6 @@ class MyApp extends StatelessWidget {
     /// [https://github.com/felangel/bloc/issues/2526]
     return MultiProvider(
       providers: [
-        ///! START MOVIE NOTIFIER
-
-        ///! END MOVIE NOTIFIER
-
         ///* START MIGRATION TV SERIES CUBIT
         BlocProvider<TVSeriesAiringTodayCubit>(
           create: (context) => di.locator<TVSeriesAiringTodayCubit>(),

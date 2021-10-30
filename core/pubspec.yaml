@@ -27,6 +27,7 @@ dependencies:
   intl: ^0.17.0
   json_annotation: ^4.3.0
   path_provider: ^2.0.5
+  provider: ^6.0.1
   search:
     path: ../search
   sqflite: ^2.0.0+4
@@ -37,6 +38,8 @@ dev_dependencies:
   bloc_test: ^9.0.0-dev.3
   build_runner: ^2.1.4
   flutter_lints: ^1.0.4
+  integration_test:
+    sdk: flutter
   flutter_test:
     sdk: flutter
   json_serializable: ^6.0.1

@@ -14,26 +14,12 @@ import '../../dummy_data/dummy_objects.dart';
 
 class MovieDetailCubitMock extends MockCubit<MovieDetailState> implements MovieDetailCubit {}
 
-class MovieDetailStateMock extends Fake implements MovieDetailState {}
-
 class MovieRecommendationsCubitMock extends MockCubit<MovieRecommendationsState>
     implements MovieRecommendationsCubit {}
-
-class MovieRecommendationsStateMock extends Fake implements MovieRecommendationsState {}
-
-class GetWatchListStatusMock extends Fake implements GetWatchListStatus {}
-
-class SaveWatchlistMock extends Fake implements SaveWatchlist {}
 
 void main() {
   late MovieDetailCubitMock movieDetailCubitMock;
   late MovieRecommendationsCubitMock movieRecommendationsMock;
-  setUpAll(() {
-    registerFallbackValue(MovieDetailStateMock());
-    registerFallbackValue(MovieRecommendationsStateMock());
-    registerFallbackValue(GetWatchListStatusMock());
-    registerFallbackValue(SaveWatchlistMock());
-  });
 
   setUp(() {
     movieRecommendationsMock = MovieRecommendationsCubitMock();

@@ -2,13 +2,13 @@ import 'package:equatable/equatable.dart';
 
 class Season extends Equatable {
   const Season({
-    required this.airDate,
-    required this.episodeCount,
-    required this.id,
-    required this.name,
-    required this.overview,
-    required this.posterPath,
-    required this.seasonNumber,
+    this.airDate,
+    this.episodeCount = 0,
+    this.id = 0,
+    this.name,
+    this.overview,
+    this.posterPath,
+    this.seasonNumber = 0,
   });
 
   final DateTime? airDate;

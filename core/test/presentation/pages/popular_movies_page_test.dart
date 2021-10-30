@@ -1,63 +1,71 @@
-// import 'package:core/core.dart';
-// import 'package:core/src/domain/entities/movie.dart';
-// import 'package:core/src/presentation/pages/popular_movies_page.dart';
-// import 'package:core/src/presentation/provider/popular_movies_notifier.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:mockito/annotations.dart';
-// import 'package:mockito/mockito.dart';
-// import 'package:provider/provider.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:core/core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:provider/provider.dart';
 
-// import 'popular_movies_page_test.mocks.dart';
+class MoviePopularCubitMock extends MockCubit<MoviePopularState> implements MoviePopularCubit {}
 
-// @GenerateMocks([PopularMoviesNotifier])
-// void main() {
-//   late MockPopularMoviesNotifier mockNotifier;
+void main() {
+  late MoviePopularCubitMock mockMoviePopularCubit;
 
-//   setUp(() {
-//     mockNotifier = MockPopularMoviesNotifier();
-//   });
+  setUp(() {
+    mockMoviePopularCubit = MoviePopularCubitMock();
+  });
 
-//   Widget _makeTestableWidget(Widget body) {
-//     return ChangeNotifierProvider<PopularMoviesNotifier>.value(
-//       value: mockNotifier,
-//       child: MaterialApp(
-//         home: body,
-//       ),
-//     );
-//   }
+  Widget _makeTestableWidget(Widget body) {
+    return MultiProvider(
+      providers: [
+        BlocProvider<MoviePopularCubit>(
+          create: (context) => mockMoviePopularCubit,
+        ),
+      ],
+      child: MaterialApp(home: body),
+    );
+  }
 
-//   testWidgets('Page should display center progress bar when loading', (WidgetTester tester) async {
-//     when(mockNotifier.state).thenReturn(RequestState.Loading);
+  void initializeFunction() {
+    when(() => mockMoviePopularCubit.get()).thenAnswer((_) async => {});
+  }
 
-//     final progressBarFinder = find.byType(CircularProgressIndicator);
-//     final centerFinder = find.byType(Center);
+  testWidgets('Page should display center progress bar when loading', (WidgetTester tester) async {
+    initializeFunction();
 
-//     await tester.pumpWidget(_makeTestableWidget(const PopularMoviesPage()));
+    final progressBarFinder = find.byType(CircularProgressIndicator);
+    final centerFinder = find.byType(Center);
 
-//     expect(centerFinder, findsOneWidget);
-//     expect(progressBarFinder, findsOneWidget);
-//   });
+    when(() => mockMoviePopularCubit.state).thenAnswer((_) => const MoviePopularLoadingState());
+    await tester.pumpWidget(_makeTestableWidget(const PopularMoviesPage()));
 
-//   testWidgets('Page should display ListView when data is loaded', (WidgetTester tester) async {
-//     when(mockNotifier.state).thenReturn(RequestState.Loaded);
-//     when(mockNotifier.movies).thenReturn(<Movie>[]);
+    expect(centerFinder, findsOneWidget);
+    expect(progressBarFinder, findsOneWidget);
+  });
 
-//     final listViewFinder = find.byType(ListView);
+  testWidgets('Page should display ListView when data is loaded', (WidgetTester tester) async {
+    /// Find Widget
+    final listViewFinder = find.byType(ListView);
 
-//     await tester.pumpWidget(_makeTestableWidget(const PopularMoviesPage()));
+    initializeFunction();
+    when(() => mockMoviePopularCubit.state)
+        .thenAnswer((_) => const MoviePopularLoadedState(items: []));
 
-//     expect(listViewFinder, findsOneWidget);
-//   });
+    await tester.pumpWidget(_makeTestableWidget(const PopularMoviesPage()));
 
-//   testWidgets('Page should display text with message when Error', (WidgetTester tester) async {
-//     when(mockNotifier.state).thenReturn(RequestState.Error);
-//     when(mockNotifier.message).thenReturn('Error message');
+    expect(listViewFinder, findsOneWidget);
+  });
 
-//     final textFinder = find.byKey(const Key('error_message'));
+  testWidgets('Page should display text with message when Error', (WidgetTester tester) async {
+    /// Find Widget
+    final textFinder = find.byKey(const Key('error_message'));
 
-//     await tester.pumpWidget(_makeTestableWidget(const PopularMoviesPage()));
+    initializeFunction();
+    when(() => mockMoviePopularCubit.state)
+        .thenAnswer((_) => const MoviePopularErrorState('error'));
 
-//     expect(textFinder, findsOneWidget);
-//   });
-// }
+    await tester.pumpWidget(_makeTestableWidget(const PopularMoviesPage()));
+
+    expect(textFinder, findsOneWidget);
+  });
+}

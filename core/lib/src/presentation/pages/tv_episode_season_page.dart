@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
+import 'package:core/src/domain/entities/tv/tv_episode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -99,7 +100,7 @@ class _TVEpisodeSeasonPageState extends State<TVEpisodeSeasonPage> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         const SizedBox(height: 10),
-                        Builder(builder: (_) {
+                        Builder(builder: (context) {
                           DateTime? date;
                           if (episode.airDate != null) {
                             date = episode.airDate;
@@ -136,6 +137,7 @@ class _TVEpisodeSeasonPageState extends State<TVEpisodeSeasonPage> {
                       ],
                     ),
                     trailing: InkWell(
+                      key: Key('ontap_crew$index'),
                       onTap: () async {
                         await showModalBottomSheet(
                           shape: const RoundedRectangleBorder(
@@ -144,35 +146,7 @@ class _TVEpisodeSeasonPageState extends State<TVEpisodeSeasonPage> {
                             ),
                           ),
                           context: context,
-                          builder: (context) => Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Text(
-                                  'Crew',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16.0,
-                                  ),
-                                ),
-                                const SizedBox(height: 20),
-                                ShowCrew(crews: episode.crew),
-                                const SizedBox(height: 20),
-                                const Text(
-                                  'Guest Start',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16.0,
-                                  ),
-                                ),
-                                const SizedBox(height: 20),
-                                ShowCrew(crews: episode.guestStars),
-                                const SizedBox(height: 20),
-                              ],
-                            ),
-                          ),
+                          builder: (context) => _ModalDetailCrewAndGuestStar(episode: episode),
                         );
                       },
                       child: const CircleAvatar(
@@ -185,7 +159,12 @@ class _TVEpisodeSeasonPageState extends State<TVEpisodeSeasonPage> {
                 },
               );
             } else if (state is TVSeriesEpisodeSeasonErrorState) {
-              return Center(child: Text(state.message));
+              return Center(
+                key: const Key('error_message'),
+                child: Text(
+                  state.message,
+                ),
+              );
             } else {
               return const SizedBox();
             }
@@ -196,8 +175,50 @@ class _TVEpisodeSeasonPageState extends State<TVEpisodeSeasonPage> {
   }
 }
 
-class ShowCrew extends StatelessWidget {
-  const ShowCrew({
+class _ModalDetailCrewAndGuestStar extends StatelessWidget {
+  const _ModalDetailCrewAndGuestStar({
+    Key? key,
+    required this.episode,
+  }) : super(key: key);
+
+  final Episode episode;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Text(
+            'Crew',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16.0,
+            ),
+          ),
+          const SizedBox(height: 20),
+          _ShowCrew(crews: episode.crew),
+          const SizedBox(height: 20),
+          const Text(
+            'Guest Star',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16.0,
+            ),
+          ),
+          const SizedBox(height: 20),
+          _ShowCrew(crews: episode.guestStars),
+          const SizedBox(height: 20),
+        ],
+      ),
+    );
+  }
+}
+
+class _ShowCrew extends StatelessWidget {
+  const _ShowCrew({
     Key? key,
     required this.crews,
   }) : super(key: key);

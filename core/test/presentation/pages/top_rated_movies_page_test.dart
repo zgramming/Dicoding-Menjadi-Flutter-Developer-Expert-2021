@@ -1,63 +1,71 @@
-// import 'package:core/core.dart';
-// import 'package:core/src/domain/entities/movie.dart';
-// import 'package:core/src/presentation/pages/top_rated_movies_page.dart';
-// import 'package:core/src/presentation/provider/top_rated_movies_notifier.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:mockito/annotations.dart';
-// import 'package:mockito/mockito.dart';
-// import 'package:provider/provider.dart';
+import 'package:core/core.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:provider/provider.dart';
 
-// import 'top_rated_movies_page_test.mocks.dart';
+class MovieTopRatedCubitMock extends MockCubit<MovieTopRatedState> implements MovieTopRatedCubit {}
 
-// @GenerateMocks([TopRatedMoviesNotifier])
-// void main() {
-//   late MockTopRatedMoviesNotifier mockNotifier;
+void main() {
+  late MovieTopRatedCubitMock movieTopRatedCubitMock;
 
-//   setUp(() {
-//     mockNotifier = MockTopRatedMoviesNotifier();
-//   });
+  setUp(() {
+    movieTopRatedCubitMock = MovieTopRatedCubitMock();
+  });
 
-//   Widget _makeTestableWidget(Widget body) {
-//     return ChangeNotifierProvider<TopRatedMoviesNotifier>.value(
-//       value: mockNotifier,
-//       child: MaterialApp(
-//         home: body,
-//       ),
-//     );
-//   }
+  Widget _makeTestableWidget(Widget body) {
+    return MultiProvider(
+      providers: [
+        BlocProvider<MovieTopRatedCubit>(
+          create: (context) => movieTopRatedCubitMock,
+        ),
+      ],
+      child: MaterialApp(home: body),
+    );
+  }
 
-//   testWidgets('Page should display progress bar when loading', (WidgetTester tester) async {
-//     when(mockNotifier.state).thenReturn(RequestState.Loading);
+  void initializeFunction() {
+    when(() => movieTopRatedCubitMock.get()).thenAnswer((_) async => {});
+  }
 
-//     final progressFinder = find.byType(CircularProgressIndicator);
-//     final centerFinder = find.byType(Center);
+  testWidgets('Page should display center progress bar when loading', (WidgetTester tester) async {
+    initializeFunction();
 
-//     await tester.pumpWidget(_makeTestableWidget(const TopRatedMoviesPage()));
+    final progressBarFinder = find.byType(CircularProgressIndicator);
+    final centerFinder = find.byType(Center);
 
-//     expect(centerFinder, findsOneWidget);
-//     expect(progressFinder, findsOneWidget);
-//   });
+    when(() => movieTopRatedCubitMock.state).thenAnswer((_) => const MovieTopRatedLoadingState());
+    await tester.pumpWidget(_makeTestableWidget(const TopRatedMoviesPage()));
 
-//   testWidgets('Page should display when data is loaded', (WidgetTester tester) async {
-//     when(mockNotifier.state).thenReturn(RequestState.Loaded);
-//     when(mockNotifier.movies).thenReturn(<Movie>[]);
+    expect(centerFinder, findsOneWidget);
+    expect(progressBarFinder, findsOneWidget);
+  });
 
-//     final listViewFinder = find.byType(ListView);
+  testWidgets('Page should display ListView when data is loaded', (WidgetTester tester) async {
+    /// Find Widget
+    final listViewFinder = find.byType(ListView);
 
-//     await tester.pumpWidget(_makeTestableWidget(const TopRatedMoviesPage()));
+    initializeFunction();
+    when(() => movieTopRatedCubitMock.state)
+        .thenAnswer((_) => const MovieTopRatedLoadedState(items: []));
 
-//     expect(listViewFinder, findsOneWidget);
-//   });
+    await tester.pumpWidget(_makeTestableWidget(const TopRatedMoviesPage()));
 
-//   testWidgets('Page should display text with message when Error', (WidgetTester tester) async {
-//     when(mockNotifier.state).thenReturn(RequestState.Error);
-//     when(mockNotifier.message).thenReturn('Error message');
+    expect(listViewFinder, findsOneWidget);
+  });
 
-//     final textFinder = find.byKey(const Key('error_message'));
+  testWidgets('Page should display text with message when Error', (WidgetTester tester) async {
+    /// Find Widget
+    final textFinder = find.byKey(const Key('error_message'));
 
-//     await tester.pumpWidget(_makeTestableWidget(const TopRatedMoviesPage()));
+    initializeFunction();
+    when(() => movieTopRatedCubitMock.state)
+        .thenAnswer((_) => const MovieTopRatedErrorState('error'));
 
-//     expect(textFinder, findsOneWidget);
-//   });
-// }
+    await tester.pumpWidget(_makeTestableWidget(const TopRatedMoviesPage()));
+
+    expect(textFinder, findsOneWidget);
+  });
+}

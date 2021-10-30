@@ -40,24 +40,25 @@ class _TVSeeMorePageState extends State<TVSeeMorePage> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.seeMoreState == SeeMoreState.Popular) {}
     return Scaffold(
       appBar: AppBar(
         title: Text(titleAppbar),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Builder(builder: (_) {
-          if (widget.seeMoreState == SeeMoreState.Popular) {
-            return BlocBuilder<TVSeriesPopularCubit, TVSeriesPopularState>(
-              builder: (context, state) => _buildPopular(state),
-            );
-          } else {
-            return BlocBuilder<TVSeriesTopRatedCubit, TVSeriesTopRatedState>(
-              builder: (context, state) => _buildTopRated(state),
-            );
-          }
-        }),
+        child: Builder(
+          builder: (_) {
+            if (widget.seeMoreState == SeeMoreState.Popular) {
+              return BlocBuilder<TVSeriesPopularCubit, TVSeriesPopularState>(
+                builder: (context, state) => _buildPopular(state),
+              );
+            } else {
+              return BlocBuilder<TVSeriesTopRatedCubit, TVSeriesTopRatedState>(
+                builder: (context, state) => _buildTopRated(state),
+              );
+            }
+          },
+        ),
       ),
     );
   }
