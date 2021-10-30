@@ -4,11 +4,9 @@
 
 import 'dart:async' as _i5;
 
-import 'package:core/core.dart' as _i6;
-import 'package:core/src/domain/entities/tv/tv.dart' as _i7;
+import 'package:core/core.dart' as _i4;
+import 'package:core/src/domain/entities/tv/tv.dart' as _i6;
 import 'package:core/src/domain/repositories/tv_repository.dart' as _i2;
-import 'package:core/src/domain/usecases/tv/get_recommendation_tv_series.dart'
-    as _i4;
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -39,11 +37,11 @@ class MockGetRecommendationTVSeries extends _i1.Mock
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeTVRepository_0()) as _i2.TVRepository);
   @override
-  _i5.Future<_i3.Either<_i6.Failure, List<_i7.TV>>> execute(int? id) =>
+  _i5.Future<_i3.Either<_i4.Failure, List<_i6.TV>>> execute(int? id) =>
       (super.noSuchMethod(Invocation.method(#execute, [id]),
-              returnValue: Future<_i3.Either<_i6.Failure, List<_i7.TV>>>.value(
-                  _FakeEither_1<_i6.Failure, List<_i7.TV>>()))
-          as _i5.Future<_i3.Either<_i6.Failure, List<_i7.TV>>>);
+              returnValue: Future<_i3.Either<_i4.Failure, List<_i6.TV>>>.value(
+                  _FakeEither_1<_i4.Failure, List<_i6.TV>>()))
+          as _i5.Future<_i3.Either<_i4.Failure, List<_i6.TV>>>);
   @override
   String toString() => super.toString();
 }

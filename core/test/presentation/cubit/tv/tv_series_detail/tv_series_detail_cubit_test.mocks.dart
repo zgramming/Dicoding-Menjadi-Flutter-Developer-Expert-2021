@@ -4,16 +4,9 @@
 
 import 'dart:async' as _i5;
 
-import 'package:core/core.dart' as _i6;
-import 'package:core/src/domain/entities/tv/tv_detail.dart' as _i7;
+import 'package:core/core.dart' as _i4;
+import 'package:core/src/domain/entities/tv/tv_detail.dart' as _i6;
 import 'package:core/src/domain/repositories/tv_repository.dart' as _i2;
-import 'package:core/src/domain/usecases/tv/get_detail_tv_series.dart' as _i4;
-import 'package:core/src/domain/usecases/tv/get_watch_list_status_tv_series.dart'
-    as _i8;
-import 'package:core/src/domain/usecases/tv/remove_watchlist_tv_series.dart'
-    as _i10;
-import 'package:core/src/domain/usecases/tv/save_watchlist_tv_series.dart'
-    as _i9;
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -43,11 +36,11 @@ class MockGetDetailTVSeries extends _i1.Mock implements _i4.GetDetailTVSeries {
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeTVRepository_0()) as _i2.TVRepository);
   @override
-  _i5.Future<_i3.Either<_i6.Failure, _i7.TVDetail>> execute(int? id) =>
+  _i5.Future<_i3.Either<_i4.Failure, _i6.TVDetail>> execute(int? id) =>
       (super.noSuchMethod(Invocation.method(#execute, [id]),
-              returnValue: Future<_i3.Either<_i6.Failure, _i7.TVDetail>>.value(
-                  _FakeEither_1<_i6.Failure, _i7.TVDetail>()))
-          as _i5.Future<_i3.Either<_i6.Failure, _i7.TVDetail>>);
+              returnValue: Future<_i3.Either<_i4.Failure, _i6.TVDetail>>.value(
+                  _FakeEither_1<_i4.Failure, _i6.TVDetail>()))
+          as _i5.Future<_i3.Either<_i4.Failure, _i6.TVDetail>>);
   @override
   String toString() => super.toString();
 }
@@ -56,7 +49,7 @@ class MockGetDetailTVSeries extends _i1.Mock implements _i4.GetDetailTVSeries {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetWatchListStatusTVSeries extends _i1.Mock
-    implements _i8.GetWatchListStatusTVSeries {
+    implements _i4.GetWatchListStatusTVSeries {
   MockGetWatchListStatusTVSeries() {
     _i1.throwOnMissingStub(this);
   }
@@ -77,7 +70,7 @@ class MockGetWatchListStatusTVSeries extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSaveWatchlistTVSeries extends _i1.Mock
-    implements _i9.SaveWatchlistTVSeries {
+    implements _i4.SaveWatchlistTVSeries {
   MockSaveWatchlistTVSeries() {
     _i1.throwOnMissingStub(this);
   }
@@ -87,11 +80,11 @@ class MockSaveWatchlistTVSeries extends _i1.Mock
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeTVRepository_0()) as _i2.TVRepository);
   @override
-  _i5.Future<_i3.Either<_i6.Failure, String>> execute(_i7.TVDetail? tv) =>
+  _i5.Future<_i3.Either<_i4.Failure, String>> execute(_i6.TVDetail? tv) =>
       (super.noSuchMethod(Invocation.method(#execute, [tv]),
-              returnValue: Future<_i3.Either<_i6.Failure, String>>.value(
-                  _FakeEither_1<_i6.Failure, String>()))
-          as _i5.Future<_i3.Either<_i6.Failure, String>>);
+              returnValue: Future<_i3.Either<_i4.Failure, String>>.value(
+                  _FakeEither_1<_i4.Failure, String>()))
+          as _i5.Future<_i3.Either<_i4.Failure, String>>);
   @override
   String toString() => super.toString();
 }
@@ -100,7 +93,7 @@ class MockSaveWatchlistTVSeries extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockRemoveWatchlistTVSeries extends _i1.Mock
-    implements _i10.RemoveWatchlistTVSeries {
+    implements _i4.RemoveWatchlistTVSeries {
   MockRemoveWatchlistTVSeries() {
     _i1.throwOnMissingStub(this);
   }
@@ -110,11 +103,11 @@ class MockRemoveWatchlistTVSeries extends _i1.Mock
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeTVRepository_0()) as _i2.TVRepository);
   @override
-  _i5.Future<_i3.Either<_i6.Failure, String>> execute(_i7.TVDetail? tv) =>
+  _i5.Future<_i3.Either<_i4.Failure, String>> execute(_i6.TVDetail? tv) =>
       (super.noSuchMethod(Invocation.method(#execute, [tv]),
-              returnValue: Future<_i3.Either<_i6.Failure, String>>.value(
-                  _FakeEither_1<_i6.Failure, String>()))
-          as _i5.Future<_i3.Either<_i6.Failure, String>>);
+              returnValue: Future<_i3.Either<_i4.Failure, String>>.value(
+                  _FakeEither_1<_i4.Failure, String>()))
+          as _i5.Future<_i3.Either<_i4.Failure, String>>);
   @override
   String toString() => super.toString();
 }

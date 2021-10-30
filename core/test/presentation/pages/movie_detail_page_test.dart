@@ -4,11 +4,9 @@ import 'package:core/src/domain/usecases/get_watchlist_status.dart';
 import 'package:core/src/presentation/cubit/movie/movie_detail_cubit.dart';
 import 'package:core/src/presentation/cubit/movie/movie_recommendations_cubit.dart';
 import 'package:core/src/presentation/pages/movie_detail_page.dart';
-import 'package:core/src/presentation/provider/movie_detail_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +25,6 @@ class GetWatchListStatusMock extends Fake implements GetWatchListStatus {}
 
 class SaveWatchlistMock extends Fake implements SaveWatchlist {}
 
-@GenerateMocks([MovieDetailNotifier])
 void main() {
   late MovieDetailCubitMock movieDetailCubitMock;
   late MovieRecommendationsCubitMock movieRecommendationsMock;
