@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "103243484442",
+    "project_id": "programming-course-a3756",
+    "storage_bucket": "programming-course-a3756.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103243484442:android:76a17663f2c1fe8ae430a3",
+        "android_client_info": {
+          "package_name": "com.dicoding.ditonton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "103243484442-j8c7jr4tvbem1tgerrn2gvqn7g8168vo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkiWyByb8Kka16qqnVr0Mj1mET2tnXqy4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "103243484442-j8c7jr4tvbem1tgerrn2gvqn7g8168vo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
